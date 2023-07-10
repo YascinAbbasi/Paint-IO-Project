@@ -10,8 +10,8 @@ import java.io.IOException;
 public class PaintIoProject extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PaintIoProject.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 750, 750);
+        FXMLLoader fxmlLoader = new FXMLLoader(PaintIoProject.class.getResource("LoginPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         stage.setTitle("Paint IO!");
         Image icon = new Image("file:src/main/resources/video-game.png");
         stage.getIcons().add(icon);
