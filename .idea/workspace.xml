@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="adding icon and first push">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="designing the loginpage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PaintIoProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PaintIoProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/LoginPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="5984caf8378f1b778e1693e4edbc653ebe33a4f0" />
+        <entry key="$PROJECT_DIR$" value="ac958786b7b7003afdb388bc1905b8db6c7c41e0" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,7 +71,8 @@
       <workItem from="1688976473399" duration="8000" />
       <workItem from="1688976498085" duration="9000" />
       <workItem from="1688976521134" duration="73000" />
-      <workItem from="1688976656922" duration="2131000" />
+      <workItem from="1688976656922" duration="3767000" />
+      <workItem from="1689006651870" duration="369000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -91,7 +90,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688976845331</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="designing the loginpage">
+      <option name="closed" value="true" />
+      <created>1688978868784</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688978868784</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +130,17 @@
                   <entry key="Show.Git.Branches" value="false" />
                 </map>
               </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
             </State>
           </value>
         </entry>
@@ -132,6 +150,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="checking the git connection" />
     <MESSAGE value="adding icon and first push" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding icon and first push" />
+    <MESSAGE value="designing the loginpage" />
+    <option name="LAST_COMMIT_MESSAGE" value="designing the loginpage" />
   </component>
 </project>

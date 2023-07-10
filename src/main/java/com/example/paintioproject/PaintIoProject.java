@@ -2,19 +2,23 @@ package com.example.paintioproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 public class PaintIoProject extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PaintIoProject.class.getResource("LoginPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        stage.setTitle("Paint IO!");
+        Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        Scene scene = new Scene(root);
         Image icon = new Image("file:src/main/resources/video-game.png");
+        stage.setTitle("Paint IO!");
         stage.getIcons().add(icon);
+        stage.setHeight(610);
+        stage.setWidth(610);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
