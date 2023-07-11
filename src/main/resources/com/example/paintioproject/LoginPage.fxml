@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paintioproject.LoginPageController">
    <children>
       <Label fx:id="WelcomeLabel" alignment="CENTER" layoutY="29.0" prefHeight="17.0" prefWidth="600.0" text="Welcome">
          <font>
@@ -17,10 +16,10 @@
       </Label>
       <TextField fx:id="username" layoutX="12.0" layoutY="261.0" promptText="username" />
       <TextField fx:id="password" layoutX="12.0" layoutY="310.0" promptText="password" />
-      <Button fx:id="LoginButton" layoutX="64.0" layoutY="355.0" mnemonicParsing="false" text="Login" />
+      <Button fx:id="LoginButton" layoutX="64.0" layoutY="355.0" mnemonicParsing="false" onAction="#LoginButton" text="Login" />
       <TextArea fx:id="LeaderBoardTextArea" layoutX="395.0" layoutY="118.0" prefHeight="474.0" prefWidth="197.0" />
       <Label layoutX="22.0" layoutY="480.0" text="Don't Have an Account?" />
-      <Button fx:id="SignUpButton" layoutX="57.0" layoutY="512.0" mnemonicParsing="false" text="Sign Up" />
+      <Button fx:id="SignUpButton" layoutX="57.0" layoutY="512.0" mnemonicParsing="false" onAction="#SignUpButton" text="Sign Up" />
       <Label layoutX="395.0" layoutY="101.0" text="LeaderBoard:" />
    </children>
 </AnchorPane>

@@ -1,14 +1,27 @@
 package com.example.paintioproject;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginPageController {
+    private Parent GameModePage;
+    private Parent SignUpPage;
+    private Scene scene;
+    private Stage stage;
+
     @FXML
-private Label WelcomeLabel;
+  private Label WelcomeLabel;
     @FXML
 
 private TextField username;
@@ -16,9 +29,23 @@ private TextField username;
 private TextField password;
     @FXML
     public TextArea LeaderBoardTextArea;
-    @FXML
-    private Button LoginButton;
-    @FXML
-    private Button SignUpButton;
+
+
+    public void LoginButton(ActionEvent e)throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameModePage.fxml"));
+        GameModePage = loader.load();
+        stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(GameModePage);
+        stage.setScene(scene);
+
+    }
+    public void SignUpButton(ActionEvent e1)throws IOException{
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("SignUpPage.fxml"));
+        SignUpPage = loader2.load();
+        stage =  (Stage) ((Node) e1.getSource()).getScene().getWindow();
+        scene = new Scene(SignUpPage);
+        stage.setScene(scene);
+    }
+
 
 }
