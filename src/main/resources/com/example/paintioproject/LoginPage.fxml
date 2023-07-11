@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paintioproject.LoginPageController">
+<AnchorPane prefHeight="625.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paintioproject.LoginPageController">
    <children>
       <Label fx:id="WelcomeLabel" alignment="CENTER" layoutY="29.0" prefHeight="17.0" prefWidth="600.0" text="Welcome">
          <font>

@@ -30,6 +30,7 @@ public class GameModeController {
         stage =  (Stage) ((Node) e1.getSource()).getScene().getWindow();
         scene = new Scene(GamePage);
         GameController controller = loader.getController();
+        controller.nodehandel();
         scene.setOnKeyPressed(controller::handleKeyPress);
         stage.setScene(scene);
     }
