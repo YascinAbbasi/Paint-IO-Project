@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class GameModeController {
     private Parent root;
+    private Parent GamePage;
     private Scene scene;
     private Stage stage;
 
@@ -21,6 +22,15 @@ public class GameModeController {
         root = loader.load();
         stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage.setScene(scene);
+    }
+    public void StartButton(ActionEvent e1)throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GamePage.fxml"));
+        GamePage = loader.load();
+        stage =  (Stage) ((Node) e1.getSource()).getScene().getWindow();
+        scene = new Scene(GamePage);
+        GameController controller = loader.getController();
+        scene.setOnKeyPressed(controller::handleKeyPress);
         stage.setScene(scene);
     }
 
