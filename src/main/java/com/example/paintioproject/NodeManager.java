@@ -33,9 +33,9 @@ public class NodeManager {
         if (!UP) {
             row_move += 24;
         }
-        if((row_move % 2 == 0) && (column_move % 2 == 0) || ( row_move % 2 != 0 ) && (column_move % 2 != 0)){
+        if (((row_move % 2 == 0) && (column_move % 2 == 0)) || ((row_move % 2 != 0) && (column_move % 2 != 0))) {
             is_grey = false;
-        }else {
+        } else {
             is_grey = true;
         }
         for (int i = column_move; i <= 24 + column_move; i++) {
@@ -58,7 +58,7 @@ public class NodeManager {
         if (!LEFT) {
             column_move += 24;
         }
-        if (column_move % 2 == 0) {
+        if (((row_move % 2 == 0) && (column_move % 2 == 0)) || ((row_move % 2 != 0) && (column_move % 2 != 0))) {
             is_grey = false;
         } else {
             is_grey = true;
@@ -67,16 +67,18 @@ public class NodeManager {
             if (!is_grey) {
                 node temp = new node(Color.WHITE, i, column_move, false);
                 nodes.add(temp);
+                tempNodes.add(temp);
                 is_grey = true;
             } else {
                 node temp = new node(Color.GREY, i, column_move, false);
                 nodes.add(temp);
+                tempNodes.add(temp);
                 is_grey = false;
             }
         }
     }
 
-    public void FindRowNodes(int row_move, int column_move, boolean UP, boolean LEFT) {
+    public void FindRowNodes(int row_move, int column_move, boolean UP) {
         tempNodes.clear();
         if (!UP) {
             row_move += 24;
@@ -93,19 +95,79 @@ public class NodeManager {
         if (tempNodes.size() == 0) {
             RowNodeGenerator(row_move, column_move, UP);
         } else {
-            for( int i = column_move ; i <= column_move +24; i++){
-                for(int j = 0; j < tempNodes.size();j++){
-                    if(tempNodes.get(j).column == i){
+            for (int i = column_move; i <= column_move + 24; i++) {
+                for (int j = 0; j < tempNodes.size(); j++) {
+                    if (tempNodes.get(j).column == i) {
                         is_exists = true;
                         break;
                     }
                 }
-                if(!is_exists){
+                if (!is_exists) {
+                    if (((row_move % 2 == 0) && (i % 2 == 0)) || ((row_move % 2 != 0) && (i % 2 != 0))) {
+                        is_grey = false;
+                    } else {
+                        is_grey = true;
+                    }
+                    if (is_grey) {
+                        node temp = new node(Color.GREY, row_move, i, false);
+                        nodes.add(temp);
+                        tempNodes.add(temp);
+                    } else {
+                        node temp = new node(Color.WHITE, row_move, i, false);
+                        nodes.add(temp);
+                        tempNodes.add(temp);
+                    }
 
                 }
             }
         }
 
     }
+
+    public void FindColumnNodes(int row_move, int column_move, boolean LEFT) {
+        tempNodes.clear();
+        if (!LEFT) {
+            column_move += 24;
+        }
+        for (int j = 0; j < nodes.size(); j++) {
+            if (nodes.get(j).column == column_move) {
+                for (int i = row_move; i <= row_move + 24; i++) {
+                    if (nodes.get(j).row == i) {
+                        tempNodes.add(nodes.get(j));
+                    }
+                }
+            }
+        }
+        if (tempNodes.size() == 0) {
+            ColumnNodeGenerator(row_move, column_move, LEFT);
+        } else {
+            for (int i = row_move; i <= row_move + 24; i++) {
+                for (int j = 0; j < tempNodes.size(); j++) {
+                    if (tempNodes.get(j).row == i) {
+                        is_exists = true;
+                        break;
+                    }
+                }
+                if(!is_exists){
+                    if(((column_move % 2 == 0) && (i % 2 == 0)) || (( column_move % 2 != 0 ) && (i % 2 != 0))){
+                        is_grey = false;
+                    }else {
+                        is_grey = true;
+                    }
+                    if(is_grey) {
+                        node temp = new node(Color.GREY, i, column_move, false);
+                        nodes.add(temp);
+                        tempNodes.add(temp);
+                    }else{
+                        node temp = new node(Color.WHITE, i, column_move, false);
+                        nodes.add(temp);
+                        tempNodes.add(temp);
+                    }
+
+                }
+            }
+        }
+    }
 }
+
 
