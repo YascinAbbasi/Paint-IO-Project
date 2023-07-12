@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -48,6 +49,7 @@ public class GameController {
                 }else{
                     rowIndex = 24;
                 }
+
             }
             case DOWN -> {
                 if(rowIndex< 24){
@@ -62,13 +64,22 @@ public class GameController {
         GridPane.setConstraints(label, columnIndex, rowIndex);
 
     }
-    public void nodehandel(){
+    /*public void nodehandel(){
         node nd = new node();
         node nd2 = new node();
         gp.add(nd,2,2);
         gp.add(nd2,3,3);
         System.out.println(nd.is_colored);
+
         System.out.println(nd.is_passed);
+    }*/
+    public void nodehandel2(){
+node nd = new node(Color.PINK);
+gp.add(nd,2,2);
+node nd2 = (node) gp.getChildren().get(GridPane.getColumnIndex(nd));
+gp.getChildren().remove(nd);
+gp.add(nd2,5,5);
+    System.out.println(nd2.is_passed);
     }
 
 
