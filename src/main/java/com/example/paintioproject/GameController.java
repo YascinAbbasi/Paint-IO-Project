@@ -23,6 +23,8 @@ public class GameController extends NodeManager {
     private GridPane gp;
     private int columnIndex = 12;
     private int rowIndex = 12;
+    private int row_move = 0;
+    private int column_move = 0;
     Rectangle rect = new Rectangle(25,25,Color.RED);
 
 
@@ -32,30 +34,28 @@ public class GameController extends NodeManager {
             case LEFT -> {
                 if (columnIndex > 0) {
                     columnIndex--;
-                }else{
-                    columnIndex = 24;
+                    column_move--;
+
                 }
             }
             case RIGHT -> {
                 if (columnIndex < 24) {
                     columnIndex++;
-                }else{
-                    columnIndex = 0;
+                    column_move++;
+
                 }
             }
             case UP -> {
                 if(rowIndex > 0){
                     rowIndex--;
-                }else{
-                    rowIndex = 24;
+                    row_move--;
                 }
 
             }
             case DOWN -> {
                 if(rowIndex< 24){
                     rowIndex++;
-                }else{
-                    rowIndex = 0;
+                    row_move++;
                 }
             }
             default -> {
