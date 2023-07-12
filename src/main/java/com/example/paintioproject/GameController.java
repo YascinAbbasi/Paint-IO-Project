@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class GameController {
+public class GameController extends NodeManager {
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -23,7 +23,7 @@ public class GameController {
     private GridPane gp;
     private int columnIndex = 12;
     private int rowIndex = 12;
-
+    Rectangle rect = new Rectangle(25,25,Color.RED);
 
 
     @FXML
@@ -61,23 +61,26 @@ public class GameController {
             default -> {
             }
         }
-        GridPane.setConstraints(label, columnIndex, rowIndex);
+        GridPane.setConstraints(rect, columnIndex, rowIndex);
 
     }
-    /*public void nodehandel(){
-        node nd = new node();
-        node nd2 = new node();
-        gp.add(nd,2,2);
-        gp.add(nd2,3,3);
-        System.out.println(nd.is_colored);
+    public void nodehandel(){
+       DefaultNodeGenerator();
+       int nodenum = 0;
+       for(int i = 0; i <= 24;i++){
+           for(int j = 0;j <= 24;j++){
+               gp.add(nodes.get(nodenum),i,j);
+               nodenum++;
+           }
+       }
 
-        System.out.println(nd.is_passed);
-    }*/
+       gp.add(rect,12,12);
+    }
     public void nodehandel2(){
-node nd = new node(Color.PINK);
+node nd = new node(Color.PINK,2,2,true);
 gp.add(nd,2,2);
-node nd2 = (node) gp.getChildren().get(GridPane.getColumnIndex(nd));
-gp.getChildren().remove(nd);
+node nd2 = new node(Color.GREEN,5,5,true);
+//gp.getChildren().remove(nd);
 gp.add(nd2,5,5);
     System.out.println(nd2.is_passed);
     }

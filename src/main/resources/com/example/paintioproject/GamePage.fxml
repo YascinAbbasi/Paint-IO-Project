@@ -63,6 +63,6 @@
   </rowConstraints>
    <children>
       <Label fx:id="label" alignment="CENTER" prefHeight="17.0" prefWidth="24.0" text="S" GridPane.columnIndex="12" GridPane.rowIndex="12" />
-      <Rectangle fx:id="RECT" arcHeight="5.0" arcWidth="5.0" fill="#ff3e1f" height="25.0" stroke="BLACK" strokeType="INSIDE" width="25.0" GridPane.columnIndex="12" GridPane.rowIndex="8" />
+      <Rectangle fx:id="RECT" arcHeight="5.0" arcWidth="5.0" fill="#ff3e1f" height="25.0" stroke="BLACK" strokeType="INSIDE" width="25.0" GridPane.columnIndex="12" GridPane.rowIndex="12" />
    </children>
 </GridPane>

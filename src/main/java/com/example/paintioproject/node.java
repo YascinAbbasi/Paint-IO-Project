@@ -11,17 +11,22 @@ import javafx.scene.shape.Rectangle;
 public class node extends Region {
    private int x = 25;
    private   int y = 25;
-    private int row;
-    private int column;
-    private int LocationNum;
+    public int row;
+    public int column;
+    public int LocationNum;
    private Color color;
-    public boolean is_colored = true;
+    public boolean is_default;
+
+    public boolean is_colored = false;
     public boolean is_passed  =false;
     private boolean is_player = false;
     private boolean is_MainPlayer = false;
-    public node( Color color){
-        setPrefSize(25,25);
+    public node( Color color,int row,int column,boolean is_default){
+        setPrefSize(x,y);
         this.color = color;
+        this.row = row;
+        this.column = column;
+        this.is_default = is_default;
     }
     @Override
     protected void layoutChildren() {
