@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +17,8 @@ public class GameModeController {
     private Parent GamePage;
     private Scene scene;
     private Stage stage;
+    @FXML
+    public ImageView GameModeImageView;
 
     public void BackButton(ActionEvent e) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));

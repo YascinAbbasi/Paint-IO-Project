@@ -26,7 +26,7 @@ public class NodeManager {
                     nodes.add(temp);
                     System.out.print("W ");
                 } else {
-                    node temp = new node(Color.GREY, i, j, true);
+                    node temp = new node(Color.LIGHTGREY, i, j, true);
                     nodes.add(temp);
                     System.out.print("B "); // Black square
                 }
@@ -50,7 +50,7 @@ public class NodeManager {
                 tempNodes.add(temp);
                 is_grey = true;
             } else {
-                node temp = new node(Color.GREY, row_move, i, false);
+                node temp = new node(Color.LIGHTGREY, row_move, i, false);
                 nodes.add(temp);
                 tempNodes.add(temp);
                 is_grey = false;
@@ -74,7 +74,7 @@ public class NodeManager {
                 tempNodes.add(temp);
                 is_grey = true;
             } else {
-                node temp = new node(Color.GREY, i, column_move, false);
+                node temp = new node(Color.LIGHTGREY, i, column_move, false);
                 nodes.add(temp);
                 tempNodes.add(temp);
                 is_grey = false;
@@ -123,7 +123,7 @@ public class NodeManager {
                         is_grey = true;
                     }
                     if (is_grey) {
-                        node temp = new node(Color.GREY, row_move, i, false);
+                        node temp = new node(Color.LIGHTGREY, row_move, i, false);
                         nodes.add(temp);
                         tempNodes.add(temp);
                     } else {
@@ -176,7 +176,7 @@ public class NodeManager {
                         is_grey = true;
                     }
                     if(is_grey) {
-                        node temp = new node(Color.GREY, i, column_move, false);
+                        node temp = new node(Color.LIGHTGREY, i, column_move, false);
                         nodes.add(temp);
                         tempNodes.add(temp);
                     }else{

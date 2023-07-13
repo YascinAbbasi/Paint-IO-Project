@@ -3,13 +3,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="625.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paintioproject.SignUpPageController">
    <children>
+      <ImageView fx:id="imageview" fitHeight="625.0" fitWidth="625.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="559.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackButton" text="←" />
-      <Label fx:id="WelcomeLabel" alignment="CENTER" layoutX="-1.0" layoutY="39.0" prefHeight="20.0" prefWidth="600.0" text="Welcome">
+      <Label fx:id="WelcomeLabel" alignment="CENTER" layoutX="-1.0" layoutY="39.0" prefHeight="20.0" prefWidth="625.0" text="Welcome" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
