@@ -32,23 +32,51 @@ public class GameController extends NodeManager {
     void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
             case LEFT -> {
-                if (columnIndex > 0) {
+
                     columnIndex--;
                     column_move--;
+                System.out.println("c move:");
+                System.out.println(column_move);
+                System.out.println("r move:");
+                System.out.println(row_move);
+                    FindColumnNodes(row_move,column_move,true);
+                gp =  SetNodes(gp,row_move,column_move);
+                GridPane.setConstraints(rect, 12, 12);
 
-                }
+
+
             }
             case RIGHT -> {
-                if (columnIndex < 24) {
+
                     columnIndex++;
                     column_move++;
+                    System.out.println("c move:");
+                System.out.println(column_move);
+                System.out.println("r move:");
+                System.out.println(row_move);
 
-                }
+
+                FindColumnNodes(row_move,column_move,false);
+                gp =  SetNodes(gp,row_move,column_move);
+                GridPane.setConstraints(rect, 12, 12);
+
+
+
+
             }
             case UP -> {
                 if(rowIndex > 0){
                     rowIndex--;
                     row_move--;
+                    System.out.println("c move:");
+                    System.out.println(column_move);
+                    System.out.println("r move:");
+                    System.out.println(row_move);
+
+                    FindRowNodes(row_move,column_move,true);
+                    gp =  SetNodes(gp,row_move,column_move);
+                    GridPane.setConstraints(rect, 12, 12);
+
                 }
 
             }
@@ -56,12 +84,21 @@ public class GameController extends NodeManager {
                 if(rowIndex< 24){
                     rowIndex++;
                     row_move++;
+                    System.out.println("c move:");
+                    System.out.println(column_move);
+                    System.out.println("r move:");
+                    System.out.println(row_move);
+
+                    FindRowNodes(row_move,column_move,false);
+                    gp =  SetNodes(gp,row_move,column_move);
+                    GridPane.setConstraints(rect, 12, 12);
+
                 }
             }
             default -> {
             }
         }
-        GridPane.setConstraints(rect, columnIndex, rowIndex);
+        GridPane.setConstraints(rect, 12, 12);
 
     }
     public void nodehandel(){

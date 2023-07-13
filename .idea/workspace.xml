@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="working on finding nodes">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="finishing the find node method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +89,8 @@
       <workItem from="1689136648672" duration="849000" />
       <workItem from="1689141884802" duration="19000" />
       <workItem from="1689141912252" duration="13519000" />
-      <workItem from="1689168270659" duration="8283000" />
+      <workItem from="1689168270659" duration="9252000" />
+      <workItem from="1689221437934" duration="11040000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -178,7 +180,23 @@
       <option name="project" value="LOCAL" />
       <updated>1689175153123</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="finishing the find node method">
+      <option name="closed" value="true" />
+      <created>1689180602761</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1689180602761</updated>
+    </task>
+    <task id="LOCAL-00013" summary="finishing the find node method">
+      <option name="closed" value="true" />
+      <created>1689180633086</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1689180633086</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +256,7 @@
     <MESSAGE value="changing nodes" />
     <MESSAGE value="adding new nodes to gridpane" />
     <MESSAGE value="working on finding nodes" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on finding nodes" />
+    <MESSAGE value="finishing the find node method" />
+    <option name="LAST_COMMIT_MESSAGE" value="finishing the find node method" />
   </component>
 </project>
