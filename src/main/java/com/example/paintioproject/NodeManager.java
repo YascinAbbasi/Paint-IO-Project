@@ -203,6 +203,9 @@ public class NodeManager {
                 for (int j = 0; j < nodes.size(); j++) {
                     if (nodes.get(j).row == i && nodes.get(j).column == k){
                         gp.add(nodes.get(j),column++,row);
+                        if(row == 12 && column   == 13){
+                            nodes.get(j).setColor(Color.PINK);
+                        }
                     }
                 }
             }

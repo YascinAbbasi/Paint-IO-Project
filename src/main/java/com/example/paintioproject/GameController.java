@@ -65,7 +65,7 @@ public class GameController extends NodeManager {
 
             }
             case UP -> {
-                if(rowIndex > 0){
+
                     rowIndex--;
                     row_move--;
                     System.out.println("c move:");
@@ -77,11 +77,11 @@ public class GameController extends NodeManager {
                     gp =  SetNodes(gp,row_move,column_move);
                     GridPane.setConstraints(rect, 12, 12);
 
-                }
+
 
             }
             case DOWN -> {
-                if(rowIndex< 24){
+
                     rowIndex++;
                     row_move++;
                     System.out.println("c move:");
@@ -93,7 +93,7 @@ public class GameController extends NodeManager {
                     gp =  SetNodes(gp,row_move,column_move);
                     GridPane.setConstraints(rect, 12, 12);
 
-                }
+
             }
             default -> {
             }
