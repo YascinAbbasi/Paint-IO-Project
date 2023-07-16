@@ -34,7 +34,13 @@ public class GameModeController {
         scene = new Scene(GamePage);
         GameController controller = loader.getController();
         controller.nodehandel();
-        scene.setOnKeyPressed(controller::handleKeyPress);
+        scene.setOnKeyPressed(event -> {
+            try {
+                controller.handleKeyPress(event);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
         stage.setScene(scene);
     }
 

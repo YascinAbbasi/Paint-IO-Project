@@ -82,7 +82,7 @@ public class NodeManager {
         }
     }
 
-    public void FindRowNodes(int row_move, int column_move, boolean UP) {
+    public void FindRowNodes(int row_move, int column_move, boolean UP ) {
         System.out.println("r find working");
         boolean UPP = UP;
         tempNodes.clear();
@@ -192,7 +192,7 @@ public class NodeManager {
 
     }
 
-    public GridPane SetNodes(GridPane gp,int row_move,int column_move){
+   /* public GridPane SetNodes(GridPane gp,int row_move,int column_move){
         int row = 0;
         int column = 0;
         gp.getChildren().clear();
@@ -213,7 +213,7 @@ public class NodeManager {
         }
         gp.add(rect,12,12);
         return gp;
-    }
+    }*/
     }
 
 
