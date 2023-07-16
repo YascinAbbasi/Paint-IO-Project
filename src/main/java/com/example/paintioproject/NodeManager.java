@@ -139,20 +139,6 @@ public class NodeManager {
         System.out.println(nodes.size());
 
     }
-    public void SetDefaultArea() {
-        for (int m = 11; m <= 13; m++) {
-            for (int n = 11;n <=13;n++){
-                for (int j = 0; j < nodes.size(); j++) {
-                    if (nodes.get(j).row == m && nodes.get(j).column == n) {
-                        nodes.get(j).setColor(Color.RED);
-                        nodes.get(j).is_colored = true;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
 
     public void FindColumnNodes(int row_move, int column_move, boolean LEFT) {
         System.out.println("c find working");

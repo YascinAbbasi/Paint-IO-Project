@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="a few changes and building a new method to move nodes properly">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="editing signup &amp; login &amp; game mode scenes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GameModePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GameModePage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/LoginPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/LoginPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GamePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GamePage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,8 +114,7 @@
       <workItem from="1689416221791" duration="5247000" />
       <workItem from="1689436512874" duration="1366000" />
       <workItem from="1689479314923" duration="1633000" />
-      <workItem from="1689488711213" duration="7360000" />
-      <workItem from="1689513454349" duration="3797000" />
+      <workItem from="1689488711213" duration="3132000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -246,15 +244,7 @@
       <option name="project" value="LOCAL" />
       <updated>1689254873900</updated>
     </task>
-    <task id="LOCAL-00017" summary="a few changes and building a new method to move nodes properly">
-      <option name="closed" value="true" />
-      <created>1689491955254</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1689491955254</updated>
-    </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +308,6 @@
     <MESSAGE value="finally making an infinite map by relocating nodes" />
     <MESSAGE value="saving the path" />
     <MESSAGE value="editing signup &amp; login &amp; game mode scenes" />
-    <MESSAGE value="a few changes and building a new method to move nodes properly" />
-    <option name="LAST_COMMIT_MESSAGE" value="a few changes and building a new method to move nodes properly" />
+    <option name="LAST_COMMIT_MESSAGE" value="editing signup &amp; login &amp; game mode scenes" />
   </component>
 </project>
