@@ -34,6 +34,7 @@ public class GameModeController {
         scene = new Scene(GamePage);
         GameController controller = loader.getController();
         controller.nodehandel();
+        controller.SetDefaultArea();
         scene.setOnKeyPressed(event -> {
             try {
                 controller.handleKeyPress(event);

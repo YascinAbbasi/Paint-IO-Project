@@ -8,12 +8,12 @@
 
 <AnchorPane prefHeight="625.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paintioproject.GameModeController">
    <children>
-      <ImageView fx:id="GameModeImageView" fitHeight="625.0" fitWidth="633.0" pickOnBounds="true" preserveRatio="true" />
-      <Label alignment="CENTER" layoutX="1.0" layoutY="41.0" prefHeight="21.0" prefWidth="625.0" text="GameMode">
+      <ImageView fx:id="GameModeImageView" fitHeight="625.0" fitWidth="625.0" pickOnBounds="true" preserveRatio="true" />
+      <Label alignment="CENTER" layoutY="34.0" prefHeight="21.0" prefWidth="625.0" text="GameMode">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Button fx:id="BackButton" layoutX="566.0" layoutY="29.0" mnemonicParsing="false" onAction="#BackButton" prefHeight="17.0" prefWidth="27.0" text="←" />
-      <Button layoutX="237.0" layoutY="276.0" mnemonicParsing="false" onAction="#StartButton" prefHeight="73.0" prefWidth="132.0" text="Start!" />
+      <Button fx:id="BackButton" layoutX="584.0" layoutY="22.0" mnemonicParsing="false" onAction="#BackButton" prefHeight="17.0" prefWidth="27.0" text="←" />
+      <Button layoutX="247.0" layoutY="276.0" mnemonicParsing="false" onAction="#StartButton" prefHeight="73.0" prefWidth="132.0" text="Start!" />
    </children>
 </AnchorPane>

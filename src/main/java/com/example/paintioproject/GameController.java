@@ -49,14 +49,14 @@ public class GameController extends NodeManager {
                 row_move ++;
                 FindRowNodes(row_move, column_move, false);
             }
-            if (row_move == 0 && column_move == 0){
-                color_the_path(row_move,column_move);
-            }
+           // if (row_move == 0 && column_move == 0){
+            //    color_the_path();
+          //  }
 
             SetNodes(row_move, column_move);
           // FindColumnNodes(row_move, column_move, false);
             try {
-                 Thread.sleep(200);
+                 Thread.sleep(150);
               } catch (InterruptedException e) {
                  throw new RuntimeException(e);
               }
@@ -196,6 +196,10 @@ public class GameController extends NodeManager {
                             nodes.get(j).setColor(Color.PINK);
                             nodes.get(j).is_passed = true;
                         }
+                        if((row == 12 && column   == 13 )&& (nodes.get(j).is_colored)){
+                            color_the_path();
+                        }
+
 
                     }
                 }
@@ -206,11 +210,12 @@ public class GameController extends NodeManager {
         gp.add(label,12,12);
     }
 
-    public void color_the_path(int row_move, int column_move){
+    public void color_the_path(){
         for(int j = 0; j < nodes.size(); j++){
             if(nodes.get(j).is_passed && !nodes.get(j).is_colored){
                 nodes.get(j).setColor(Color.RED);
                 nodes.get(j).is_colored = true;
+                nodes.get(j).is_passed = false;
             }
         }
     }

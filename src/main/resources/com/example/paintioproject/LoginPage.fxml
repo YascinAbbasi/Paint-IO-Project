@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="625.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paintioproject.LoginPageController">
    <children>
       <ImageView fx:id="LoginImageView" fitHeight="625.0" fitWidth="625.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="WelcomeLabel" alignment="CENTER" layoutY="29.0" prefHeight="17.0" prefWidth="600.0" text="Welcome">
+      <Label fx:id="WelcomeLabel" alignment="CENTER" layoutY="29.0" prefHeight="20.0" prefWidth="625.0" text="Welcome">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
