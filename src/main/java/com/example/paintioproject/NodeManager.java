@@ -1,6 +1,7 @@
 package com.example.paintioproject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
@@ -8,17 +9,43 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class NodeManager {
-    Rectangle rect = new Rectangle(25,25,Color.RED);
-    private Color grey;
-    private Color white;
+
+
     private boolean is_grey = false;
     private boolean is_exists = false;
 
     public ArrayList<node> nodes = new ArrayList<>();
     public ArrayList<node> tempNodes = new ArrayList<>();
-    public ArrayList <node> SetTempNodes = new ArrayList<>();
+    public HashMap<node,String> Owner = new HashMap<>();
+    public ArrayList<String> PlayerID = new ArrayList<>();
+    private Color PlayerColor;
+    private Color TraceColor;
+
+
+    public void SetPlayerColor(Color PlayerColor){
+        this.PlayerColor = PlayerColor;
+        if(PlayerColor == Color.RED){
+           TraceColor = Color.CORAL;
+        }else if(PlayerColor == Color.BLUE) {
+            TraceColor = Color.LIGHTBLUE;
+
+        }else if(PlayerColor == Color.GREEN){
+            TraceColor = Color.LIGHTGREEN;
+        }else if(PlayerColor == Color.PURPLE){
+            TraceColor = Color.LAVENDER;
+        }
+    }
+
+
+    public Color GetPlayerColor(){
+        return PlayerColor;
+    }
+    public Color GetTraceColor(){
+        return TraceColor;
+    }
 
     public void DefaultNodeGenerator() {
+
         for (int i = 0; i <= 24; i++) {
             for (int j = 0; j <= 24; j++) {
                 if ((i + j) % 2 == 0) {
@@ -34,6 +61,15 @@ public class NodeManager {
             System.out.println();
         }
     }
+
+    public void AddPlayerID( int playernum){
+        for(int i = 2; i <= playernum + 1; i++){
+            PlayerID.add("PLAYER" + i);
+        }
+          System.out.println(PlayerID);
+    }
+
+
 
     public void RowNodeGenerator(int row_move, int column_move) {
         System.out.println("r gen working");
@@ -90,9 +126,9 @@ public class NodeManager {
             row_move += 24;
         }
         for (int j = 0; j < nodes.size(); j++) {
-            if (nodes.get(j).row == row_move) {
+            if (nodes.get(j).GetRow() == row_move) {
                 for (int i = column_move; i <= column_move + 24; i++) {
-                    if (nodes.get(j).column == i) {
+                    if (nodes.get(j).GetColumn() == i) {
                         node temp = nodes.get(j);
                         tempNodes.add(temp);
                        // System.out.println("temp check:");
@@ -109,14 +145,14 @@ public class NodeManager {
         } else {
             for (int i = column_move; i <= column_move + 24; i++) {
                 for (int j = 0; j < tempNodes.size(); j++) {
-                    if (tempNodes.get(j).column == i) {
+                    if (tempNodes.get(j).GetColumn() == i) {
                         is_exists = true;
                         break;
                     }else{
                         is_exists = false;
                     }
                 }
-                if (is_exists == false) {
+                if (!is_exists) {
                     if (((row_move % 2 == 0) && (i % 2 == 0)) || ((row_move % 2 != 0) && (i % 2 != 0))) {
                         is_grey = false;
                     } else {
@@ -143,9 +179,10 @@ public class NodeManager {
         for (int m = 11; m <= 13; m++) {
             for (int n = 11;n <=13;n++){
                 for (int j = 0; j < nodes.size(); j++) {
-                    if (nodes.get(j).row == m && nodes.get(j).column == n) {
-                        nodes.get(j).setColor(Color.RED);
-                        nodes.get(j).is_colored = true;
+                    if (nodes.get(j).GetRow() == m && nodes.get(j).GetColumn() == n) {
+                        nodes.get(j).setColor(PlayerColor);
+                        nodes.get(j).SetIs_colored(true);
+                        Owner.put(nodes.get(j),"PLAYER1");
                         break;
                     }
                 }
@@ -161,9 +198,9 @@ public class NodeManager {
             column_move += 24;
         }
         for (int j = 0; j < nodes.size(); j++) {
-            if (nodes.get(j).column == column_move) {
+            if (nodes.get(j).GetColumn() == column_move) {
                 for (int i = row_move; i <= row_move + 24; i++) {
-                    if (nodes.get(j).row == i) {
+                    if (nodes.get(j).GetRow() == i) {
                         node temp = nodes.get(j);
                         tempNodes.add(temp);
                     }
@@ -176,7 +213,7 @@ public class NodeManager {
         } else {
             for (int i = row_move; i <= row_move + 24; i++) {
                 for (int j = 0; j < tempNodes.size(); j++) {
-                    if (tempNodes.get(j).row == i) {
+                    if (tempNodes.get(j).GetRow() == i) {
                         is_exists = true;
                         break;
                     }else{

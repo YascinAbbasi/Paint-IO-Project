@@ -18,18 +18,20 @@ public class GameController extends NodeManager {
     private Parent root;
     private Scene scene;
     private Stage stage;
+
     @FXML
     private Rectangle RECT;
     @FXML
     private Label label;
     @FXML
     private GridPane gp;
-    private int columnIndex = 12;
-    private int rowIndex = 12;
+
     private int row_move = 0;
     private int column_move = 0;
     private KeyEvent lastKeyEvent;
-    Rectangle rect = new Rectangle(25, 25, Color.RED);
+    Rectangle rect = new Rectangle(25, 25, GetPlayerColor());
+
+
     AnimationTimer gameLoop = new AnimationTimer() {
         @Override
         public void handle(long now) {
@@ -70,7 +72,6 @@ public class GameController extends NodeManager {
     void handleKeyPress(KeyEvent event) throws InterruptedException {
         gameLoop.start();
 
-        //while (true) {
             lastKeyEvent = event;
           /*  switch (event.getCode()) {
                 case LEFT -> {
@@ -161,7 +162,7 @@ public class GameController extends NodeManager {
             for (int i = 0; i <= 24; i++) {
                 for (int j = 0; j <= 24; j++) {
                     if(i == 12 & j == 12){
-                        nodes.get(nodenum).setColor(Color.RED);
+                        nodes.get(nodenum).setColor(GetPlayerColor());
                     }
                     gp.add(nodes.get(nodenum), i, j);
                     nodenum++;
@@ -173,14 +174,7 @@ public class GameController extends NodeManager {
 
 
         }
-         /*public void nodehandel2 () {
-            node nd = new node(Color.PINK, 2, 2, true);
-            gp.add(nd, 2, 2);
-            node nd2 = new node(Color.GREEN, 5, 5, true);
-//gp.getChildren().remove(nd);
-            gp.add(nd2, 5, 5);
-            System.out.println(nd2.is_passed);
-        }*/
+
     public void SetNodes(int row_move,int column_move){
         int row = 0;
         int column = 0;
@@ -190,17 +184,16 @@ public class GameController extends NodeManager {
             column = 0;
             for (int k = column_move; k <= column_move + 24; k++) {
                 for (int j = 0; j < nodes.size(); j++) {
-                    if (nodes.get(j).row == i && nodes.get(j).column == k){
+                    if (nodes.get(j).GetRow() == i && nodes.get(j).GetColumn() == k){
                         gp.add(nodes.get(j),column++,row);
-                        if((row == 12 && column   == 13 )&& (!nodes.get(j).is_colored)){
-                            nodes.get(j).setColor(Color.PINK);
-                            nodes.get(j).is_passed = true;
+                        if((row == 12 && column   == 13 )&& (!nodes.get(j).GetIs_colored())){
+                            nodes.get(j).setColor(GetTraceColor());
+                            nodes.get(j).SetIs_passed(true);
+                            Owner.put(nodes.get(j),"PLAYER1");
                         }
-                        if((row == 12 && column   == 13 )&& (nodes.get(j).is_colored)){
+                        if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored())){
                             color_the_path();
                         }
-
-
                     }
                 }
             }
@@ -212,14 +205,13 @@ public class GameController extends NodeManager {
 
     public void color_the_path(){
         for(int j = 0; j < nodes.size(); j++){
-            if(nodes.get(j).is_passed && !nodes.get(j).is_colored){
-                nodes.get(j).setColor(Color.RED);
-                nodes.get(j).is_colored = true;
-                nodes.get(j).is_passed = false;
+            if(nodes.get(j).GetIs_passed() && !nodes.get(j).GetIs_colored()){
+                nodes.get(j).setColor(GetPlayerColor());
+                nodes.get(j).SetIs_colored(true);
+                nodes.get(j).SetIs_passed(false);
             }
         }
     }
 
-
-    }
+  }
 
