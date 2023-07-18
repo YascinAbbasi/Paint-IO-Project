@@ -27,5 +27,11 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="SpeedChoiceBox" layoutX="424.0" layoutY="161.0" prefWidth="150.0" />
+      <Label layoutX="417.0" layoutY="135.0" text="Select your Desired Speed:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

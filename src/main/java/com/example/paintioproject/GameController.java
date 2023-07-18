@@ -18,6 +18,8 @@ public class GameController extends NodeManager {
     private Parent root;
     private Scene scene;
     private Stage stage;
+    private Color PlayerColor;
+    private Color TraceColor;
 
     @FXML
     private Rectangle RECT;
@@ -28,6 +30,7 @@ public class GameController extends NodeManager {
 
     private int row_move = 0;
     private int column_move = 0;
+    private int speed;
     private KeyEvent lastKeyEvent;
     Rectangle rect = new Rectangle(25, 25, GetPlayerColor());
 
@@ -58,7 +61,7 @@ public class GameController extends NodeManager {
             SetNodes(row_move, column_move);
           // FindColumnNodes(row_move, column_move, false);
             try {
-                 Thread.sleep(150);
+                 Thread.sleep(speed);
               } catch (InterruptedException e) {
                  throw new RuntimeException(e);
               }
@@ -153,6 +156,45 @@ public class GameController extends NodeManager {
 
          */
         }
+    public void SetPlayerColor(Color PlayerColor){
+        this.PlayerColor = PlayerColor;
+        if(PlayerColor == Color.RED){
+            TraceColor = Color.CORAL;
+        }else if(PlayerColor == Color.BLUE) {
+            TraceColor = Color.LIGHTBLUE;
+
+        }else if(PlayerColor == Color.GREEN){
+            TraceColor = Color.LIGHTGREEN;
+        }else if(PlayerColor == Color.PURPLE){
+            TraceColor = Color.LAVENDER;
+        }
+    }
+    public void SetDefaultArea() {
+        for (int m = 11; m <= 13; m++) {
+            for (int n = 11;n <=13;n++){
+                for (int j = 0; j < nodes.size(); j++) {
+                    if (nodes.get(j).GetRow() == m && nodes.get(j).GetColumn() == n) {
+                        nodes.get(j).setColor(PlayerColor);
+                        nodes.get(j).SetIs_colored(true);
+                        Owner.put(nodes.get(j),"PLAYER1");
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void AddPlayerID( int playernum){
+        for(int i = 2; i <= playernum + 1; i++){
+            PlayerID.add("PLAYER" + i);
+        }
+        System.out.println(PlayerID);
+    }
+    public Color GetPlayerColor(){
+        return PlayerColor;
+    }
+    public Color GetTraceColor(){
+        return TraceColor;
+    }
 
 
 
@@ -211,6 +253,10 @@ public class GameController extends NodeManager {
                 nodes.get(j).SetIs_passed(false);
             }
         }
+    }
+    public void Setspeed(int speed){
+        this.speed = speed;
+
     }
 
   }

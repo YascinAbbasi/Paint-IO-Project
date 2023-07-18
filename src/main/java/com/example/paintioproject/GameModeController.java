@@ -30,9 +30,12 @@ public class GameModeController implements Initializable {
     @FXML
     private ChoiceBox<String> ColorChoiceBox;
     @FXML
+    private ChoiceBox <String> SpeedChoiceBox;
+    @FXML
     private Label ErrorLabel;
     private String[] Colors ={"RED","BLUE","GREEN","PURPLE"};
-
+    private String[] Speed = {"SLOW","NORMAL","FAST"};
+    private int speed;
     public void BackButton(ActionEvent e) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         root = loader.load();
@@ -48,7 +51,9 @@ public class GameModeController implements Initializable {
         GameController gamecontroller = loader.getController();
         gamecontroller.nodehandel();
         gamecontroller.SetPlayerColor(Getplayercolor());
+        gamecontroller.SetTakenColors(Getplayercolor());
         gamecontroller.SetDefaultArea();
+        gamecontroller.Setspeed(Getspeed());
         gamecontroller.AddPlayerID(3);
         scene.setOnKeyPressed(event -> {
             try {
@@ -63,6 +68,8 @@ public class GameModeController implements Initializable {
         switch(ColorChoiceBox.getValue()){
             case("RED"):
                 playercolor = Color.RED;
+
+
             break;
 
             case("BLUE"):
@@ -81,11 +88,36 @@ public class GameModeController implements Initializable {
     public Color Getplayercolor(){
         return playercolor;
     }
+    public void SetGameSpeed(ActionEvent event2){
+        switch (SpeedChoiceBox.getValue()){
+            case("SLOW"):
+                speed = 200;
+
+                break;
+
+            case("NORMAL"):
+                speed = 100;
+
+                break;
+
+            case("FAST"):
+                speed = 50;
+                break;
+
+        }
+    }
+    public int Getspeed(){
+
+        return speed;
+    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ColorChoiceBox.getItems().addAll(Colors);
         ColorChoiceBox.setOnAction(this::setplayercolor);
+        SpeedChoiceBox.getItems().addAll(Speed);
+        SpeedChoiceBox.setOnAction(this::SetGameSpeed);
+
     }
 }

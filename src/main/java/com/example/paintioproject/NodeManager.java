@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -13,16 +14,21 @@ public class NodeManager {
 
     private boolean is_grey = false;
     private boolean is_exists = false;
+    private boolean ID_in_use = false;
+    private boolean Color_in_use = false;
 
     public ArrayList<node> nodes = new ArrayList<>();
     public ArrayList<node> tempNodes = new ArrayList<>();
     public HashMap<node,String> Owner = new HashMap<>();
     public ArrayList<String> PlayerID = new ArrayList<>();
-    private Color PlayerColor;
-    private Color TraceColor;
+    public ArrayList <Color> AlreadyTakenColors = new ArrayList<>();
+    public ArrayList <String>  AlreadyTakenIDs = new ArrayList<>();
+   // private String BotID;
+   /* private Color PlayerColor;
+    private Color TraceColor;*/
 
 
-    public void SetPlayerColor(Color PlayerColor){
+   /* public void SetPlayerColor(Color PlayerColor){
         this.PlayerColor = PlayerColor;
         if(PlayerColor == Color.RED){
            TraceColor = Color.CORAL;
@@ -34,15 +40,42 @@ public class NodeManager {
         }else if(PlayerColor == Color.PURPLE){
             TraceColor = Color.LAVENDER;
         }
+    }*/
+
+   /* public void SetBotID(){
+        for(int i = 0; i < PlayerID.size();i++){
+            for(int j = 0; j < AlreadyTakenIDs.size();j++){
+                if(PlayerID.get(j) == AlreadyTakenIDs.get(i)){
+                    ID_in_use = true;
+                    break;
+                }
+                else {
+                    ID_in_use = false;
+                }
+            }
+            if(!ID_in_use){
+                BotID = PlayerID.get(i);
+            }
+        }
+    }*/
+   /* public String GetBotID(){
+        return BotID;
+    }*/
+    public void SetTakenColors(Color color){
+        AlreadyTakenColors.add(color);
+
+    }
+    public void SetTakenID(String ID){
+        AlreadyTakenIDs.add(ID);
     }
 
 
-    public Color GetPlayerColor(){
+    /*public Color GetPlayerColor(){
         return PlayerColor;
     }
     public Color GetTraceColor(){
         return TraceColor;
-    }
+    }*/
 
     public void DefaultNodeGenerator() {
 
@@ -62,12 +95,12 @@ public class NodeManager {
         }
     }
 
-    public void AddPlayerID( int playernum){
+   /* public void AddPlayerID( int playernum){
         for(int i = 2; i <= playernum + 1; i++){
             PlayerID.add("PLAYER" + i);
         }
           System.out.println(PlayerID);
-    }
+    }*/
 
 
 
@@ -175,12 +208,12 @@ public class NodeManager {
         System.out.println(nodes.size());
 
     }
-    public void SetDefaultArea() {
+   /* public void SetDefaultArea() {
         for (int m = 11; m <= 13; m++) {
             for (int n = 11;n <=13;n++){
                 for (int j = 0; j < nodes.size(); j++) {
                     if (nodes.get(j).GetRow() == m && nodes.get(j).GetColumn() == n) {
-                        nodes.get(j).setColor(PlayerColor);
+                        nodes.get(j).setColor(Get);
                         nodes.get(j).SetIs_colored(true);
                         Owner.put(nodes.get(j),"PLAYER1");
                         break;
@@ -188,7 +221,7 @@ public class NodeManager {
                 }
             }
         }
-    }
+    }*/
 
 
     public void FindColumnNodes(int row_move, int column_move, boolean LEFT) {
