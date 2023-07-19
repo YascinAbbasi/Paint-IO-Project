@@ -3,6 +3,7 @@ package com.example.paintioproject;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BotPlayer extends NodeManager {
 
@@ -12,7 +13,8 @@ public class BotPlayer extends NodeManager {
     private Color TraceColor;
     private boolean ID_in_use = false;
     private boolean Color_in_use = false;
-
+    private boolean is_empty = false;
+    private ArrayList <node> tempnodes = new ArrayList<>();
     int row_move = 0;
     int column_move = 0;
 
@@ -22,7 +24,13 @@ public class BotPlayer extends NodeManager {
   public BotPlayer(){
       SetBotID();
       SetBotColor();
+      SetDefaultBotArea();
 
+  }
+  public int test() {
+      int x = 0;
+      x =  Owner.size();
+      return x;
   }
 
     public void SetBotID(){
@@ -89,7 +97,42 @@ public class BotPlayer extends NodeManager {
     public String GetBotID(){
         return BotID;
     }
-   public void SetDefalutBotArea(){
+   public void SetDefaultBotArea(){
+       Random rand = new Random();
+      while(true) {
+          int RandNum = rand.nextInt(nodes.size() - 300);
+          if(!nodes.get(RandNum).GetIs_passed()){
+              for(int i =  nodes.get(RandNum).GetRow() ; i <= nodes.get(RandNum).GetRow() + 1; i++ ){
+                  for(int j = nodes.get(RandNum).GetColumn(); j <= nodes.get(RandNum).GetColumn() + 1;j++){
+                     for(int n = 0; n < nodes.size(); n++){
+                          if(nodes.get(n).GetRow() == i  &&  nodes.get(n).GetColumn() == j){
+                              tempnodes.add(nodes.get(n));
+                          }
+                     }
+                  }
+              }
+              for(int j = 0 ; j < tempnodes.size();j++){
+                  if(!tempnodes.get(j).GetIs_passed()){
+                      is_empty = true;
+                  }else{
+                      is_empty = false;
+                      break;
+                  }
+              }
+          }
+          if(is_empty){
+            for(int i = 0; i < nodes.size();i++){
+                for(int j = 0; j < tempnodes.size();j++){
+                    if(nodes.get(i) == tempnodes.get(j)){
+                        nodes.get(i).setColor(AreaColor);
+                        nodes.get(i).SetIs_colored(true);
+                        Owner.put(nodes.get(i),BotID);
+                    }
+                }
+            }
+            break;
+          }
 
+      }
   }
 }

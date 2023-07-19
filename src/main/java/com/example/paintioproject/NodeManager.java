@@ -3,11 +3,9 @@ package com.example.paintioproject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javafx.scene.Node;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+
 
 public class NodeManager {
 
@@ -17,12 +15,12 @@ public class NodeManager {
     private boolean ID_in_use = false;
     private boolean Color_in_use = false;
 
-    public ArrayList<node> nodes = new ArrayList<>();
+    public static ArrayList<node> nodes = new ArrayList<>();
     public ArrayList<node> tempNodes = new ArrayList<>();
-    public HashMap<node,String> Owner = new HashMap<>();
-    public ArrayList<String> PlayerID = new ArrayList<>();
-    public ArrayList <Color> AlreadyTakenColors = new ArrayList<>();
-    public ArrayList <String>  AlreadyTakenIDs = new ArrayList<>();
+    public static HashMap<node,String> Owner = new HashMap<>();
+    public static ArrayList<String> PlayerID = new ArrayList<>();
+    public static ArrayList <Color> AlreadyTakenColors = new ArrayList<>();
+    public static ArrayList <String>  AlreadyTakenIDs = new ArrayList<>();
    // private String BotID;
    /* private Color PlayerColor;
     private Color TraceColor;*/

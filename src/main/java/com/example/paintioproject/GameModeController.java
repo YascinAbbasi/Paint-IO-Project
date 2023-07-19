@@ -35,6 +35,7 @@ public class GameModeController implements Initializable {
     private Label ErrorLabel;
     private String[] Colors ={"RED","BLUE","GREEN","PURPLE"};
     private String[] Speed = {"SLOW","NORMAL","FAST"};
+    private BotPlayer bt ;
     private int speed;
     public void BackButton(ActionEvent e) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
@@ -55,6 +56,8 @@ public class GameModeController implements Initializable {
         gamecontroller.SetDefaultArea();
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.AddPlayerID(3);
+        bt = new BotPlayer();
+        gamecontroller.AddBot(bt);
         scene.setOnKeyPressed(event -> {
             try {
                 gamecontroller.handleKeyPress(event);

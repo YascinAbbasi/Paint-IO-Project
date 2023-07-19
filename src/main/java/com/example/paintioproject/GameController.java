@@ -20,6 +20,7 @@ public class GameController extends NodeManager {
     private Stage stage;
     private Color PlayerColor;
     private Color TraceColor;
+    private BotPlayer bt;
 
     @FXML
     private Rectangle RECT;
@@ -33,6 +34,10 @@ public class GameController extends NodeManager {
     private int speed;
     private KeyEvent lastKeyEvent;
     Rectangle rect = new Rectangle(25, 25, GetPlayerColor());
+
+    public void AddBot(BotPlayer botPlayer){
+        bt = botPlayer;
+    }
 
 
     AnimationTimer gameLoop = new AnimationTimer() {
@@ -53,6 +58,9 @@ public class GameController extends NodeManager {
             else if (lastKeyEvent.getCode() == KeyCode.DOWN){
                 row_move ++;
                 FindRowNodes(row_move, column_move, false);
+            }
+            else if (lastKeyEvent.getCode() == KeyCode.SPACE){
+                System.out.println(bt.test());
             }
            // if (row_move == 0 && column_move == 0){
             //    color_the_path();
