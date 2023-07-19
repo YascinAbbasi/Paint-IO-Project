@@ -12,13 +12,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class GameController extends NodeManager {
+public class GameController extends GameThings {
     private Parent root;
     private Scene scene;
     private Stage stage;
     private Color PlayerColor;
     private Color TraceColor;
-    private BotPlayer bt;
+    private Player player;
+    private BotManager botplayer;
 
     @FXML
     private Rectangle RECT;
@@ -31,53 +32,56 @@ public class GameController extends NodeManager {
     private int column_move = 0;
     private int speed;
     private KeyEvent lastKeyEvent;
-    Rectangle rect = new Rectangle(25, 25, GetPlayerColor());
+   // Rectangle rect = new Rectangle(25, 25, GetPlayerColor());
 
-    public void AddBot(BotPlayer botPlayer){
-        bt = botPlayer;
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    public void SetBotPlayer(BotManager botplayer){
+        this.botplayer = botplayer;
     }
 
 
-    AnimationTimer gameLoop = new AnimationTimer() {
+
+  /* public void AddBot(BotPlayer botPlayer){ // BEMON
+        bt = botPlayer;
+    } */
+
+
+    AnimationTimer gameLoop = new AnimationTimer() { //BEMON OC
         @Override
         public void handle(long now) {
-            if (lastKeyEvent.getCode() == KeyCode.LEFT){
-                column_move--;
-                try {
-                    bt.test();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+            switch (lastKeyEvent.getCode()) {
+                case LEFT -> {
+                    column_move--;
+                    player.FindColumnNodes(row_move, column_move, true);
                 }
-                FindColumnNodes(row_move, column_move, true);
+                case RIGHT -> {
+                    column_move++;
+                    player.FindColumnNodes(row_move, column_move, false);
+                }
+                case UP -> {
+                    row_move--;
+                    player.FindRowNodes(row_move, column_move, true);
+                }
+                case DOWN -> {
+                    row_move++;
+                    player.FindRowNodes(row_move, column_move, false);
+                }
+                default -> {
+                }
             }
-            else if(lastKeyEvent.getCode() == KeyCode.RIGHT) {
-                column_move++;
-                FindColumnNodes(row_move, column_move, false);
-            }
-            else if(lastKeyEvent.getCode() == KeyCode.UP){
-                row_move --;
-                FindRowNodes(row_move, column_move, true);
-            }
-            else if (lastKeyEvent.getCode() == KeyCode.DOWN){
-                row_move ++;
-                FindRowNodes(row_move, column_move, false);
-            }
-
-           // if (row_move == 0 && column_move == 0){
-            //    color_the_path();
-          //  }
-
-            SetNodes(row_move, column_move);
-          // FindColumnNodes(row_move, column_move, false);
+            player.SetNodes(gp, row_move, column_move, player.GetPlayerColor(), player.GetTraceColor());
             try {
-                 Thread.sleep(speed);
-              } catch (InterruptedException e) {
-                 throw new RuntimeException(e);
-              }
+                Thread.sleep(speed);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            //GridPane.setConstraints(label,12,12);
 
-    }
+        }
     };
-    AnimationTimer BotGameLoop = new AnimationTimer() {
+    AnimationTimer BotGameLoop = new AnimationTimer() { //BEMON
         @Override
         public void handle(long now) {
 
@@ -85,11 +89,10 @@ public class GameController extends NodeManager {
     };
 
 
-
-    void handleKeyPress(KeyEvent event) throws InterruptedException {
+    void handleKeyPress(KeyEvent event) throws InterruptedException { //BEMON
         gameLoop.start();
 
-            lastKeyEvent = event;
+        lastKeyEvent = event;
           /*  switch (event.getCode()) {
                 case LEFT -> {
                    // column_move--;
@@ -169,35 +172,38 @@ public class GameController extends NodeManager {
             //GridPane.setConstraints(rect, 12, 12);
 
          */
-        }
-    public void SetPlayerColor(Color PlayerColor){
+    }
+
+    public void SetPlayerColor(Color PlayerColor) { //BRO I GUESS
         this.PlayerColor = PlayerColor;
-        if(PlayerColor == Color.RED){
+        if (PlayerColor == Color.RED) {
             TraceColor = Color.CORAL;
-        }else if(PlayerColor == Color.BLUE) {
+        } else if (PlayerColor == Color.BLUE) {
             TraceColor = Color.LIGHTBLUE;
 
-        }else if(PlayerColor == Color.GREEN){
+        } else if (PlayerColor == Color.GREEN) {
             TraceColor = Color.LIGHTGREEN;
-        }else if(PlayerColor == Color.PURPLE){
+        } else if (PlayerColor == Color.PURPLE) {
             TraceColor = Color.LAVENDER;
         }
     }
-    public void SetDefaultArea() {
+
+    public void SetDefaultArea() { //BRO
         for (int m = 11; m <= 13; m++) {
-            for (int n = 11;n <=13;n++){
+            for (int n = 11; n <= 13; n++) {
                 for (int j = 0; j < nodes.size(); j++) {
                     if (nodes.get(j).GetRow() == m && nodes.get(j).GetColumn() == n) {
                         nodes.get(j).setColor(PlayerColor);
                         nodes.get(j).SetIs_colored(true);
-                        Owner.put(nodes.get(j),"PLAYER1");
+                        Owner.put(nodes.get(j), "PLAYER1");
                         break;
                     }
                 }
             }
         }
     }
-    public void AddPlayerID( int playernum){
+
+   /* public void AddPlayerID( int playernum){
         for(int i = 2; i <= playernum + 1; i++){
             PlayerID.add("PLAYER" + i);
         }
@@ -208,17 +214,17 @@ public class GameController extends NodeManager {
     }
     public Color GetTraceColor(){
         return TraceColor;
-    }
+    }*/
 
 
 
-        public void nodehandel () {
+        public void nodehandel (Color playercolor) { //IDK FOR NOW
             DefaultNodeGenerator();
             int nodenum = 0;
             for (int i = 0; i <= 24; i++) {
                 for (int j = 0; j <= 24; j++) {
                     if(i == 12 & j == 12){
-                        nodes.get(nodenum).setColor(GetPlayerColor());
+                        nodes.get(nodenum).setColor(playercolor);
                     }
                     gp.add(nodes.get(nodenum), i, j);
                     nodenum++;
@@ -231,7 +237,10 @@ public class GameController extends NodeManager {
 
         }
 
-    public void SetNodes(int row_move,int column_move){
+
+        /*
+
+    public void SetNodes(int row_move,int column_move){ //BRO
         int row = 0;
         int column = 0;
         gp.getChildren().clear();
@@ -260,7 +269,7 @@ public class GameController extends NodeManager {
         gp.add(label,12,12);
     }
 
-    public void color_the_path(){
+    public void color_the_path(){  //BRO
         for(int j = 0; j < nodes.size(); j++){
             if(nodes.get(j).GetIs_passed() && !nodes.get(j).GetIs_colored()){
                 nodes.get(j).setColor(GetPlayerColor());
@@ -268,11 +277,12 @@ public class GameController extends NodeManager {
                 nodes.get(j).SetIs_passed(false);
             }
         }
-    }
-    public void Setspeed(int speed){
+    }*/
+    public void Setspeed(int speed){  //BEMON
         this.speed = speed;
 
     }
+}
 
-  }
+
 

@@ -50,14 +50,25 @@ public class GameModeController implements Initializable {
         stage =  (Stage) ((Node) e1.getSource()).getScene().getWindow();
         scene = new Scene(GamePage);
         GameController gamecontroller = loader.getController();
-        gamecontroller.nodehandel();
-        gamecontroller.SetPlayerColor(Getplayercolor());
+        Player player = new Player();
+        BotPlayer Botplayer = new BotPlayer();
+        BotManager botplayer = new BotManager(Botplayer);
+        gamecontroller.nodehandel(Getplayercolor());
+        player.SetPlayerColor(Getplayercolor());
+        BotManager.AlreadyTakenColors.add(Getplayercolor());
+        botplayer.SetBotColor();
+        botplayer.AddPlayerID(3);
+        botplayer.SetBotID();
+        player.SetDefaultArea(Getplayercolor());
+        botplayer.SetDefaultBotArea();
+        gamecontroller.Setspeed(Getspeed());
+        gamecontroller.setPlayer(player);
+        /*gamecontroller.SetPlayerColor(Getplayercolor());
         gamecontroller.SetTakenColors(Getplayercolor());
         gamecontroller.SetDefaultArea();
-        gamecontroller.Setspeed(Getspeed());
         gamecontroller.AddPlayerID(3);
         bt = new BotPlayer();
-        gamecontroller.AddBot(bt);
+        gamecontroller.AddBot(bt);*/
         scene.setOnKeyPressed(event -> {
             try {
                 gamecontroller.handleKeyPress(event);

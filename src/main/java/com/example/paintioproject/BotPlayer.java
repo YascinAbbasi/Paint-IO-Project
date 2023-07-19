@@ -5,9 +5,10 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BotPlayer extends NodeManager {
+public class BotPlayer  {
 
     private Color color;
+    //private Color botcolor;
     private Color BOTColor;
     private Color AreaColor;
     private Color TraceColor;
@@ -23,13 +24,10 @@ public class BotPlayer extends NodeManager {
    private Color[] Colors = {Color.RED,Color.BLUE,Color.GREEN,Color.PURPLE};
 
   public BotPlayer(){
-      SetBotID();
-      SetBotColor();
-      SetDefaultBotArea();
-      SetPlayer();
-
+     // SetDefaultBotArea();
+     // SetPlayer();
   }
-  public void test() throws InterruptedException {
+  /*public void test() throws InterruptedException {
      row_move = PlayerNode.GetRow();
      column_move = PlayerNode.GetColumn();
      for(int i = row_move + 1; i <= row_move +5; i++)
@@ -44,9 +42,9 @@ public class BotPlayer extends NodeManager {
          }
      }
 
-  }
+  }*/
 
-    public void SetBotID(){
+   /* public void SetbotID(){
         for(int i = 0; i < PlayerID.size();i++){
             for(int j = 0; j < AlreadyTakenIDs.size();j++){
                 if(PlayerID.get(i) == AlreadyTakenIDs.get(j)){
@@ -63,54 +61,79 @@ public class BotPlayer extends NodeManager {
                 break;
             }
         }
+    }*/
+    public void SetBotID(String BotID){
+      this.BotID = BotID;
     }
-    public void SetBotColor(){
-        for(int i = 0; i < Colors.length ;i++){
-            for(int j = 0;  j < AlreadyTakenColors.size();j++){
-                if(Colors[i] == AlreadyTakenColors.get(j)){
-                    Color_in_use = true;
-                    break;
-                }
-                else {
-                    Color_in_use = false;
-                }
-            }
-            if(!Color_in_use){
-                color = Colors[i];
-                AlreadyTakenColors.add(color);
-                break;
-            }
-            }
-        if(color == Color.RED){
-
-            BOTColor = Color.DARKRED;
-            AreaColor = color;
-            TraceColor = Color.CORAL;
-        }
-        else if(color == Color.BLUE){
-
-            BOTColor = Color.DARKBLUE;
-            AreaColor = color;
-            TraceColor = Color.LIGHTBLUE;
-        }
-        else if(color == Color.GREEN){
-
-            BOTColor = Color.DARKGREEN;
-            AreaColor = color;
-            TraceColor = Color.LIGHTGREEN;
-        }
-        else if(color == Color.PURPLE){
-
-            BOTColor = Color.PURPLE;
-            AreaColor = Color.MEDIUMPURPLE;
-            TraceColor = Color.LAVENDER;
-        }
-
+    public void SetBotColor(Color BOTcolor){
+      this.BOTColor = BOTColor;
     }
+    public void SetTraceColor(Color TraceColor){
+        this.TraceColor = TraceColor;
+    }
+    public void SetAreaColor (Color AreaColor){
+        this.AreaColor = AreaColor;
+    }
+
+    public Color GetBOTColor() {
+        return BOTColor;
+    }
+
+    public Color GetAreaColor() {
+        return AreaColor;
+    }
+
+    public Color GetTraceColor() {
+        return TraceColor;
+    }
+
+    /*public void SetbotColor(){
+                    for(int i = 0; i < Colors.length ;i++){
+                        for(int j = 0;  j < AlreadyTakenColors.size();j++){
+                            if(Colors[i] == AlreadyTakenColors.get(j)){
+                                Color_in_use = true;
+                                break;
+                            }
+                            else {
+                                Color_in_use = false;
+                            }
+                        }
+                        if(!Color_in_use){
+                            color = Colors[i];
+                            AlreadyTakenColors.add(color);
+                            break;
+                        }
+                        }
+                    if(color == Color.RED){
+
+                        BOTColor = Color.DARKRED;
+                        AreaColor = color;
+                        TraceColor = Color.CORAL;
+                    }
+                    else if(color == Color.BLUE){
+
+                        BOTColor = Color.DARKBLUE;
+                        AreaColor = color;
+                        TraceColor = Color.LIGHTBLUE;
+                    }
+                    else if(color == Color.GREEN){
+
+                        BOTColor = Color.DARKGREEN;
+                        AreaColor = color;
+                        TraceColor = Color.LIGHTGREEN;
+                    }
+                    else if(color == Color.PURPLE){
+
+                        BOTColor = Color.PURPLE;
+                        AreaColor = Color.MEDIUMPURPLE;
+                        TraceColor = Color.LAVENDER;
+                    }
+
+                }*/
     public String GetBotID(){
         return BotID;
     }
-   public void SetDefaultBotArea(){
+   /*public void SetDefaultBotArea(){
        Random rand = new Random();
       while(true) {
           int RandNum = rand.nextInt(nodes.size() - 300);
@@ -147,9 +170,9 @@ public class BotPlayer extends NodeManager {
           }
 
       }
-  }
+  }*/
 
-  public void SetPlayer(){
+ /* public void SetPlayer(){
       for(int j = 0; j < nodes.size();j++){
           if(Owner.get(nodes.get(j)) == BotID){
               nodes.get(j).setColor(BOTColor);
@@ -189,5 +212,5 @@ public class BotPlayer extends NodeManager {
 
       }
 
-  }
+  }*/
 }
