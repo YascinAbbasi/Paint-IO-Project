@@ -46,6 +46,15 @@ public class node extends Region {
     public void SetIs_passed(boolean is_passed) {
         this.is_passed = is_passed;
     }
+
+    public void SetIs_player(boolean is_player) {
+        this.is_player = is_player;
+    }
+
+    public boolean Getis_player() {
+        return is_player;
+    }
+
     public boolean GetIs_passed(){
         return is_passed;
     }

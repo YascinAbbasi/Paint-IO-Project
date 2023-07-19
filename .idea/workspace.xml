@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="adding bot player class and a few changes">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="adding default area method for bots">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +141,9 @@
       <workItem from="1689646184154" duration="12309000" />
       <workItem from="1689690493062" duration="4000" />
       <workItem from="1689690886951" duration="1000000" />
-      <workItem from="1689733484885" duration="11204000" />
+      <workItem from="1689733484885" duration="11607000" />
+      <workItem from="1689756686207" duration="2000" />
+      <workItem from="1689756692902" duration="7231000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -288,7 +289,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689669305383</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="adding default area method for bots">
+      <option name="closed" value="true" />
+      <created>1689756472388</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1689756472388</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,6 +363,7 @@
     <MESSAGE value="editing signup &amp; login &amp; game mode scenes" />
     <MESSAGE value="a few changes and building a new method to move nodes properly" />
     <MESSAGE value="adding bot player class and a few changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding bot player class and a few changes" />
+    <MESSAGE value="adding default area method for bots" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding default area method for bots" />
   </component>
 </project>

@@ -1,7 +1,6 @@
 package com.example.paintioproject;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -45,6 +43,11 @@ public class GameController extends NodeManager {
         public void handle(long now) {
             if (lastKeyEvent.getCode() == KeyCode.LEFT){
                 column_move--;
+                try {
+                    bt.test();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 FindColumnNodes(row_move, column_move, true);
             }
             else if(lastKeyEvent.getCode() == KeyCode.RIGHT) {
@@ -59,9 +62,7 @@ public class GameController extends NodeManager {
                 row_move ++;
                 FindRowNodes(row_move, column_move, false);
             }
-            else if (lastKeyEvent.getCode() == KeyCode.SPACE){
-                System.out.println(bt.test());
-            }
+
            // if (row_move == 0 && column_move == 0){
             //    color_the_path();
           //  }
@@ -76,7 +77,12 @@ public class GameController extends NodeManager {
 
     }
     };
+    AnimationTimer BotGameLoop = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
 
+        }
+    };
 
 
 
@@ -241,7 +247,8 @@ public class GameController extends NodeManager {
                             nodes.get(j).SetIs_passed(true);
                             Owner.put(nodes.get(j),"PLAYER1");
                         }
-                        if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored())){
+                        if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored()) && (!Owner.containsKey(nodes.get(j)) ||
+                        Owner.get(nodes.get(j)) == "PLAYER1")){
                             color_the_path();
                         }
                     }

@@ -14,9 +14,10 @@ public class BotPlayer extends NodeManager {
     private boolean ID_in_use = false;
     private boolean Color_in_use = false;
     private boolean is_empty = false;
+    private node PlayerNode;
     private ArrayList <node> tempnodes = new ArrayList<>();
-    int row_move = 0;
-    int column_move = 0;
+     private int row_move = 0;
+     private int column_move = 0;
 
     private String BotID;
    private Color[] Colors = {Color.RED,Color.BLUE,Color.GREEN,Color.PURPLE};
@@ -25,12 +26,24 @@ public class BotPlayer extends NodeManager {
       SetBotID();
       SetBotColor();
       SetDefaultBotArea();
+      SetPlayer();
 
   }
-  public int test() {
-      int x = 0;
-      x =  Owner.size();
-      return x;
+  public void test() throws InterruptedException {
+     row_move = PlayerNode.GetRow();
+     column_move = PlayerNode.GetColumn();
+     for(int i = row_move + 1; i <= row_move +5; i++)
+     for(int j = 0; j < nodes.size();j++){
+         if(nodes.get(j).GetRow() == i && nodes.get(j).GetColumn() == column_move){
+             nodes.get(j).SetIs_player(true);
+             nodes.get(j).setColor(BOTColor);
+             PlayerNode.SetIs_player(false);
+             PlayerNode.setColor(TraceColor);
+             PlayerNode =  nodes.get(j);
+             Thread.sleep(200);
+         }
+     }
+
   }
 
     public void SetBotID(){
@@ -134,5 +147,47 @@ public class BotPlayer extends NodeManager {
           }
 
       }
+  }
+
+  public void SetPlayer(){
+      for(int j = 0; j < nodes.size();j++){
+          if(Owner.get(nodes.get(j)) == BotID){
+              nodes.get(j).setColor(BOTColor);
+              nodes.get(j).SetIs_player(true);
+              PlayerNode = nodes.get(j);
+              break;
+          }
+      }
+
+    }
+  public void EasyModeMovement(){
+      Random random = new Random();
+      int rand = random.nextInt(4);
+      switch(rand){
+          case(0): // UP
+
+
+              break;
+
+          case(1) : //RIGHT
+
+
+              break;
+
+          case(2): // DOWN
+
+
+              break;
+
+          case(3)://LEFT
+
+
+              break;
+
+          default:
+              break;
+
+      }
+
   }
 }
