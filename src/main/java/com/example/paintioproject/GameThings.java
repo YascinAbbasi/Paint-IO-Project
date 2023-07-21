@@ -21,16 +21,21 @@ public class GameThings {
     public void DefaultNodeGenerator() {
         for (int i = 0; i <= 24; i++) {
             for (int j = 0; j <= 24; j++) {
+                node temp;
                 if ((i + j) % 2 == 0) {
-                    node temp = new node(Color.WHITE, i, j, true);
-                    nodes.add(temp);
+                    temp = new node(Color.WHITE, i, j, true);
                 } else {
-                    node temp = new node(Color.LIGHTGREY, i, j, true);
-                    nodes.add(temp);
+                    if(i == 19 && j == 20){
+                        temp = new node(Color.BLACK, i, j, true);
+                    }else {
+                        temp = new node(Color.LIGHTGREY, i, j, true);
+                    }
                 }
+                nodes.add(temp);
+            }
             }
         }
-    }
+
 
     public void RowNodeGenerator(int row_move, int column_move) {
         System.out.println("r gen working");
@@ -79,9 +84,9 @@ public class GameThings {
         }
     }
 
-    public void FindRowNodes(int row_move, int column_move, boolean UP ) {
+    public synchronized void FindRowNodes(int row_move, int column_move, boolean UP ) {
         System.out.println("r find working");
-        boolean UPP = UP;
+        //boolean UPP = UP;
         tempNodes.clear();
         if (!UP) {
             row_move += 24;
@@ -91,7 +96,7 @@ public class GameThings {
                 for (int i = column_move; i <= column_move + 24; i++) {
                     if (nodes.get(j).GetColumn() == i) {
                         node temp = nodes.get(j);
-                        tempNodes.add(temp);
+                        tempNodes.add(nodes.get(j));
 
                     }
                 }
@@ -137,7 +142,7 @@ public class GameThings {
 
 
 
-    public void FindColumnNodes(int row_move, int column_move, boolean LEFT) {
+    public synchronized void FindColumnNodes(int row_move, int column_move, boolean LEFT) {
         System.out.println("c find working");
         tempNodes.clear();
         if (!LEFT) {
@@ -148,7 +153,7 @@ public class GameThings {
                 for (int i = row_move; i <= row_move + 24; i++) {
                     if (nodes.get(j).GetRow() == i) {
                         node temp = nodes.get(j);
-                        tempNodes.add(temp);
+                        tempNodes.add(nodes.get(j));
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.paintioproject;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,12 +12,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class GameModeController implements Initializable {
@@ -25,6 +29,7 @@ public class GameModeController implements Initializable {
     private Scene scene;
     private Stage stage;
     private Color playercolor;
+    private KeyEvent lastKeyEvent;
     @FXML
     public ImageView GameModeImageView;
     @FXML
@@ -53,7 +58,7 @@ public class GameModeController implements Initializable {
         Player player = new Player();
         BotPlayer Botplayer = new BotPlayer();
         BotManager botplayer = new BotManager(Botplayer);
-        gamecontroller.nodehandel(Getplayercolor());
+        gamecontroller.firstnodehandel(Getplayercolor());
         player.SetPlayerColor(Getplayercolor());
         BotManager.AlreadyTakenColors.add(Getplayercolor());
         botplayer.SetBotColor();
@@ -61,8 +66,14 @@ public class GameModeController implements Initializable {
         botplayer.SetBotID();
         player.SetDefaultArea(Getplayercolor());
         botplayer.SetDefaultBotArea();
+        botplayer.SetPlayer();
+        botplayer.setSpeed(400);
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
+        gamecontroller.SetBotPlayer(botplayer);
+        RandomDirection();
+        gamecontroller.SetLastKeyEvent(lastKeyEvent);
+        gamecontroller.gameLoop.start();
         /*gamecontroller.SetPlayerColor(Getplayercolor());
         gamecontroller.SetTakenColors(Getplayercolor());
         gamecontroller.SetDefaultArea();
@@ -70,11 +81,13 @@ public class GameModeController implements Initializable {
         bt = new BotPlayer();
         gamecontroller.AddBot(bt);*/
         scene.setOnKeyPressed(event -> {
+
             try {
                 gamecontroller.handleKeyPress(event);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+
         });
         stage.setScene(scene);
     }
@@ -99,9 +112,7 @@ public class GameModeController implements Initializable {
                 break;
         }
     }
-    public Color Getplayercolor(){
-        return playercolor;
-    }
+
     public void SetGameSpeed(ActionEvent event2){
         switch (SpeedChoiceBox.getValue()){
             case("SLOW"):
@@ -120,6 +131,9 @@ public class GameModeController implements Initializable {
 
         }
     }
+    public Color Getplayercolor(){
+        return playercolor;
+    }
     public int Getspeed(){
 
         return speed;
@@ -133,5 +147,71 @@ public class GameModeController implements Initializable {
         SpeedChoiceBox.getItems().addAll(Speed);
         SpeedChoiceBox.setOnAction(this::SetGameSpeed);
 
+    }
+    public void  RandomDirection(){
+        Random Rand = new Random();
+        int rand = Rand.nextInt(4);
+        switch(rand){
+            case(0):
+                KeyEvent keyPressEvent = new KeyEvent(
+                        KeyEvent.KEY_PRESSED,  // event type
+                        "",                    // character
+                        "",                    // text
+                        KeyCode.UP,            // key code
+                        false,                 // shift down
+                        false,                 // control down
+                        false,                 // alt down
+                        false                  // meta down
+                );
+                lastKeyEvent = keyPressEvent;
+                break;
+
+            case(1):
+                 keyPressEvent = new KeyEvent(
+                        KeyEvent.KEY_PRESSED,   // event type
+                        "",                     // character
+                        "",                     // text
+                        KeyCode.RIGHT,          // key code
+                        false,                  // shift down
+                        false,                  // control down
+                        false,                  // alt down
+                        false                   // meta down
+                );
+                 lastKeyEvent = keyPressEvent;
+
+                break;
+
+            case(2):
+                keyPressEvent = new KeyEvent(
+                        KeyEvent.KEY_PRESSED,   // event type
+                        "",                     // character
+                        "",                     // text
+                        KeyCode.DOWN,          // key code
+                        false,                  // shift down
+                        false,                  // control down
+                        false,                  // alt down
+                        false                   // meta down
+                );
+                lastKeyEvent = keyPressEvent;
+
+                break;
+
+            case(3):
+                keyPressEvent = new KeyEvent(
+                        KeyEvent.KEY_PRESSED,   // event type
+                        "",                     // character
+                        "",                     // text
+                        KeyCode.LEFT,          // key code
+                        false,                  // shift down
+                        false,                  // control down
+                        false,                  // alt down
+                        false                   // meta down
+                );
+                lastKeyEvent = keyPressEvent;
+                break;
+
+            default:
+                break;
+        }
     }
 }

@@ -69,6 +69,8 @@ public class node extends Region {
         this.row = row;
         this.column = column;
         this.is_default = is_default;
+        is_colored = false;
+        is_passed = false;
     }
     @Override
     protected void layoutChildren() {

@@ -20,13 +20,14 @@ public class GameController extends GameThings {
     private Color TraceColor;
     private Player player;
     private BotManager botplayer;
-
     @FXML
     private Rectangle RECT;
     @FXML
     private Label label;
     @FXML
     private GridPane gp;
+     public Thread thread;
+
 
     private int row_move = 0;
     private int column_move = 0;
@@ -39,7 +40,10 @@ public class GameController extends GameThings {
     }
     public void SetBotPlayer(BotManager botplayer){
         this.botplayer = botplayer;
+        thread = new Thread(botplayer);
+        thread.start();
     }
+
 
 
 
@@ -90,9 +94,8 @@ public class GameController extends GameThings {
 
 
     void handleKeyPress(KeyEvent event) throws InterruptedException { //BEMON
-        gameLoop.start();
-
         lastKeyEvent = event;
+        gameLoop.start();
           /*  switch (event.getCode()) {
                 case LEFT -> {
                    // column_move--;
@@ -174,7 +177,7 @@ public class GameController extends GameThings {
          */
     }
 
-    public void SetPlayerColor(Color PlayerColor) { //BRO I GUESS
+   /* public void SetPlayerColor(Color PlayerColor) { //BRO I GUESS
         this.PlayerColor = PlayerColor;
         if (PlayerColor == Color.RED) {
             TraceColor = Color.CORAL;
@@ -186,9 +189,9 @@ public class GameController extends GameThings {
         } else if (PlayerColor == Color.PURPLE) {
             TraceColor = Color.LAVENDER;
         }
-    }
+    }*/
 
-    public void SetDefaultArea() { //BRO
+   /* public void SetDefaultArea() { //BRO
         for (int m = 11; m <= 13; m++) {
             for (int n = 11; n <= 13; n++) {
                 for (int j = 0; j < nodes.size(); j++) {
@@ -201,7 +204,7 @@ public class GameController extends GameThings {
                 }
             }
         }
-    }
+    } */
 
    /* public void AddPlayerID( int playernum){
         for(int i = 2; i <= playernum + 1; i++){
@@ -218,7 +221,7 @@ public class GameController extends GameThings {
 
 
 
-        public void nodehandel (Color playercolor) { //IDK FOR NOW
+        public void firstnodehandel (Color playercolor) { //IDK FOR NOW
             DefaultNodeGenerator();
             int nodenum = 0;
             for (int i = 0; i <= 24; i++) {
@@ -281,6 +284,9 @@ public class GameController extends GameThings {
     public void Setspeed(int speed){  //BEMON
         this.speed = speed;
 
+    }
+    public void SetLastKeyEvent(KeyEvent lastKeyEvent){
+        this.lastKeyEvent = lastKeyEvent;
     }
 }
 
