@@ -23,7 +23,7 @@ public class GameController extends GameThings {
     @FXML
     private Rectangle RECT;
     @FXML
-    private Label label;
+    private Label label = new Label("\uD83C\uDFAE");
     @FXML
     private GridPane gp;
      public Thread thread;
@@ -76,12 +76,13 @@ public class GameController extends GameThings {
                 }
             }
             player.SetNodes(gp, row_move, column_move, player.GetPlayerColor(), player.GetTraceColor());
+            gp.add(label,12,12);
             try {
                 Thread.sleep(speed);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            //GridPane.setConstraints(label,12,12);
+
 
         }
     };

@@ -70,7 +70,7 @@ public class GameModeController implements Initializable {
         botplayer.setSpeed(400);
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
-        gamecontroller.SetBotPlayer(botplayer);
+        //gamecontroller.SetBotPlayer(botplayer);
         RandomDirection();
         gamecontroller.SetLastKeyEvent(lastKeyEvent);
         gamecontroller.gameLoop.start();

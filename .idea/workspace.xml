@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment=" redesigning classes and  gamecontroller">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="just testing bot moves and multi threading (code needs a lot of changes)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +147,8 @@
       <workItem from="1689756686207" duration="2000" />
       <workItem from="1689756692902" duration="23911000" />
       <workItem from="1689822178952" duration="20619000" />
-      <workItem from="1689906365968" duration="11466000" />
+      <workItem from="1689906365968" duration="23646000" />
+      <workItem from="1689998044548" duration="16105000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -318,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689794193901</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="just testing bot moves and multi threading (code needs a lot of changes)">
+      <option name="closed" value="true" />
+      <created>1689923543521</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1689923543521</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,6 +395,7 @@
     <MESSAGE value="adding default area method for bots" />
     <MESSAGE value="last commit before redesign" />
     <MESSAGE value=" redesigning classes and  gamecontroller" />
-    <option name="LAST_COMMIT_MESSAGE" value=" redesigning classes and  gamecontroller" />
+    <MESSAGE value="just testing bot moves and multi threading (code needs a lot of changes)" />
+    <option name="LAST_COMMIT_MESSAGE" value="just testing bot moves and multi threading (code needs a lot of changes)" />
   </component>
 </project>

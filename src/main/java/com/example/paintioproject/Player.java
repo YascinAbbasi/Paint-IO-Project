@@ -33,7 +33,7 @@ public class Player extends GameThings {
                         }
                         if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored()) && (!Owner.containsKey(nodes.get(j)) ||
                                 Owner.get(nodes.get(j)) == "PLAYER1")){
-                            color_the_path(PlayerColor);
+                            color_the_path(PlayerColor,"PLAYER1");
                         }
                     }
                 }
