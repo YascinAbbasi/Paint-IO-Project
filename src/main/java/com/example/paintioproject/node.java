@@ -15,7 +15,7 @@ public class node extends Region {
     private int row;
     private int column;
    private Color color;
-   private Color PlayerColor;
+   private Color DefaultColor;
    private Color  TraceColor;
 
     public boolean is_default;
@@ -66,6 +66,7 @@ public class node extends Region {
     public node(Color color, int row, int column, boolean is_default){
         setPrefSize(x,y);
         this.color = color;
+        DefaultColor = color;
         this.row = row;
         this.column = column;
         this.is_default = is_default;
@@ -80,6 +81,10 @@ public class node extends Region {
     }
     public void setColor(Color color) {
         this.color = color;
+        requestLayout();
+    }
+    public void ResettoDefaultColor(){
+        color = DefaultColor;
         requestLayout();
     }
 

@@ -33,6 +33,8 @@ public class GameController extends GameThings {
     private int column_move = 0;
     private int speed;
     private KeyEvent lastKeyEvent;
+    private KeyEvent HelpKeyEvent;
+    private KeyEvent ShootKeyEvent;
    // Rectangle rect = new Rectangle(25, 25, GetPlayerColor());
 
     public void setPlayer(Player player) {
@@ -59,20 +61,59 @@ public class GameController extends GameThings {
                 case LEFT -> {
                     column_move--;
                     player.FindColumnNodes(row_move, column_move, true);
+                    HelpKeyEvent = lastKeyEvent;
                 }
                 case RIGHT -> {
                     column_move++;
                     player.FindColumnNodes(row_move, column_move, false);
+                    HelpKeyEvent = lastKeyEvent;
                 }
                 case UP -> {
                     row_move--;
                     player.FindRowNodes(row_move, column_move, true);
+                    HelpKeyEvent = lastKeyEvent;
                 }
                 case DOWN -> {
                     row_move++;
                     player.FindRowNodes(row_move, column_move, false);
+                    HelpKeyEvent = lastKeyEvent;
+                }
+                case SPACE -> {
+                    try {
+                        ShootBulletA(HelpKeyEvent,row_move + 12,column_move + 12,player.GetPlayerColor(),"PLAYER1");
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    lastKeyEvent = HelpKeyEvent;
+                }
+                case ESCAPE -> {
+
                 }
                 default -> {
+                    switch (HelpKeyEvent.getCode()){
+                        case LEFT -> {
+                            column_move--;
+                            player.FindColumnNodes(row_move, column_move, true);
+                          //  HelpKeyEvent = lastKeyEvent;
+                        }
+                        case RIGHT -> {
+                            column_move++;
+                            player.FindColumnNodes(row_move, column_move, false);
+                           // HelpKeyEvent = lastKeyEvent;
+                        }
+                        case UP -> {
+                            row_move--;
+                            player.FindRowNodes(row_move, column_move, true);
+                          //  HelpKeyEvent = lastKeyEvent;
+                        }
+                        case DOWN -> {
+                            row_move++;
+                            player.FindRowNodes(row_move, column_move, false);
+                            //HelpKeyEvent = lastKeyEvent;
+                        }
+                    }
+                    //lastKeyEvent = HelpKeyEvent;
                 }
             }
             player.SetNodes(gp, row_move, column_move, player.GetPlayerColor(), player.GetTraceColor());
@@ -96,7 +137,7 @@ public class GameController extends GameThings {
 
     void handleKeyPress(KeyEvent event) throws InterruptedException { //BEMON
         lastKeyEvent = event;
-        gameLoop.start();
+        //gameLoop.start();
           /*  switch (event.getCode()) {
                 case LEFT -> {
                    // column_move--;

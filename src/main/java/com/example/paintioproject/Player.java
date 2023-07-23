@@ -28,10 +28,12 @@ public class Player extends GameThings {
                         gp.add(nodes.get(j),column++,row);
                         if((row == 12 && column   == 13 )&& (!nodes.get(j).GetIs_colored())){
                             nodes.get(j).setColor(TraceColor); //RANG
+                            System.out.println("ROW : " + nodes.get(j).GetRow());
+                            System.out.println("COLUMN : " + nodes.get(j).GetColumn());
                             nodes.get(j).SetIs_passed(true);
                             Owner.put(nodes.get(j),"PLAYER1");
                         }
-                        if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored()) && (!Owner.containsKey(nodes.get(j)) ||
+                        if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored()) && (
                                 Owner.get(nodes.get(j)) == "PLAYER1")){
                             color_the_path(PlayerColor,"PLAYER1");
                         }
