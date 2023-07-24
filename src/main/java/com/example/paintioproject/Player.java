@@ -17,6 +17,7 @@ public class Player extends GameThings {
     public void SetNodes(GridPane gp, int row_move, int column_move, Color PlayerColor, Color TraceColor){ //bayad bre to player
         int row = 0;
         int column = 0;
+        boolean AlreadyColored = false;
         Rectangle rect = new Rectangle(25, 25,PlayerColor);
         gp.getChildren().clear();
 
@@ -28,14 +29,20 @@ public class Player extends GameThings {
                         gp.add(nodes.get(j),column++,row);
                         if((row == 12 && column   == 13 )&& (!nodes.get(j).GetIs_colored())){
                             nodes.get(j).setColor(TraceColor); //RANG
-                            System.out.println("ROW : " + nodes.get(j).GetRow());
-                            System.out.println("COLUMN : " + nodes.get(j).GetColumn());
+                           // System.out.println("ROW : " + nodes.get(j).GetRow());
+                            //System.out.println("COLUMN : " + nodes.get(j).GetColumn());
                             nodes.get(j).SetIs_passed(true);
+                            //AlreadyColored = false;
                             Owner.put(nodes.get(j),"PLAYER1");
                         }
-                        if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored()) && (
+                        else if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored()) && (
                                 Owner.get(nodes.get(j)) == "PLAYER1")){
-                            color_the_path(PlayerColor,"PLAYER1");
+                           // color_the_path(PlayerColor,"PLAYER1");
+                           // if(!AlreadyColored) {
+                               // AlreadyColored = true;
+                                color_the_path(PlayerColor,"PLAYER1");
+                                ColorArea(PlayerColor, "PLAYER1");
+                           // }
                         }
                     }
                 }

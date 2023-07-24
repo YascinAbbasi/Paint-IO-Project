@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="working on ColorTheArea function and a few improvements">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="Adding Bullet A and a few improvements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +146,8 @@
       <workItem from="1689822178952" duration="20619000" />
       <workItem from="1689906365968" duration="23646000" />
       <workItem from="1689998044548" duration="16193000" />
-      <workItem from="1690082118014" duration="22114000" />
+      <workItem from="1690082118014" duration="25376000" />
+      <workItem from="1690169307561" duration="14728000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -334,7 +333,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690038164103</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Adding Bullet A and a few improvements">
+      <option name="closed" value="true" />
+      <created>1690129578671</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1690129578671</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,6 +412,7 @@
     <MESSAGE value=" redesigning classes and  gamecontroller" />
     <MESSAGE value="just testing bot moves and multi threading (code needs a lot of changes)" />
     <MESSAGE value="working on ColorTheArea function and a few improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on ColorTheArea function and a few improvements" />
+    <MESSAGE value="Adding Bullet A and a few improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Bullet A and a few improvements" />
   </component>
 </project>
