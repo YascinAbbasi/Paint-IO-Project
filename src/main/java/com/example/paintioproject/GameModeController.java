@@ -59,18 +59,20 @@ public class GameModeController implements Initializable {
         BotPlayer Botplayer = new BotPlayer();
         BotManager botplayer = new BotManager(Botplayer);
         gamecontroller.firstnodehandel(Getplayercolor());
-        player.SetPlayerColor(Getplayercolor());
-        BotManager.AlreadyTakenColors.add(Getplayercolor());
+        SetPlayer(player);
+       // player.SetPlayerColor(Getplayercolor());
+       /* BotManager.AlreadyTakenColors.add(Getplayercolor());
         botplayer.SetBotColor();
         botplayer.AddPlayerID(3);
-        botplayer.SetBotID();
-        player.SetDefaultArea(Getplayercolor());
-        botplayer.SetDefaultBotArea();
+        botplayer.SetBotID();*/
+       // player.SetDefaultArea(Getplayercolor());
+       /* botplayer.SetDefaultBotArea();
         botplayer.SetPlayer();
-        botplayer.setSpeed(400);
+        botplayer.setSpeed(400);*/
+        SetBot(botplayer);
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
-        //gamecontroller.SetBotPlayer(botplayer);
+        gamecontroller.SetBotPlayer(botplayer);
         RandomDirection();
         gamecontroller.SetLastKeyEvent(lastKeyEvent);
         gamecontroller.gameLoop.start();
@@ -213,5 +215,19 @@ public class GameModeController implements Initializable {
             default:
                 break;
         }
+    }
+
+    public void SetPlayer( Player player){
+        player.SetPlayerColor(Getplayercolor());
+        player.SetDefaultArea(Getplayercolor());
+    }
+    public void SetBot(BotManager botmanager){
+        BotManager.AlreadyTakenColors.add(Getplayercolor());
+        botmanager.SetBotColor();
+        botmanager.AddPlayerID(3);
+        botmanager.SetBotID();
+        botmanager.SetDefaultBotArea();
+        botmanager.SetPlayer();
+        botmanager.setSpeed(400);
     }
 }
