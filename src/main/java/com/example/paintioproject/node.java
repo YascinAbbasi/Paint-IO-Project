@@ -83,6 +83,9 @@ public class node extends Region {
         this.color = color;
         requestLayout();
     }
+    public Color GetColor(){
+        return color;
+    }
     public void ResettoDefaultColor(){
         color = DefaultColor;
         requestLayout();

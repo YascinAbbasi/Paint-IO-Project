@@ -13,6 +13,7 @@ import java.util.Objects;
 public class GameThings {
     public static ArrayList<node> nodes = new ArrayList<>();
     public ArrayList<node> tempNodes = new ArrayList<>();
+   // public static ArrayList<node>  PassedNodes = new ArrayList<>();
     public static HashMap<node,String> Owner = new HashMap<>();
     public static ArrayList <node> toCheck = new ArrayList<>();
     public static ArrayList <node> toColor = new ArrayList<>();
@@ -204,7 +205,7 @@ public class GameThings {
 
 
 
-    public void ShootBulletA(KeyEvent Direction,int row, int column,Color color,String ID) throws InterruptedException {
+    public void ShootBulletA(KeyEvent Direction,int row, int column,Color color,Color TraceColor,String ID) throws InterruptedException {
         toShootCheck.clear();
         node TempNode = null;
          node TempNode2 ;
@@ -243,7 +244,7 @@ public class GameThings {
                         toShootCheck.add(TempNode);
                     }
                 }
-                color_the_path(color,ID);
+                color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
                     toShootCheck.get(j).setColor(color);
                 }
@@ -278,7 +279,7 @@ public class GameThings {
                       toShootCheck.add(TempNode);
                   }
               }
-                color_the_path(color,ID);
+                color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
                     toShootCheck.get(j).setColor(color);
                 }
@@ -316,7 +317,7 @@ public class GameThings {
                         toShootCheck.add(TempNode);
                     }
                 }
-                color_the_path(color,ID);
+                color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
                     toShootCheck.get(j).setColor(color);
                 }
@@ -353,7 +354,7 @@ public class GameThings {
                         toShootCheck.add(TempNode);
                     }
                 }
-                color_the_path(color,ID);
+                color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
                     toShootCheck.get(j).setColor(color);
                 }
@@ -361,15 +362,17 @@ public class GameThings {
 
             }
         }
-        public synchronized void color_the_path(Color color,String ID){
+        public synchronized void color_the_path(Color color,String ID,Color TraceColor){
         for(int j = 0; j < nodes.size(); j++){
-            if(nodes.get(j).GetIs_passed() && !nodes.get(j).GetIs_colored() && (Owner.get(nodes.get(j))
-             == ID || !Owner.containsKey(nodes.get(j)))){
+            if(nodes.get(j).GetIs_passed() && (nodes.get(j).GetColor() == TraceColor || nodes.get(j).GetColor() == color)){/*&& !nodes.get(j).GetIs_colored()*/
+                    /*&& (Owner.get(nodes.get(j)) == ID /* || !Owner.containsKey(nodes.get(j))*///){
                 nodes.get(j).setColor(color);
                 nodes.get(j).SetIs_colored(true);
-                //nodes.get(j).SetIs_passed(false);
+                Owner.put(nodes.get(j),ID);
+                nodes.get(j).SetIs_passed(false);
             }
         }
+        System.out.println("COLOR THE PATH CALLED BY " + ID);
     }
 
 
@@ -401,10 +404,10 @@ public class GameThings {
         for (int i = MinRow; i <= MaxRow; i++) {
             for (int j = MinColumn; j <= MaxColumn; j++) {
                 for (int n = 0; n < nodes.size(); n++) {
-                    if (nodes.get(n).GetRow() == i && nodes.get(n).GetColumn() == j &&
-                            (Objects.equals(Owner.get(nodes.get(n)), ID) || !Owner.containsKey(nodes.get(n)))) {
+                    if (nodes.get(n).GetRow() == i && nodes.get(n).GetColumn() == j /*&&
+                            (Objects.equals(Owner.get(nodes.get(n)), ID) || !Owner.containsKey(nodes.get(n)))*/) {
                         toColor.add(nodes.get(n));
-                        //  System.out.println("ColorSize : " + toColor.size());
+                         // System.out.println("ColorSize : " + toColor.size());
                     }
                 }
             }
@@ -414,13 +417,13 @@ public class GameThings {
             for (int j = MinColumn; j <= MaxColumn; j++) {
                 tempnode = FindtoColorTemp(i, j);
                 if(tempnode != null) {
-                    if (!tempnode.GetIs_colored()) {
+                    if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                         is_found = Checkneighbour(i - 1, j);
                         if (!is_found) {
                             for (int n = j; n <= MaxColumn; n++) {
                                 tempnode = FindtoColorTemp(i, n);
                                 if (tempnode != null) {
-                                    if (tempnode.GetIs_colored()) {
+                                    if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
                                         break;
                                     } else {
                                         toRemove.add(tempnode);
@@ -430,7 +433,7 @@ public class GameThings {
                             }
                             //toRemove.add(tempnode);
                         } else {
-                            toCheckArea(tempnode, "UP", i, j);
+                            toCheckArea(tempnode, "UP", i, j,ID);
                             //toCheck.add(tempnode);
                         }
                     } else {
@@ -445,13 +448,13 @@ public class GameThings {
             for (int j = MaxColumn; j >= MinColumn; j--) {
                 tempnode = FindtoColorTemp(i, j);
                     if(tempnode != null) {/////////////
-                        if (!tempnode.GetIs_colored()) {
+                        if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                             is_found = Checkneighbour(i + 1, j);
                             if (!is_found) {
                                 for (int n = j; n >= MinColumn; n--) {
                                     tempnode = FindtoColorTemp(i, n);
                                     if (tempnode != null) { ///////////////////
-                                        if (tempnode.GetIs_colored()) {
+                                        if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
                                             break;
                                         } else {
                                             toRemove.add(tempnode);
@@ -460,7 +463,7 @@ public class GameThings {
                                 }
                                 //toRemove.add(tempnode);
                             } else {
-                                toCheckArea(tempnode, "DOWN", i, j);
+                                toCheckArea(tempnode, "DOWN", i, j,ID);
                                 //toCheck.add(tempnode);
                             }
                         } else {
@@ -475,13 +478,13 @@ public class GameThings {
             for (int i = MaxRow; i >= MinRow; i--) {
                 tempnode = FindtoColorTemp(i, j);
                 if(tempnode != null) {
-                    if (!tempnode.GetIs_colored()) {
+                    if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                         is_found = Checkneighbour(i, j - 1);
                         if (!is_found) {
                             for (int n = i; n >= MinRow; n--) {
                                 tempnode = FindtoColorTemp(n, j);
                                 if(tempnode != null) {
-                                    if (tempnode.GetIs_colored()) {
+                                    if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
                                         break;
                                     } else {
                                         toRemove.add(tempnode);
@@ -490,7 +493,7 @@ public class GameThings {
                             }
                             // toRemove.add(tempnode);
                         } else {
-                            toCheckArea(tempnode, "LEFT", i, j);
+                            toCheckArea(tempnode, "LEFT", i, j,ID);
                             // toCheck.add(tempnode);
                         }
 
@@ -506,13 +509,13 @@ public class GameThings {
             for (int i = MinRow; i <= MaxRow; i++) {
                 tempnode = FindtoColorTemp(i, j);
                 if (tempnode != null) {
-                    if (!tempnode.GetIs_colored()) {
+                    if (!tempnode.GetIs_colored() ||(tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                         is_found = Checkneighbour(i, j + 1);
                         if (!is_found) {
                             for (int n = i; n <= MaxRow; n++) {
                                 tempnode = FindtoColorTemp(n, j);
                                 if(tempnode != null){
-                                if (tempnode.GetIs_colored()) {
+                                if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
                                     break;
                                 } else {
                                     toRemove.add(tempnode);
@@ -521,7 +524,7 @@ public class GameThings {
                             }
                             //toRemove.add(tempnode);
                         } else {
-                            toCheckArea(tempnode, "RIGHT", i, j);
+                            toCheckArea(tempnode, "RIGHT", i, j,ID);
                             //toCheck.add(tempnode);
                         }
                     } else {
@@ -536,8 +539,12 @@ public class GameThings {
             if (!toRemove.contains(toColor.get(i))) {
                 toColor.get(i).setColor(color);
                 toColor.get(i).SetIs_colored(true);
+                Owner.put(toColor.get(i),ID);
+                System.out.println("TO COLOR CALLED BY " + ID);
             }
         }
+     //   System.out.println("GONNA PAINT IT FOR" + ID);
+        //System.out.println("SIZEE TO REMOVE : " + toRemove.size());
     }
 
 
@@ -742,7 +749,7 @@ public class GameThings {
             }
         }
     }*/
-    public void toCheckArea(node Tempnode, String Direction,int row, int column){ /*-------------------------------------------------*/
+    public void toCheckArea(node Tempnode, String Direction,int row, int column,String ID){ /*-------------------------------------------------*/
         TEMPNODES.clear();
         TEMPNODES.add(Tempnode);
         Helptempnode = null;
@@ -752,7 +759,7 @@ public class GameThings {
                      Helptempnode = FindtoColorTemp(row,i);
                     if (Helptempnode != null) {
                         TEMPNODES.add(Helptempnode);
-                        if (Helptempnode.GetIs_colored()) {
+                        if (Helptempnode.GetIs_colored() && Owner.get(Helptempnode) == ID) {
                             toCheck.addAll(TEMPNODES);
                             // SetTEMP(i);
                             break;
@@ -776,17 +783,19 @@ public class GameThings {
                     if (Helptempnode != null) {
                         TEMPNODES.add(Helptempnode);
                         //toCheck.add(Helptempnode);
-                        is_found = Checkneighbour(i, column + 1);
-                        if (Helptempnode.GetIs_colored()) {
+                       // is_found = Checkneighbour(i, column + 1);
+                        if (Helptempnode.GetIs_colored() && Owner.get(Helptempnode) == ID) {
                             toCheck.addAll(TEMPNODES);
                             //   SetTEMP(i);
                             break;
-                        }
-                        if (!is_found) {
-                            toRemove.addAll(TEMPNODES);
-                            //   CleartoCheck();
-                            // SetTEMP(i + 1);
-                            break;
+                        } else {
+                            is_found = Checkneighbour(i, column + 1);
+                            if (!is_found) {
+                                toRemove.addAll(TEMPNODES);
+                                //   CleartoCheck();
+                                // SetTEMP(i + 1);
+                                break;
+                            }
                         }
                     }
                 }
@@ -799,17 +808,19 @@ public class GameThings {
                     if (Helptempnode != null) {
                         TEMPNODES.add(Helptempnode);
                         //toCheck.add(Helptempnode);
-                        is_found = Checkneighbour(row + 1, i);
-                        if (Helptempnode.GetIs_colored()) {
+                        //is_found = Checkneighbour(row + 1, i);
+                        if (Helptempnode.GetIs_colored() && Owner.get(Helptempnode) == ID) {
                             toCheck.addAll(TEMPNODES);
                             // SetTEMP(i);
                             break;
-                        }
-                        if (!is_found) {
-                            toRemove.addAll(TEMPNODES);
-                            // CleartoCheck();
-                            // SetTEMP(i - 1);
-                            break;
+                        } else {
+                            is_found = Checkneighbour(row + 1, i);
+                            if (!is_found) {
+                                toRemove.addAll(TEMPNODES);
+                                // CleartoCheck();
+                                // SetTEMP(i - 1);
+                                break;
+                            }
                         }
                     }
                 }
@@ -821,16 +832,18 @@ public class GameThings {
                     if (Helptempnode != null) {
                         TEMPNODES.add(Helptempnode);
                         //toCheck.add(Helptempnode);
-                        is_found = Checkneighbour(i, column - 1);
-                        if (Helptempnode.GetIs_colored()) {
+                        //is_found = Checkneighbour(i, column - 1);
+                        if (Helptempnode.GetIs_colored() && Owner.get(Helptempnode) == ID) {
                             toCheck.addAll(TEMPNODES);
                             // SetTEMP(i);
                             break;
-                        }
-                        if (!is_found) {
-                            toRemove.addAll(TEMPNODES);
-                            //SetTEMP(i - 1);
-                            break;
+                        } else {
+                            is_found = Checkneighbour(i, column - 1);
+                            if (!is_found) {
+                                toRemove.addAll(TEMPNODES);
+                                //SetTEMP(i - 1);
+                                break;
+                            }
                         }
                     }
                 }

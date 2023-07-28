@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="fix the colorArea method">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="improving bot movement functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +152,9 @@
       <workItem from="1689998044548" duration="16193000" />
       <workItem from="1690082118014" duration="25376000" />
       <workItem from="1690169307561" duration="19465000" />
-      <workItem from="1690253377567" duration="9959000" />
+      <workItem from="1690253377567" duration="10620000" />
+      <workItem from="1690515654032" duration="20418000" />
+      <workItem from="1690551214333" duration="9436000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -351,7 +356,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690207840718</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="improving bot movement functions">
+      <option name="closed" value="true" />
+      <created>1690270490662</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1690270490662</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,6 +437,7 @@
     <MESSAGE value="working on ColorTheArea function and a few improvements" />
     <MESSAGE value="Adding Bullet A and a few improvements" />
     <MESSAGE value="fix the colorArea method" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the colorArea method" />
+    <MESSAGE value="improving bot movement functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="improving bot movement functions" />
   </component>
 </project>

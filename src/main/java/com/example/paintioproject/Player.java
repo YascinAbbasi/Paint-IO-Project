@@ -6,6 +6,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Objects;
+
 public class Player extends GameThings {
 
     private String PlayerID;
@@ -27,20 +29,22 @@ public class Player extends GameThings {
                 for (int j = 0; j < nodes.size(); j++) {
                     if (nodes.get(j).GetRow() == i && nodes.get(j).GetColumn() == k){
                         gp.add(nodes.get(j),column++,row);
-                        if((row == 12 && column   == 13 )&& (!nodes.get(j).GetIs_colored())){
+                        if((row == 12 && column   == 13 )&& (!nodes.get(j).GetIs_colored() || !Objects.equals(Owner.get(nodes.get(j)), "PLAYER1"))){
                             nodes.get(j).setColor(TraceColor); //RANG
+                           // PassedNodes.add(nodes.get(j));
                            // System.out.println("ROW : " + nodes.get(j).GetRow());
                             //System.out.println("COLUMN : " + nodes.get(j).GetColumn());
                             nodes.get(j).SetIs_passed(true);
+                            nodes.get(j).SetIs_colored(false); //???????????????????
                             //AlreadyColored = false;
-                            Owner.put(nodes.get(j),"PLAYER1");
+                           // Owner.put(nodes.get(j),"PLAYER1");
                         }
                         else if((row == 12 && column   == 13 )&& (nodes.get(j).GetIs_colored()) && (
                                 Owner.get(nodes.get(j)) == "PLAYER1")){
                            // color_the_path(PlayerColor,"PLAYER1");
                            // if(!AlreadyColored) {
                                // AlreadyColored = true;
-                                color_the_path(PlayerColor,"PLAYER1");
+                                color_the_path(PlayerColor,"PLAYER1",TraceColor);
                                 ColorArea(PlayerColor, "PLAYER1");
                            // }
                         }

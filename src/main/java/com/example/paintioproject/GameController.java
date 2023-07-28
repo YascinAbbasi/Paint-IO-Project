@@ -20,6 +20,7 @@ public class GameController extends GameThings {
     private Color TraceColor;
     private Player player;
     private BotManager botplayer;
+    private BotManager botplayer2;
     @FXML
     private Rectangle RECT;
     @FXML
@@ -27,6 +28,7 @@ public class GameController extends GameThings {
     @FXML
     private GridPane gp;
      public Thread thread;
+     public Thread thread2;
 
 
     private int row_move = 0;
@@ -44,6 +46,11 @@ public class GameController extends GameThings {
         this.botplayer = botplayer;
         thread = new Thread(botplayer);
         thread.start();
+    }
+    public void SetBotPlayer2(BotManager botplayer2){
+        this.botplayer2 = botplayer2;
+        thread2 = new Thread(botplayer2);
+        thread2.start();
     }
 
 
@@ -80,7 +87,7 @@ public class GameController extends GameThings {
                 }
                 case SPACE -> {
                     try {
-                        ShootBulletA(HelpKeyEvent,row_move + 12,column_move + 12,player.GetPlayerColor(),"PLAYER1");
+                        ShootBulletA(HelpKeyEvent,row_move + 12,column_move + 12,player.GetPlayerColor(),player.GetTraceColor(),"PLAYER1");
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }

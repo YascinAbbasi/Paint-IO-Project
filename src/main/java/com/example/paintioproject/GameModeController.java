@@ -57,6 +57,9 @@ public class GameModeController implements Initializable {
         GameController gamecontroller = loader.getController();
         Player player = new Player();
         BotPlayer Botplayer = new BotPlayer();
+        BotPlayer Botplayer2 = new  BotPlayer();
+        BotManager botplayer2 = new BotManager(Botplayer2);
+
         BotManager botplayer = new BotManager(Botplayer);
         gamecontroller.firstnodehandel(Getplayercolor());
         SetPlayer(player);
@@ -70,9 +73,11 @@ public class GameModeController implements Initializable {
         botplayer.SetPlayer();
         botplayer.setSpeed(400);*/
         SetBot(botplayer);
+        //SetBot(botplayer2);
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
         gamecontroller.SetBotPlayer(botplayer);
+        //gamecontroller.SetBotPlayer2(botplayer2);
         RandomDirection();
         gamecontroller.SetLastKeyEvent(lastKeyEvent);
         gamecontroller.gameLoop.start();
@@ -97,9 +102,7 @@ public class GameModeController implements Initializable {
         switch(ColorChoiceBox.getValue()){
             case("RED"):
                 playercolor = Color.RED;
-
-
-            break;
+                break;
 
             case("BLUE"):
                 playercolor = Color.BLUE;
@@ -119,12 +122,10 @@ public class GameModeController implements Initializable {
         switch (SpeedChoiceBox.getValue()){
             case("SLOW"):
                 speed = 200;
-
                 break;
 
             case("NORMAL"):
                 speed = 100;
-
                 break;
 
             case("FAST"):
@@ -228,6 +229,6 @@ public class GameModeController implements Initializable {
         botmanager.SetBotID();
         botmanager.SetDefaultBotArea();
         botmanager.SetPlayer();
-        botmanager.setSpeed(400);
+        botmanager.setSpeed(300);
     }
 }
