@@ -10,10 +10,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class GameThings {
+public class GameThings{
     public static ArrayList<node> nodes = new ArrayList<>();
     public ArrayList<node> tempNodes = new ArrayList<>();
-   // public static ArrayList<node>  PassedNodes = new ArrayList<>();
     public static HashMap<node,String> Owner = new HashMap<>();
     public static ArrayList <node> toCheck = new ArrayList<>();
     public static ArrayList <node> toColor = new ArrayList<>();
@@ -23,6 +22,7 @@ public class GameThings {
     private node tempnode;
     private node Helptempnode;
     Rectangle rect = new Rectangle(25, 25);// GetPlayerColor());
+    private KeyEvent Direction;
 
     private boolean is_grey = false;
     private boolean is_exists = false;
@@ -31,6 +31,8 @@ public class GameThings {
     private int MinRow = 1000000;
     private int MaxColumn = -1000000;
     private int MinColumn = 1000000;
+    private int BulletRow = 0;
+    private int BulletColumn = 0;
 
 
 
@@ -362,6 +364,82 @@ public class GameThings {
 
             }
         }
+
+         public void ShootBulletB(KeyEvent Direction,int row,int column) throws InterruptedException {
+        node TempNode = null;
+        node BulletNode = null;
+
+
+        switch (Direction.getCode()){
+             case UP -> {
+                 BulletNode = FindTemp(row - 1,column);
+               while(TempNode != null){
+                   row--;
+                  TempNode = FindTemp(row,column);
+                  if(TempNode == null){
+                      break;
+                  }
+                  BulletNode = MoveBullet(BulletNode,TempNode);
+                  Thread.sleep(70);
+                   if(BulletNode.GetIs_passed()){
+                       break;
+                   }
+
+               }
+             }
+             case DOWN -> {
+                 BulletNode = FindTemp(row + 1,column);
+                 while(TempNode != null){
+                     row++;
+
+                     TempNode = FindTemp(row,column);
+                     if(TempNode == null){
+                         break;
+                     }
+                     BulletNode = MoveBullet(BulletNode,TempNode);
+                     Thread.sleep(70);
+                     if(BulletNode.GetIs_passed()){
+                         break;
+                     }
+                 }
+             }
+             case LEFT -> {
+                 BulletNode = FindTemp(row,column - 1);
+                 while(TempNode != null){
+                     column--;
+                     TempNode = FindTemp(row,column);
+                     if(TempNode == null){
+                         break;
+                     }
+                     BulletNode = MoveBullet(BulletNode,TempNode);
+                     Thread.sleep(70);
+                     if(BulletNode.GetIs_passed()){
+                         break;
+                     }
+                 }
+             }
+             case RIGHT -> {
+                 BulletNode = FindTemp(row,column  + 1);
+                 while(TempNode != null){
+                     column++;
+                     TempNode = FindTemp(row,column);
+                     if(TempNode == null){
+                         break;
+                     }
+                     BulletNode = MoveBullet(BulletNode,TempNode);
+                     Thread.sleep(70);
+                     if(BulletNode.GetIs_passed()){
+                         break;
+                     }
+
+                 }
+             }
+             default -> {
+
+             }
+         }
+        }
+
         public synchronized void color_the_path(Color color,String ID,Color TraceColor){
         for(int j = 0; j < nodes.size(); j++){
             if(nodes.get(j).GetIs_passed() && (nodes.get(j).GetColor() == TraceColor || nodes.get(j).GetColor() == color)){/*&& !nodes.get(j).GetIs_colored()*/
@@ -407,7 +485,7 @@ public class GameThings {
                     if (nodes.get(n).GetRow() == i && nodes.get(n).GetColumn() == j /*&&
                             (Objects.equals(Owner.get(nodes.get(n)), ID) || !Owner.containsKey(nodes.get(n)))*/) {
                         toColor.add(nodes.get(n));
-                         // System.out.println("ColorSize : " + toColor.size());
+                        // System.out.println("ColorSize : " + toColor.size());
                     }
                 }
             }
@@ -416,7 +494,7 @@ public class GameThings {
         for (int i = MinRow; i <= MaxRow; i++) {       //UP
             for (int j = MinColumn; j <= MaxColumn; j++) {
                 tempnode = FindtoColorTemp(i, j);
-                if(tempnode != null) {
+                if (tempnode != null) {
                     if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                         is_found = Checkneighbour(i - 1, j);
                         if (!is_found) {
@@ -433,7 +511,7 @@ public class GameThings {
                             }
                             //toRemove.add(tempnode);
                         } else {
-                            toCheckArea(tempnode, "UP", i, j,ID);
+                            toCheckArea(tempnode, "UP", i, j, ID);
                             //toCheck.add(tempnode);
                         }
                     } else {
@@ -447,29 +525,29 @@ public class GameThings {
         for (int i = MaxRow; i >= MinRow; i--) { //DOWN
             for (int j = MaxColumn; j >= MinColumn; j--) {
                 tempnode = FindtoColorTemp(i, j);
-                    if(tempnode != null) {/////////////
-                        if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
-                            is_found = Checkneighbour(i + 1, j);
-                            if (!is_found) {
-                                for (int n = j; n >= MinColumn; n--) {
-                                    tempnode = FindtoColorTemp(i, n);
-                                    if (tempnode != null) { ///////////////////
-                                        if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
-                                            break;
-                                        } else {
-                                            toRemove.add(tempnode);
-                                        }
+                if (tempnode != null) {/////////////
+                    if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
+                        is_found = Checkneighbour(i + 1, j);
+                        if (!is_found) {
+                            for (int n = j; n >= MinColumn; n--) {
+                                tempnode = FindtoColorTemp(i, n);
+                                if (tempnode != null) { ///////////////////
+                                    if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
+                                        break;
+                                    } else {
+                                        toRemove.add(tempnode);
                                     }
                                 }
-                                //toRemove.add(tempnode);
-                            } else {
-                                toCheckArea(tempnode, "DOWN", i, j,ID);
-                                //toCheck.add(tempnode);
                             }
+                            //toRemove.add(tempnode);
                         } else {
-                            toCheck.add(tempnode);
+                            toCheckArea(tempnode, "DOWN", i, j, ID);
+                            //toCheck.add(tempnode);
                         }
+                    } else {
+                        toCheck.add(tempnode);
                     }
+                }
 
             }
         }
@@ -477,13 +555,13 @@ public class GameThings {
         for (int j = MinColumn; j <= MaxColumn; j++) {  //LEFT
             for (int i = MaxRow; i >= MinRow; i--) {
                 tempnode = FindtoColorTemp(i, j);
-                if(tempnode != null) {
+                if (tempnode != null) {
                     if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                         is_found = Checkneighbour(i, j - 1);
                         if (!is_found) {
                             for (int n = i; n >= MinRow; n--) {
                                 tempnode = FindtoColorTemp(n, j);
-                                if(tempnode != null) {
+                                if (tempnode != null) {
                                     if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
                                         break;
                                     } else {
@@ -493,7 +571,7 @@ public class GameThings {
                             }
                             // toRemove.add(tempnode);
                         } else {
-                            toCheckArea(tempnode, "LEFT", i, j,ID);
+                            toCheckArea(tempnode, "LEFT", i, j, ID);
                             // toCheck.add(tempnode);
                         }
 
@@ -509,22 +587,22 @@ public class GameThings {
             for (int i = MinRow; i <= MaxRow; i++) {
                 tempnode = FindtoColorTemp(i, j);
                 if (tempnode != null) {
-                    if (!tempnode.GetIs_colored() ||(tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
+                    if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                         is_found = Checkneighbour(i, j + 1);
                         if (!is_found) {
                             for (int n = i; n <= MaxRow; n++) {
                                 tempnode = FindtoColorTemp(n, j);
-                                if(tempnode != null){
-                                if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
-                                    break;
-                                } else {
-                                    toRemove.add(tempnode);
-                                }
+                                if (tempnode != null) {
+                                    if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
+                                        break;
+                                    } else {
+                                        toRemove.add(tempnode);
+                                    }
                                 }
                             }
                             //toRemove.add(tempnode);
                         } else {
-                            toCheckArea(tempnode, "RIGHT", i, j,ID);
+                            toCheckArea(tempnode, "RIGHT", i, j, ID);
                             //toCheck.add(tempnode);
                         }
                     } else {
@@ -540,174 +618,10 @@ public class GameThings {
                 toColor.get(i).setColor(color);
                 toColor.get(i).SetIs_colored(true);
                 Owner.put(toColor.get(i),ID);
-                System.out.println("TO COLOR CALLED BY " + ID);
+                // System.out.println("TO COLOR CALLED BY " + ID);
             }
         }
-     //   System.out.println("GONNA PAINT IT FOR" + ID);
-        //System.out.println("SIZEE TO REMOVE : " + toRemove.size());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-   /* public synchronized  void ColorTheArea(Color color,String ID){
-        toColor.clear();
-
-
-
-        for(int j = 0; j < nodes.size(); j++){
-            if(nodes.get(j).GetIs_passed()){
-                if(Owner.get(nodes.get(j)) == ID){
-                    if(nodes.get(j).GetRow() > MaxRow){
-                        MaxRow = nodes.get(j).GetRow();
-                    }else if(nodes.get(j).GetRow() < MinRow){
-                        MinRow = nodes.get(j).GetRow();
-                    } if( nodes.get(j).GetColumn() > MaxColumn){
-                        MaxColumn = nodes.get(j).GetColumn();
-                    }else if(nodes.get(j).GetColumn() < MinColumn){
-                        MinColumn = nodes.get(j).GetColumn();
-                    }
-                }
-            }
-        }
-        System.out.println(MinRow);
-        System.out.println(MaxRow);
-        System.out.println(MinColumn);
-        System.out.println(MaxColumn);
-        for(int i = MinRow; i <= MaxRow; i++){
-            for(int j = MinColumn; j <= MaxColumn;j++){
-                for(int n = 0; n < nodes.size();n++){
-                    if(nodes.get(n).GetRow() == i && nodes.get(n).GetColumn() == j){
-                       toColor.add(nodes.get(n));
-                    }
-                }
-            }
-        }
-        while(MinRow < MaxRow &&  MinColumn < MaxColumn){
-
-            for( TEMP =  MinColumn; TEMP <= MaxColumn;TEMP++){ //UP
-                tempnode = FindtoColorTemp(MinRow,TEMP);
-                if(!tempnode.GetIs_passed()){
-                   is_found = Checkneighbour(MinRow - 1,TEMP);
-                    if(!is_found){
-                        FindtoRemove(tempnode);
-                    }else{
-                    toCheckArea(tempnode,"UP");
-                    }
-                }
-            }
-            for( TEMP = MinRow + 1; TEMP <= MaxRow; TEMP++){ //RIGHT
-                tempnode = FindtoColorTemp(TEMP,MaxColumn);
-                if(!tempnode.GetIs_passed()){
-                    is_found = Checkneighbour(TEMP,MaxColumn + 1);
-                    if(!is_found){
-                        FindtoRemove(tempnode);
-                    }else{
-                        toCheckArea(tempnode,"RIGHT");
-                    }
-
-                }
-            }
-            for( TEMP = MaxColumn - 1; TEMP >= MinColumn;TEMP--){ // DOWN
-                tempnode = FindtoColorTemp(MaxRow,TEMP);
-                if(!tempnode.GetIs_passed()){
-                    is_found = Checkneighbour(MaxRow + 1,TEMP);
-                    if(!is_found){
-                        FindtoRemove(tempnode);
-                    }else{
-                        toCheckArea(tempnode,"DOWN");
-                    }
-                }
-            }
-            for( TEMP = MaxRow - 1; TEMP <= MinRow; TEMP--){   //LEFT
-                tempnode = FindtoColorTemp(TEMP,MinColumn);
-                if(!tempnode.GetIs_passed()){
-                    is_found = Checkneighbour(TEMP,MinColumn - 1);
-                    if(!is_found){
-                        FindtoRemove(tempnode);
-                    }else{
-                        toCheckArea(tempnode,"LEFT");
-                    }
-                }
-            }
-            MinRow++;
-            MinColumn++;
-            MaxRow--;
-            MaxColumn--;
-        }
-        if(MinRow == MaxRow && MinColumn == MaxColumn){
-            tempnode = FindtoColorTemp(MinRow,MinColumn);
-            if(!tempnode.GetIs_passed()){
-                is_found  = Checkneighbour(MinRow - 1, MinColumn); //UP
-                if(!is_found) {
-                    FindtoRemove(tempnode);
-                }else {
-                    is_found  = Checkneighbour(MinRow, MinColumn + 1); //RIGHT
-                    if(!is_found) {
-                        FindtoRemove(tempnode);
-                    }else {
-                        is_found  = Checkneighbour(MinRow + 1, MinColumn); //DOWN
-                        if(!is_found) {
-                            FindtoRemove(tempnode);
-                        }else{
-                            is_found  = Checkneighbour(MinRow + 1, MinColumn); // LEFT
-                            if(!is_found) {
-                                FindtoRemove(tempnode);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else if(MinRow == MaxRow){
-           for(TEMP = MinColumn; TEMP <= MaxColumn;TEMP++){
-               tempnode = FindtoColorTemp(MinRow,TEMP);
-               if(!tempnode.GetIs_passed()){
-                   is_found = Checkneighbour(MinRow - 1,TEMP); //UP NODE
-                   if (!is_found){
-                       FindtoRemove(tempnode);
-                   }else {
-                       is_found = Checkneighbour(MinRow + 1,TEMP); // DOWN NODE
-                       if(!is_found){
-                           FindtoRemove(tempnode);
-                       }else{
-                            ToCheckBothSide(tempnode,"UP&DOWN");
-                       }
-                   }
-               }
-           }
-        }
-        else if(MinColumn == MaxColumn) {
-           for(TEMP = MinRow; TEMP <= MaxRow;TEMP++){
-               tempnode = FindtoColorTemp(TEMP,MinColumn);
-               if(!tempnode.GetIs_passed()){
-                   is_found = Checkneighbour(TEMP,MinColumn - 1);// LEFT NODE
-                   if (!is_found) {
-                       FindtoRemove(tempnode);
-                   }else{
-                       is_found = Checkneighbour(TEMP,MinColumn + 1); //RIGHT NODE
-                       if(!is_found){
-                           FindtoRemove(tempnode);
-                       }else{
-                           ToCheckBothSide(tempnode,"LEFT&RIGHT");
-                       }
-                   }
-               }
-           }
-        }
-        for (int j = 0; j < toColor.size(); j++) { // Coloring the Area
-            toColor.get(j).setColor(color);
-            toColor.get(j).SetIs_colored(true);
-        }
-    }*/
     public node FindtoColorTemp(int row, int column){
         tempnode = null;
         for(int j = 0; j < toColor.size();j++){
@@ -720,9 +634,9 @@ public class GameThings {
     }
     public node FindTemp(int row, int column){
          node TempNode = null;
-        for (com.example.paintioproject.node node : nodes) {
-            if (node.GetRow() == row && node.GetColumn() == column) {
-                TempNode = node;
+        for (int j = 0; j < nodes.size();j++) {
+            if (nodes.get(j).GetRow() == row && nodes.get(j).GetColumn() == column) {
+                TempNode = nodes.get(j);
                 break;
             }
         }
@@ -741,14 +655,7 @@ public class GameThings {
         return is_found;
     }
 
-  /* public void FindtoRemove(node Tempnode){
-        for(int j = 0; j < toColor.size();j++){
-            if(toColor.get(j).equals(Tempnode)){
-                toColor.remove(j);
-                break;
-            }
-        }
-    }*/
+
     public void toCheckArea(node Tempnode, String Direction,int row, int column,String ID){ /*-------------------------------------------------*/
         TEMPNODES.clear();
         TEMPNODES.add(Tempnode);
@@ -852,81 +759,16 @@ public class GameThings {
                 break;
         }
     }
-   // public void CleartoCheck(){
-       //  for(int i = 0; i < toColor.size(); i++){
-      //       for(int j = 0; j < toCheck.size();j++){
-           //      if(toColor.get(i) == toCheck.get(j)){
-         //           toColor.remove(i);
-            //     }
-          //  }
-       //  }
-  //  }
-   // public void SetTEMP(int TEMP){
-     //  this.TEMP = TEMP;
-   // }
-    //public void setToRemove(node TempNode,){
+     public node MoveBullet(node BulletNode,node TempNode){
+        TempNode.setColor(Color.LIGHTYELLOW);
+        BulletNode.ResettoDefaultColor();
+        BulletNode = TempNode;
+    return BulletNode;
+    }
 
-   // }
-
-  /*  public void ToCheckBothSide(node TempNode, String Sides){
-        switch(Sides){
-            case("UP&DOWN"):
-                for(int i = TempNode.GetColumn() + 1; i <= MaxColumn;i++) {
-                    Helptempnode = FindtoColorTemp(MinRow, i);
-                    toCheck.add(Helptempnode);
-                    if (Helptempnode.GetIs_passed()) {
-                        SetTEMP(i);
-                        break;
-                    }
-                        is_found = Checkneighbour(MinRow - 1, i); //UP NODE
-                        if (!is_found) {
-                            CleartoCheck();
-                            SetTEMP(i + 1);
-                            break;
-                        }else {
-                            is_found = Checkneighbour(MinRow + 1, i); //DOWN NODE
-                            if (!is_found) {
-                                CleartoCheck();
-                                SetTEMP(i + 1);
-                                break;
-                            }
-                        }
-                }
-                break;
-
-                case("LEFT&RIGHT"):
-                for(int i = TempNode.GetRow() + 1; i <= MaxRow; i++){
-                    Helptempnode = FindtoColorTemp(i, MinColumn);
-                    toCheck.add(Helptempnode);
-                    if (Helptempnode.GetIs_passed()) {
-                        SetTEMP(i);
-                        break;
-                    }
-                    is_found = Checkneighbour(i,MinColumn - 1);  //LEFT NODE
-                    if (!is_found) {
-                        CleartoCheck();
-                        SetTEMP(i + 1);
-                        break;
-                    }else {
-                        is_found = Checkneighbour(i, MinColumn + 1); //RIGHT NODE
-                        if (!is_found) {
-                            CleartoCheck();
-                            SetTEMP(i + 1);
-                            break;
-                        }
-                    }
-            }
-                break;
-
-                default:
-                break;
-        }
-
-
-
-
-
-    }*/
-
-
+    public void SetBulletB(KeyEvent Direction,int BulletRow, int BulletColumn){
+    this.Direction = Direction;
+    this.BulletRow = BulletRow;
+    this.BulletColumn = BulletColumn;
+    }
 }

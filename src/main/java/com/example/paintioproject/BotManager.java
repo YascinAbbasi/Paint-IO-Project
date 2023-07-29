@@ -10,9 +10,7 @@ import java.util.Random;
 public class BotManager extends GameThings implements Runnable {
     private BotPlayer Bot;
     private Color color;
-   // private Color BOTColor;
-  //  private Color AreaColor;
- //   private Color TraceColor;
+
     private boolean ID_in_use = false;
     private boolean Color_in_use = false;
     private boolean is_empty = false;
@@ -25,8 +23,11 @@ public class BotManager extends GameThings implements Runnable {
     public static ArrayList<String> AlreadyTakenIDs = new ArrayList<>();
     private Color[] Colors = {Color.RED, Color.BLUE, Color.GREEN, Color.PURPLE};
 
-    private int row_move = 0;
-    private int column_move = 0;
+    private String Difficulty = "EASY";
+
+    private static int row_move;
+    private static int column_move;
+    private int steps = 0;
     private int Speed;
 
 
@@ -59,6 +60,13 @@ public class BotManager extends GameThings implements Runnable {
 
     public int getSpeed() {
         return Speed;
+    }
+    public void setDifficulty (String Difficulty){
+        this.Difficulty = Difficulty;
+    }
+
+    public String getDifficulty() {
+        return Difficulty;
     }
 
     public void SetBotColor() { //RANG
@@ -136,7 +144,7 @@ public class BotManager extends GameThings implements Runnable {
                         if (nodes.get(i) == tempnodes.get(j)) {
                             nodes.get(i).setColor(Bot.GetAreaColor());
                             nodes.get(i).SetIs_colored(true);
-                            Owner.put(nodes.get(i), Bot.GetBotID());  //?????????
+                            Owner.put(nodes.get(i), Bot.GetBotID());
                         }
                     }
                 }
@@ -165,6 +173,8 @@ public class BotManager extends GameThings implements Runnable {
         int rand = random.nextInt(4);
         column_move = PlayerNode.GetColumn();
         row_move = PlayerNode.GetRow();
+        int x = 5;
+        int y = 7;
         while (true) {
             switch (rand) {
                 case (0):  //UP
@@ -174,9 +184,9 @@ public class BotManager extends GameThings implements Runnable {
                   //  if(TempNode.GetIs_colored()) {
                  //       FindUnColoredRow(row_move, column_move, true);
                  //   }
-                    MoveUP(row_move,column_move,8);
-                    MoveRIGHT(row_move,column_move,8);
-                    MoveDOWN(row_move,column_move,8);
+                    MoveUP(row_move,column_move,x,Difficulty);
+                    MoveRIGHT(row_move,column_move,y,Difficulty);
+                    MoveDOWN(row_move,column_move,y,Difficulty);
                     System.out.println("EXITING CASE 0");
                     rand = 2;
                     break;
@@ -188,9 +198,9 @@ public class BotManager extends GameThings implements Runnable {
                   //  if(TempNode.GetIs_colored()) {
                    //     FindUnColoredRow(row_move, column_move, false);
                   //  }
-                    MoveDOWN(row_move,column_move,8);
-                    MoveLEFT(row_move,column_move,8);
-                    MoveUP(row_move,column_move,8);
+                    MoveDOWN(row_move,column_move,x,Difficulty);
+                    MoveLEFT(row_move,column_move,y,Difficulty);
+                    MoveUP(row_move,column_move,y,Difficulty);
                     System.out.println("EXITING CASE 1");
 
                     rand = 3;
@@ -203,9 +213,9 @@ public class BotManager extends GameThings implements Runnable {
                   //  if(TempNode.GetIs_colored()) {
                     //    FindUnColoredColumn(row_move,column_move,true);
                   //  }
-                    MoveLEFT(row_move,column_move,8);
-                    MoveUP(row_move,column_move,8);
-                    MoveRIGHT(row_move,column_move,8);
+                    MoveLEFT(row_move,column_move,x,Difficulty);
+                    MoveUP(row_move,column_move,y,Difficulty);
+                    MoveRIGHT(row_move,column_move,y,Difficulty);
                     System.out.println("EXITING CASE 2");
                     rand = 1;
                     break;
@@ -217,20 +227,116 @@ public class BotManager extends GameThings implements Runnable {
                  //   if(TempNode.GetIs_colored()) {
                  //       FindUnColoredColumn(row_move,column_move,false);
                   //  }
-                    MoveRIGHT(row_move,column_move,8);
-                    MoveDOWN(row_move,column_move,8);
-                    MoveLEFT(row_move,column_move,8);
+                    MoveRIGHT(row_move,column_move,x,Difficulty);
+                    MoveDOWN(row_move,column_move,y,Difficulty);
+                    MoveLEFT(row_move,column_move,y,Difficulty);
                     System.out.println("EXITING CASE 3");
                     rand = 0;
                     break;
 
             }
+            x++;
+            y++;
+        }
+    }
+    public void NormalModeMovement() throws InterruptedException{
+        Random random = new Random();
+        int rand = random.nextInt(4);
+        column_move = PlayerNode.GetColumn();
+        row_move = PlayerNode.GetRow();
+        int x = 3;
+        int y = 5;
+        while(true){
+            switch (rand) {
+                case (0):  //UP
+                    MoveUP(row_move,column_move,x,Difficulty);
+                    MoveRIGHT(row_move,column_move,y,Difficulty);
+                    MoveDOWN(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 0");
+                    rand = 2;
+                    break;
+
+                case (1):  //DOWN
+                    MoveDOWN(row_move,column_move,x,Difficulty);
+                    MoveLEFT(row_move,column_move,y,Difficulty);
+                    MoveUP(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 1");
+                    rand = 3;
+                    break;
+
+                case (2):  //LEFT
+                    MoveLEFT(row_move,column_move,x,Difficulty);
+                    MoveUP(row_move,column_move,y,Difficulty);
+                    MoveRIGHT(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 2");
+                    rand = 1;
+                    break;
+
+                case (3):  //RIGHT
+                    MoveRIGHT(row_move,column_move,x,Difficulty);
+                    MoveDOWN(row_move,column_move,y,Difficulty);
+                    MoveLEFT(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 3");
+                    rand = 0;
+                    break;
+
+
+            }
+            x++;
+            y++;
+        }
+    }
+    public void HardMoveMovement() throws InterruptedException {
+        Random random = new Random();
+        int rand = random.nextInt(4);
+        column_move = PlayerNode.GetColumn();
+        row_move = PlayerNode.GetRow();
+        int x = 3;
+        int y = 5;
+        while(true){
+            switch (rand) {
+                case (0):  //UP
+                    MoveUP(row_move,column_move,x,Difficulty);
+                    MoveRIGHT(row_move,column_move,y,Difficulty);
+                    MoveDOWN(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 0");
+                    rand = 2;
+                    break;
+
+                case (1):  //DOWN
+                    MoveDOWN(row_move,column_move,x,Difficulty);
+                    MoveLEFT(row_move,column_move,y,Difficulty);
+                    MoveUP(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 1");
+                    rand = 3;
+                    break;
+
+                case (2):  //LEFT
+                    MoveLEFT(row_move,column_move,x,Difficulty);
+                    MoveUP(row_move,column_move,y,Difficulty);
+                    MoveRIGHT(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 2");
+                    rand = 1;
+                    break;
+
+                case (3):  //RIGHT
+                    MoveRIGHT(row_move,column_move,x,Difficulty);
+                    MoveDOWN(row_move,column_move,y,Difficulty);
+                    MoveLEFT(row_move,column_move,y,Difficulty);
+                    System.out.println("EXITING CASE 3");
+                    rand = 0;
+                    break;
+
+
+            }
+            x++;
+            y++;
         }
     }
 
     public void SetPlayer() {
         for (int j = 0; j < nodes.size(); j++) {
-            if (Owner.get(nodes.get(j)) == Bot.GetBotID()) { // ???????????????
+            if (Owner.get(nodes.get(j)) == Bot.GetBotID()) {
                 nodes.get(j).setColor(Bot.GetBOTColor());
                 nodes.get(j).SetIs_player(true);
                 PlayerNode = nodes.get(j);
@@ -279,209 +385,233 @@ public class BotManager extends GameThings implements Runnable {
         return TempNode;
     }
 
-    public void FindUnColoredRow(int row,int column,boolean UP) throws InterruptedException { //RE CHECK ??
-        while(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){
+    public void FindUnColoredRow(int row_move,int column_move,boolean UP) throws InterruptedException { //RE CHECK ??
+        while(PlayerNode.GetIs_colored() && Objects.equals(Owner.get(PlayerNode), Bot.GetBotID())){
             if(UP){
-                row --;
+                row_move --;
             }else{
-                row ++;
+                row_move ++;
             }
-            TempNode = FindRowNode(row, column);
+            TempNode = FindRowNode(row_move, column_move);
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
             Thread.sleep(Speed);
-            /*TempNode = FindRowNode(row, column);
-            TempNode.SetIs_player(true);
-            TempNode.setColor(Bot.GetBOTColor());
-            Owner.put(TempNode,Bot.GetBotID());
-            PlayerNode.SetIs_player(false);
-            PlayerNode.setColor(Bot.GetAreaColor());*/
-            //PlayerNode = null;
-           // FindRowNode(row_move, column_move);
-         //   System.out.println("R IM HERE");
-         //   System.out.println(TempNode.GetIs_colored());
-         //   System.out.println(TempNode.GetRow());
             System.out.println("UNCOLORED CALLED");
         }
 
-        SetPlayerCordinates_R(row);
+       SetPlayerCordinates_R(PlayerNode.GetRow()); //row
       //  System.out.println("R GETTING OUT!");
 
     }
-    public void FindUnColoredColumn(int row,int column,boolean LEFT) throws InterruptedException { //RE CHECK ??
-        while(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){
+    public void FindUnColoredColumn(int row_move,int column_move,boolean LEFT) throws InterruptedException { //RE CHECK ??
+        while(PlayerNode.GetIs_colored() && Objects.equals(Owner.get(PlayerNode), Bot.GetBotID())){
             if(LEFT){
-                 column--;
+                 column_move--;
             }else{
-                column++;
+                column_move++;
             }
-            TempNode = FindColumnNode(row, column);
+            TempNode = FindColumnNode(row_move, column_move);
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
             Thread.sleep(Speed);
-
-            /*TempNode = FindColumnNode(row, column);
-            TempNode.SetIs_player(true);
-            TempNode.setColor(Bot.GetBOTColor());
-            Owner.put(TempNode,Bot.GetBotID());
-            PlayerNode.SetIs_player(false);
-            PlayerNode.setColor(Bot.GetAreaColor());*/
-            //PlayerNode = null;
-           // FindRowNode(row_move, column_move);
-          //  System.out.println("C IM HERE");
-           // System.out.println(TempNode.GetIs_colored());
-          //  System.out.println(TempNode.GetColumn());
             System.out.println("UNCOLORED CALLED");
         }
 
-        SetPlayerCordinates_C(column);
+        SetPlayerCordinates_C(PlayerNode.GetColumn()); //COL
     }
 
 
     @Override
     public void run() {
-        try {
-            EasyModeMovement();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        if(Difficulty == "EASY") {
+            try {
+                EasyModeMovement();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else if(Difficulty == "NORMAL"){
+            try {
+                NormalModeMovement();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else if(Difficulty == "HARD"){
+            try {
+                HardMoveMovement();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
-    public void MoveUP(int row, int column,int step) throws InterruptedException {
-        //for(int i = row  ; i >= row - step; i--){
+    public void MoveUP(int row, int column, int step,String difficulty) throws InterruptedException {
         int Counter = 1;
-            while(Counter <= step){
-            TempNode = FindRowNode(row_move,column);
-            if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){ //?????????????
+        while(Counter <= step){
+            TempNode = FindRowNode(row_move,column_move);
+            if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())) {
                 color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
                 ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-            //   FindUnColoredRow(row_move,column,true);
-                TempNode = FindRowNode(row_move,column);
+                FindUnColoredRow(row_move,column_move,true);
             }
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
             row_move--;
             Counter++;
+            steps++;
             Thread.sleep(Speed);
             System.out.println("MOVE UP");
-             /*TempNode.SetIs_player(true);
-            TempNode.setColor(Bot.GetBOTColor());
-            Owner.put(TempNode,Bot.GetBotID());
-            if(TempNode.GetIs_colored()){
-                color_the_path(Bot.GetAreaColor(),Bot.GetBotID());
+            if(difficulty == "NORMAL") {
+                if (steps >= 30) {
+                     LocateMyArea(Bot.GetBotID());
+                      color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
+                     ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
+                    SetSteps(0);
+                }
             }
-            PlayerNode.SetIs_player(false);
-            PlayerNode.SetIs_passed(true);
-            if(!PlayerNode.GetIs_colored() || !Objects.equals(Owner.get(PlayerNode), Bot.GetBotID())) {
-                PlayerNode.setColor(Bot.GetTraceColor());
-            }else{
-                PlayerNode.setColor(Bot.GetAreaColor());
+            else if(difficulty == "HARD"){
+                if(steps % 5 == 0){
+                    FindEnemy(row_move,column_move,7);
+                }
+                if(steps >= 20){
+                    LocateMyArea(Bot.GetBotID());
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    SetSteps(0);
+                }
+
             }
-            PlayerNode = TempNode;*/
-            //row_move--;
-           // Thread.sleep(Speed);
-            //SetPlayerCordinates_R(row_move);
-           // System.out.println("MOVE UP");
         }
-        SetPlayerCordinates_R(row_move);
+        SetPlayerCordinates_R(row_move); //ROWM
+       // SetPlayerCordinates_C(PlayerNode.GetColumn());
+        SetSteps(steps);
+
+
     }
-    public void MoveDOWN(int row, int column,int step)throws  InterruptedException{
-        //for(int i = row;  i  <= row + step;i++){
+    public void MoveDOWN(int row, int column,int step,String difficulty)throws  InterruptedException{
         int Counter = 1;
         while(Counter <= step){
-            TempNode = FindRowNode(row_move,column);
+            TempNode = FindRowNode(row_move,column_move);
             if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){ // ????????????
                 color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
                 ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-             //   FindUnColoredRow(row,column,false);
-                TempNode = FindRowNode(row_move,column);
+               // FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
+                FindUnColoredRow(row_move,column_move,false);
+                //TempNode = FindRowNode(row_move,column);
             }
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
             row_move++;
             Counter++;
+            steps++;
             Thread.sleep(Speed);
             System.out.println("MOVE DOWN");
-           /* TempNode.SetIs_player(true);
-            TempNode.setColor(Bot.GetBOTColor());
-            Owner.put(TempNode,Bot.GetBotID());
-            PlayerNode.SetIs_player(false);
-            PlayerNode.SetIs_passed(true);
-            if(!PlayerNode.GetIs_colored()) {
-                PlayerNode.setColor(Bot.GetTraceColor());
-            }else{
-                PlayerNode.setColor(Bot.GetAreaColor());
+            if(difficulty == "NORMAL") {
+                if (steps >= 30) {
+                     LocateMyArea(Bot.GetBotID());
+                     color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
+                     ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
+                    SetSteps(0);
+                }
             }
-            PlayerNode = TempNode;*/
-            //row_move++;
-            //Thread.sleep(Speed);
-            //SetPlayerCordinates_R(row_move);
-          // System.out.println("MOVE DOWN");
+            else if(difficulty == "HARD"){
+                if(steps % 5 == 0){
+                    FindEnemy(row_move,column_move,7);
+                }
+                if(steps >= 20){
+                    LocateMyArea(Bot.GetBotID());
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    SetSteps(0);
+                }
+
+            }
+
         }
-        SetPlayerCordinates_R(row_move);
+       SetPlayerCordinates_R(row_move); //ROWM
+       // SetPlayerCordinates_C(PlayerNode.GetColumn());
+        SetSteps(steps);
     }
-    public void MoveLEFT(int row, int column,int step) throws InterruptedException{
-        //for(int i = column; i >= column - step;i--){
+    public void MoveLEFT(int row, int column,int step,String difficulty) throws InterruptedException{
         int Counter = 1;
         while(Counter <= step){
-            TempNode = FindColumnNode(row,column_move);
+            TempNode = FindColumnNode(row_move,column_move);
             if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){ // ????????????
                 color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
                 ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-               // FindUnColoredColumn(row,column,true);
-                TempNode = FindColumnNode(row,column_move);
+              // FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
+                FindUnColoredColumn(row_move,column_move,true);
+                //TempNode = FindColumnNode(row,column_move);
             }
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
             column_move--;
             Counter++;
+            steps++;
             Thread.sleep(Speed);
             System.out.println("MOVE LEFT");
-            /*TempNode.SetIs_player(true);
-            TempNode.setColor(Bot.GetBOTColor());
-            Owner.put(TempNode,Bot.GetBotID());
-            PlayerNode.SetIs_player(false);
-            PlayerNode.SetIs_passed(true);
-            if(!PlayerNode.GetIs_colored()) {
-                PlayerNode.setColor(Bot.GetTraceColor());
-            }else{
-                PlayerNode.setColor(Bot.GetAreaColor());
+            if(difficulty == "NORMAL") {
+                if (steps >= 30) {
+                      LocateMyArea(Bot.GetBotID());
+                      color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
+                     ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
+                    SetSteps(0);
+                }
             }
-            PlayerNode = TempNode;*/
-            //column_move--;
-          //  Thread.sleep(Speed);
-            //SetPlayerCordinates_C(column_move);
-          //  System.out.println("MOVE LEFT");
+            else if(difficulty == "HARD"){
+                if(steps % 5 == 0){
+                    FindEnemy(row_move,column_move,7);
+                }
+                if(steps >= 20){
+                    LocateMyArea(Bot.GetBotID());
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    SetSteps(0);
+                }
+
+            }
         }
-        SetPlayerCordinates_C(column_move);
+      // SetPlayerCordinates_R(PlayerNode.GetRow()); //ROWM
+        SetPlayerCordinates_C(column_move); //COLM
+        SetSteps(steps);
     }
-    public void MoveRIGHT(int row, int column,int step) throws InterruptedException{
-        //for(int i = column; i <= column + step;i++){
+    public void MoveRIGHT(int row, int column,int step,String difficulty) throws InterruptedException{
         int Counter = 1;
         while(Counter <= step){
-            TempNode = FindColumnNode(row,column_move);
+            TempNode = FindColumnNode(row_move,column_move);
             if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){ //?????????????????
                 color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
                 ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-              //  FindUnColoredColumn(row,column,false);
-                TempNode = FindColumnNode(row,column_move);
+              //  FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
+                FindUnColoredColumn(row_move,column_move,false);
+              //  TempNode = FindColumnNode(row,column_move);
             }
-              PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+            PlayerNode = SwitchPlayer(PlayerNode,TempNode);
             column_move++;
             Counter++;
+            steps++;
             Thread.sleep(Speed);
             System.out.println("MOVE RIGHT");
-           /* TempNode.SetIs_player(true);
-            TempNode.setColor(Bot.GetBOTColor());
-            Owner.put(TempNode,Bot.GetBotID());
-            PlayerNode.SetIs_player(false);
-            PlayerNode.SetIs_passed(true);*/
-            /*if(!PlayerNode.GetIs_colored()) {
-                PlayerNode.setColor(Bot.GetTraceColor());
-            }else{
-                PlayerNode.setColor(Bot.GetAreaColor());
-            }*/
-            //PlayerNode = TempNode;
-           // column_move++;
-          //  Thread.sleep(Speed);
-            //SetPlayerCordinates_C(column_move);
-           // System.out.println("MOVE RIGHT");
+            if(difficulty =="NORMAL") {
+                if (steps >= 30) {
+                    LocateMyArea(Bot.GetBotID());
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    SetSteps(0);
+                }
+            }
+            else if(difficulty == "HARD"){
+                if(steps % 5 == 0){
+                    FindEnemy(row_move,column_move,7);
+                }
+                if(steps >= 20){
+                    LocateMyArea(Bot.GetBotID());
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    SetSteps(0);
+                }
+
+            }
         }
-        SetPlayerCordinates_C(column_move);
+      //  SetPlayerCordinates_R(PlayerNode.GetRow()); //ROWM
+        SetPlayerCordinates_C(column_move); //COLM
+        SetSteps(steps);
     }
 
     public node SwitchPlayer(node player, node temp){
@@ -498,12 +628,12 @@ public class BotManager extends GameThings implements Runnable {
         player = temp;
         return player;
     }
-    public void LocateMyArea(String ID) {  //RE CHECK ??
+    public void LocateMyArea(String ID) throws InterruptedException {  //RE CHECK ??
         node TempNode;
         int MinRow = 1000000;
         int MinColumn = 1000000;
         for (int j = 0; j < nodes.size(); j++) {
-            if (Owner.get(nodes.get(j)) == ID) {
+            if (Objects.equals(Owner.get(nodes.get(j)), ID)) {
                 if (Math.abs(PlayerNode.GetRow() - nodes.get(j).GetRow()) < MinRow) {
                     MinRow = nodes.get(j).GetRow();
                 }
@@ -512,30 +642,165 @@ public class BotManager extends GameThings implements Runnable {
                 }
             }
         }
+        System.out.println( " MIN LOCATE ROW : " + MinRow);
+        System.out.println("MIN LOCATE COL "+MinColumn);
         if (MinRow < PlayerNode.GetRow()) {
-            for(int i = PlayerNode.GetRow(); i >= MinRow;i--){
-             TempNode =  FindRowNode(i,PlayerNode.GetColumn());
-              SwitchPlayer(PlayerNode,TempNode);
+            for(int i = PlayerNode.GetRow() - 1; i >= MinRow;i--){
+                TempNode = FindRowNode(i,PlayerNode.GetColumn());
+                if(TempNode.GetIs_colored() && Owner.get(TempNode) == ID){
+                    color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
+                }
+                PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+                 Thread.sleep(Speed);
+              //  SetPlayerCordinates_R(PlayerNode.GetRow());
             }
-        }else if(MinRow >= PlayerNode.GetRow()){
-            for(int i = PlayerNode.GetRow();i <= MinRow;i++){
-                TempNode =  FindRowNode(i,PlayerNode.GetColumn());
-                SwitchPlayer(PlayerNode,TempNode);
 
+        }else if(MinRow >= PlayerNode.GetRow()){
+            for(int i = PlayerNode.GetRow() + 1;i <= MinRow;i++){
+                TempNode = FindRowNode(i,PlayerNode.GetColumn());
+                if(TempNode.GetIs_colored() && Owner.get(TempNode) == ID){
+                    color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
+                }
+                PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+                Thread.sleep(Speed);
+               // SetPlayerCordinates_R(PlayerNode.GetRow());
             }
+
         }
         if(MinColumn < PlayerNode.GetColumn()){
-            for(int i = PlayerNode.GetColumn(); i >= MinColumn; i--){
-              TempNode = FindColumnNode(PlayerNode.GetRow(),i);
-                SwitchPlayer(PlayerNode,TempNode);
+            for(int i = PlayerNode.GetColumn() - 1; i >= MinColumn; i--){
+                TempNode = FindColumnNode(PlayerNode.GetRow(),i);
+                if(TempNode.GetIs_colored() && Owner.get(TempNode) == ID){
+                    color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
+                }
+                PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+                Thread.sleep(Speed);
+               // SetPlayerCordinates_C(PlayerNode.GetColumn());
             }
 
+
         }else if(MinColumn >= PlayerNode.GetColumn()){
-            for(int i = PlayerNode.GetColumn(); i <= MinColumn;i++){
+            for(int i = PlayerNode.GetColumn() + 1; i <= MinColumn;i++){
                 TempNode = FindColumnNode(PlayerNode.GetRow(),i);
-                SwitchPlayer(PlayerNode,TempNode);
+                if(TempNode.GetIs_colored() && Owner.get(TempNode) == ID){
+                    color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
+                }
+                PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+                Thread.sleep(Speed);
+              //  SetPlayerCordinates_C(PlayerNode.GetColumn());
+            }
+
+        }
+        SetPlayerCordinates_R(PlayerNode.GetRow());
+        SetPlayerCordinates_C(PlayerNode.GetColumn());
+    }
+    public void FindEnemy(int row , int column , int Sensitivity) throws InterruptedException {
+        node EnemyTrace = null;
+        node TempNode;
+        String Direction = "";
+
+        for(int i = row;i >= row - Sensitivity;i--){  //UP CHECK
+            TempNode = FindTemp(i,column);
+            if(TempNode != null){
+                if(TempNode.GetIs_passed() && TempNode.GetColor() != Bot.GetTraceColor()){
+                    EnemyTrace = TempNode;
+                    Direction = "UP";
+                    break;
+                }
+            }else{
+                break;
             }
         }
+        for(int i = row; i<= row + Sensitivity;i--){   //DOWN CHECK
+            TempNode = FindTemp(i,column);
+            if(TempNode != null){
+                if(TempNode.GetIs_passed() && TempNode.GetColor() != Bot.GetTraceColor()){
+                    EnemyTrace = TempNode;
+                    Direction = "DOWN";
+                    break;
+                }
+            }else{
+                break;
+            }
+        }
+        for(int i = column; i >= column - Sensitivity;i--){  //LEFT CHECK
+            TempNode = FindTemp(row,i);
+            if(TempNode != null){
+                if(TempNode.GetIs_passed() && TempNode.GetColor() != Bot.GetTraceColor()){
+                    EnemyTrace = TempNode;
+                    Direction = "LEFT";
+                    break;
+                }
+            }else{
+                break;
+            }
+        }
+        for(int i = column; i <= column + Sensitivity;i++){   //RIGHT CHECK
+            TempNode = FindTemp(row,i);
+            if(TempNode != null){
+                if(TempNode.GetIs_passed() && TempNode.GetColor() != Bot.GetTraceColor()){
+                    EnemyTrace = TempNode;
+                    Direction = "RIGHT";
+                    break;
+                }
+            }else{
+                break;
+            }
+        }
+        if(EnemyTrace != null){
+            System.out.println("FIND ENEMY CALLED!");
+            switch (Direction){
+
+                case("UP"):
+                    for(int i = row; i >= EnemyTrace.GetRow();i--){
+                        TempNode = FindTemp(i,column);
+                        PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+                        Thread.sleep(Speed);
+                        }
+                    break;
+
+                case("DOWN"):
+                    for(int i = row; i <= EnemyTrace.GetRow();i++){
+                        TempNode = FindTemp(i,column);
+                       PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+                        Thread.sleep(Speed);
+                    }
+                    break;
+
+                case("LEFT"):
+                    for(int i = column; i >= EnemyTrace.GetColumn();i--){
+                        TempNode = FindTemp(row,i);
+                        PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+                        Thread.sleep(Speed);
+                    }
+                    break;
+
+                case("RIGHT"):
+                    for(int i = column; i <= EnemyTrace.GetColumn();i++){
+                        TempNode = FindTemp(row,i);
+                        PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+                        Thread.sleep(Speed);
+
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            SetPlayerCordinates_R(PlayerNode.GetRow());
+            SetPlayerCordinates_C(PlayerNode.GetColumn());
+        }else {
+            System.out.println("ENEMY NOT FOUND!!");
+        }
     }
+    public void SetSteps(int steps){
+    this.steps =  steps;
+    }
+
+
 
 }

@@ -29,6 +29,7 @@ public class GameController extends GameThings {
     private GridPane gp;
      public Thread thread;
      public Thread thread2;
+     private Bullets BulletB;
 
 
     private int row_move = 0;
@@ -96,6 +97,12 @@ public class GameController extends GameThings {
                 }
                 case ESCAPE -> {
 
+                }
+                case ENTER -> {
+                    BulletB = new Bullets(HelpKeyEvent,row_move,column_move,"PLAYER1");
+                    Thread BulletThread = new Thread(BulletB);
+                    BulletThread.start();
+                    HelpKeyEvent = lastKeyEvent;
                 }
                 default -> {
                     switch (HelpKeyEvent.getCode()){

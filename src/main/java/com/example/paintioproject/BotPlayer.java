@@ -3,7 +3,6 @@ package com.example.paintioproject;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class BotPlayer  {
 
@@ -24,8 +23,7 @@ public class BotPlayer  {
    private Color[] Colors = {Color.RED,Color.BLUE,Color.GREEN,Color.PURPLE};
 
   public BotPlayer(){
-     // SetDefaultBotArea();
-     // SetPlayer();
+
   }
 
     public void SetBotID(String BotID){

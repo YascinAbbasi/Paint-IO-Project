@@ -37,9 +37,17 @@ public class GameModeController implements Initializable {
     @FXML
     private ChoiceBox <String> SpeedChoiceBox;
     @FXML
+    private ChoiceBox <String> DifficultyLevelChoiceBox;
+    @FXML
+    private ChoiceBox <String> BotNumberChoiceBox;
+    @FXML
     private Label ErrorLabel;
     private String[] Colors ={"RED","BLUE","GREEN","PURPLE"};
     private String[] Speed = {"SLOW","NORMAL","FAST"};
+
+    private String[] Difficulty = {"EASY","NORMAL","HARD"};
+    private String[] BotNumber = {"1","2","3"};
+    private String difficulty;
     private BotPlayer bt ;
     private int speed;
     public void BackButton(ActionEvent e) throws IOException{
@@ -149,7 +157,9 @@ public class GameModeController implements Initializable {
         ColorChoiceBox.setOnAction(this::setplayercolor);
         SpeedChoiceBox.getItems().addAll(Speed);
         SpeedChoiceBox.setOnAction(this::SetGameSpeed);
-
+        DifficultyLevelChoiceBox.getItems().addAll(Difficulty);
+        DifficultyLevelChoiceBox.setOnAction(this::SetDifficulty);
+        BotNumberChoiceBox.getItems().addAll(BotNumber);
     }
     public void  RandomDirection(){
         Random Rand = new Random();
@@ -229,6 +239,27 @@ public class GameModeController implements Initializable {
         botmanager.SetBotID();
         botmanager.SetDefaultBotArea();
         botmanager.SetPlayer();
-        botmanager.setSpeed(300);
+        botmanager.setDifficulty(difficulty);
+        botmanager.setSpeed(200);
+    }
+    public void SetDifficulty(ActionEvent event3){
+        switch(DifficultyLevelChoiceBox.getValue()){
+            case("EASY"):
+
+                difficulty = "EASY";
+
+            break;
+
+            case("NORMAL"):
+
+                difficulty = "NORMAL";
+
+                break;
+
+            case("HARD"):
+                difficulty = "HARD";
+
+                break;
+        }
     }
 }
