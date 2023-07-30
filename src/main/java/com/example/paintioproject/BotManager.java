@@ -623,9 +623,12 @@ public class BotManager extends GameThings implements Runnable {
        } else {
            player.setColor(Bot.GetTraceColor());
        }
-           player.SetIs_passed(true);
-
-        player = temp;
+      // temp.setOwnerID(Bot.GetBotID());
+      // player.setOwnerID(Bot.GetBotID());
+       player.SetIs_passed(true);
+        ChecktoKill(temp,Bot.GetBotID());
+       player = temp;
+       player.setOwnerID(Bot.GetBotID());
         return player;
     }
     public void LocateMyArea(String ID) throws InterruptedException {  //RE CHECK ??

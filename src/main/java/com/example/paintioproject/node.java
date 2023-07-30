@@ -16,14 +16,17 @@ public class node extends Region {
     private int column;
    private Color color;
    private Color DefaultColor;
-   private Color  TraceColor;
+   private Color  PreviousColor;
 
     public boolean is_default;
-
     private boolean is_colored = false;
+    private boolean AlreadyColored = false;
+    private boolean HasOwner = false;
     private boolean is_passed  =false;
     private boolean is_player = false;
     private boolean is_MainPlayer = false;
+    private String OwnerID;
+    private String PreviousOwnerID;
 
     public void SetRow(int row){
         this.row  = row;
@@ -62,6 +65,26 @@ public class node extends Region {
         return is_colored;
     }
 
+    public boolean GetAlreadyColored() {
+        return AlreadyColored;
+    }
+
+    public void setOwnerID(String ownerID) {
+        HasOwner = true;
+        PreviousOwnerID = OwnerID;
+        OwnerID = ownerID;
+    }
+    public void ResettoPreviousOwner(){
+        OwnerID = PreviousOwnerID;
+    }
+
+    public String getOwnerID() {
+        return OwnerID;
+    }
+    public void ResetOwnerID(){
+        OwnerID = null;
+        HasOwner = false;
+    }
 
     public node(Color color, int row, int column, boolean is_default){
         setPrefSize(x,y);
@@ -79,8 +102,14 @@ public class node extends Region {
         setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
 
     }
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(Color Color) {
+        AlreadyColored = true;
+        PreviousColor = color;
+        color = Color;
+        requestLayout();
+    }
+    public void ResettoPreviousColor(){
+       color = PreviousColor;
         requestLayout();
     }
     public Color GetColor(){
@@ -88,8 +117,10 @@ public class node extends Region {
     }
     public void ResettoDefaultColor(){
         color = DefaultColor;
+        AlreadyColored = false;
         requestLayout();
     }
+
 
 
 

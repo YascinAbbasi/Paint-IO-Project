@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -64,5 +65,6 @@
    <children>
       <Rectangle fx:id="RECT" arcHeight="5.0" arcWidth="5.0" fill="#ff3e1f" height="25.0" stroke="BLACK" strokeType="INSIDE" width="25.0" GridPane.columnIndex="12" GridPane.rowIndex="12" />
       <Label fx:id="label" alignment="CENTER" prefHeight="25.0" prefWidth="53.0" text="🎮" GridPane.columnIndex="12" GridPane.rowIndex="12" />
+      <Button fx:id="GameOverButton" mnemonicParsing="false" onAction="#SwitchtoGameOverScene" text="Button" visible="false" GridPane.columnIndex="12" GridPane.rowIndex="12" />
    </children>
 </GridPane>

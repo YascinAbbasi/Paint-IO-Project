@@ -35,7 +35,8 @@ public class Player extends GameThings {
                            // System.out.println("ROW : " + nodes.get(j).GetRow());
                             //System.out.println("COLUMN : " + nodes.get(j).GetColumn());
                             nodes.get(j).SetIs_passed(true);
-                            nodes.get(j).SetIs_colored(false); //???????????????????
+                            nodes.get(j).SetIs_colored(false);//???????????????????
+                            nodes.get(j).setOwnerID("PLAYER1");
                             //AlreadyColored = false;
                            // Owner.put(nodes.get(j),"PLAYER1");
                         }

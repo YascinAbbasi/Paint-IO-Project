@@ -5,10 +5,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
 
 public class GameThings{
     public static ArrayList<node> nodes = new ArrayList<>();
@@ -17,7 +14,8 @@ public class GameThings{
     public static ArrayList <node> toCheck = new ArrayList<>();
     public static ArrayList <node> toColor = new ArrayList<>();
     public static HashSet<node> toRemove = new HashSet<>();
-    ArrayList  <node> TEMPNODES = new ArrayList<>();
+    private ArrayList <node> DeleteKeys = new ArrayList<>();
+     public ArrayList  <node> TEMPNODES = new ArrayList<>();
     public ArrayList<node> toShootCheck = new ArrayList<>();
     private node tempnode;
     private node Helptempnode;
@@ -770,5 +768,58 @@ public class GameThings{
     this.Direction = Direction;
     this.BulletRow = BulletRow;
     this.BulletColumn = BulletColumn;
+    }
+    public void Kill(String ID){
+        for(Map.Entry <node,String> entry : Owner.entrySet()){
+            if(entry.getValue() == ID){
+                DeleteKeys.add(entry.getKey());
+            }
+        }
+        for(node delete : DeleteKeys){
+            Owner.remove(delete);
+            delete.ResettoDefaultColor();
+            delete.ResetOwnerID();
+        }
+        for(int j = 0; j < nodes.size();j++){
+            if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && nodes.get(j).GetAlreadyColored()){
+
+                nodes.get(j).ResettoPreviousColor();
+                nodes.get(j).ResettoPreviousOwner();
+            }
+            else if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetAlreadyColored()){
+
+                nodes.get(j).ResettoDefaultColor();
+                nodes.get(j).ResetOwnerID();
+            }
+             if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID &&nodes.get(j).GetAlreadyColored() ){
+                nodes.get(j).ResettoPreviousColor();
+                nodes.get(j).ResettoPreviousOwner();
+            }
+            else if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetAlreadyColored()){
+               nodes.get(j).ResettoDefaultColor();
+                 nodes.get(j).ResetOwnerID();
+             }
+        }
+
+    }
+
+    public void ChecktoKill(node Player, String ID){
+        if(Player.GetIs_passed() && Player.getOwnerID() != ID){
+            Kill(Player.getOwnerID());
+            System.out.println("CHECK TO KILL CALLED");
+        }
+    }
+    public boolean AmIDead(String ID){
+       ArrayList <node> ImAlive =  new ArrayList<>();
+        for(Map.Entry <node,String> entry : Owner.entrySet()){
+            if(entry.getValue() == ID){
+                ImAlive.add(entry.getKey());
+            }
+        }
+        if(ImAlive.size() == 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

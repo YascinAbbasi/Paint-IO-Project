@@ -1,9 +1,13 @@
 package com.example.paintioproject;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -11,6 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class GameController extends GameThings {
     private Parent root;
@@ -30,6 +36,8 @@ public class GameController extends GameThings {
      public Thread thread;
      public Thread thread2;
      private Bullets BulletB;
+     @FXML
+     private Button GameOverButton;
 
 
     private int row_move = 0;
@@ -38,6 +46,8 @@ public class GameController extends GameThings {
     private KeyEvent lastKeyEvent;
     private KeyEvent HelpKeyEvent;
     private KeyEvent ShootKeyEvent;
+     
+    private boolean AmiDead =false;
    // Rectangle rect = new Rectangle(25, 25, GetPlayerColor());
 
     public void setPlayer(Player player) {
@@ -132,6 +142,10 @@ public class GameController extends GameThings {
             }
             player.SetNodes(gp, row_move, column_move, player.GetPlayerColor(), player.GetTraceColor());
             gp.add(label,12,12);
+            AmiDead = AmIDead("PLAYER1");
+            if(AmiDead){
+                GameOverButton.fire();
+            }
             try {
                 Thread.sleep(speed);
             } catch (InterruptedException e) {
@@ -343,6 +357,14 @@ public class GameController extends GameThings {
     }
     public void SetLastKeyEvent(KeyEvent lastKeyEvent){
         this.lastKeyEvent = lastKeyEvent;
+    }
+
+    public void SwitchtoGameOverScene(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOverPage.fxml"));
+        root = loader.load();
+        stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
     }
 }
 

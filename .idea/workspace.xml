@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="debugging bot movement and colorArea functions and also adding Find My Area function">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="adding easy &amp; normal &amp; hard mode and also start working with bullet b">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GameModePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GameModePage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GamePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GamePage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +156,8 @@
       <workItem from="1690515654032" duration="20418000" />
       <workItem from="1690551214333" duration="9613000" />
       <workItem from="1690597069723" duration="13112000" />
-      <workItem from="1690618592687" duration="17728000" />
+      <workItem from="1690618592687" duration="17860000" />
+      <workItem from="1690683135433" duration="12235000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -374,7 +375,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690563681893</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="adding easy &amp; normal &amp; hard mode and also start working with bullet b">
+      <option name="closed" value="true" />
+      <created>1690648986902</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1690648986902</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +433,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="checking the git connection" />
     <MESSAGE value="adding icon and first push" />
     <MESSAGE value="designing the loginpage" />
     <MESSAGE value="some changes in main class" />
@@ -449,6 +457,7 @@
     <MESSAGE value="fix the colorArea method" />
     <MESSAGE value="improving bot movement functions" />
     <MESSAGE value="debugging bot movement and colorArea functions and also adding Find My Area function" />
-    <option name="LAST_COMMIT_MESSAGE" value="debugging bot movement and colorArea functions and also adding Find My Area function" />
+    <MESSAGE value="adding easy &amp; normal &amp; hard mode and also start working with bullet b" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding easy &amp; normal &amp; hard mode and also start working with bullet b" />
   </component>
 </project>
