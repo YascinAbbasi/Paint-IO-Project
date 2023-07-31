@@ -31,7 +31,7 @@ public class SignUpPageController {
     public void BackButton(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         root = loader.load();
-        stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage= (Stage) root.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }

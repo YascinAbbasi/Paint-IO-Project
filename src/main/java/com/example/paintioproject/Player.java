@@ -29,14 +29,19 @@ public class Player extends GameThings {
                 for (int j = 0; j < nodes.size(); j++) {
                     if (nodes.get(j).GetRow() == i && nodes.get(j).GetColumn() == k){
                         gp.add(nodes.get(j),column++,row);
+                        if(row == 12 && column == 13){
+                           // ChecktoKill(nodes.get(j),"PLAYER1"); //@@@@@@@@@@@@@@@@
+                        }
+                        if(row == 12 && column == 13 &&(nodes.get(j).GetIs_colored() || !Objects.equals(Owner.get(nodes.get(j)), "PLAYER1"))){
+                           nodes.get(j).SetPrevious(); //@@@@@@@@@@@@@@
+                        }
                         if((row == 12 && column   == 13 )&& (!nodes.get(j).GetIs_colored() || !Objects.equals(Owner.get(nodes.get(j)), "PLAYER1"))){
+
                             nodes.get(j).setColor(TraceColor); //RANG
-                           // PassedNodes.add(nodes.get(j));
-                           // System.out.println("ROW : " + nodes.get(j).GetRow());
-                            //System.out.println("COLUMN : " + nodes.get(j).GetColumn());
                             nodes.get(j).SetIs_passed(true);
-                            nodes.get(j).SetIs_colored(false);//???????????????????
+                           // nodes.get(j).SetIs_colored(false);//???????????????????
                             nodes.get(j).setOwnerID("PLAYER1");
+
                             //AlreadyColored = false;
                            // Owner.put(nodes.get(j),"PLAYER1");
                         }

@@ -34,12 +34,17 @@
          </font>
       </Label>
       <ChoiceBox fx:id="DifficultyLevelChoiceBox" layoutX="14.0" layoutY="320.0" prefHeight="25.0" prefWidth="169.0" />
-      <ChoiceBox fx:id="BotNumberChoiceBox" layoutX="424.0" layoutY="320.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="BotNumberChoiceBox" layoutX="412.0" layoutY="320.0" prefHeight="25.0" prefWidth="175.0" />
       <Label layoutX="14.0" layoutY="299.0" text="Select your Difficulty Level :">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Label layoutX="424.0" layoutY="301.0" />
+      <Label layoutX="412.0" layoutY="300.0" text="Choose the Number of Bots:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

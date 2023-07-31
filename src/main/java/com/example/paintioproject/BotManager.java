@@ -2,32 +2,37 @@ package com.example.paintioproject;
 
 import javafx.scene.paint.Color;
 
+import java.lang.invoke.VolatileCallSite;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Objects;
 import java.util.Random;
 
 public class BotManager extends GameThings implements Runnable {
-    private BotPlayer Bot;
-    private Color color;
+    private volatile BotPlayer Bot;
+    private volatile Color color;
 
     private boolean ID_in_use = false;
     private boolean Color_in_use = false;
     private boolean is_empty = false;
+    private boolean AmiDead =false;
+   // private static boolean Restart = false;
 
-    private node PlayerNode;
-    private node TempNode;
-    private ArrayList<node> tempnodes = new ArrayList<>();
+    private volatile node PlayerNode;
+    private volatile node TempNode;
+    private volatile ArrayList<node> tempnodes = new ArrayList<>();
     public static ArrayList<String> PlayerID = new ArrayList<>();
     public static ArrayList<Color> AlreadyTakenColors = new ArrayList<>();
     public static ArrayList<String> AlreadyTakenIDs = new ArrayList<>();
-    private Color[] Colors = {Color.RED, Color.BLUE, Color.GREEN, Color.PURPLE};
+    private volatile Color[] Colors = {Color.RED, Color.BLUE, Color.GREEN, Color.PURPLE};
 
     private String Difficulty = "EASY";
 
-    private static int row_move;
-    private static int column_move;
-    private int steps = 0;
+    private volatile int row_move;
+    private volatile int column_move;
+    private volatile int steps = 0;
+    private  static int x = 5;
+    private  static int y = 7;
     private int Speed;
 
 
@@ -35,7 +40,7 @@ public class BotManager extends GameThings implements Runnable {
         this.Bot = Bot;
     }
 
-    public void SetBotID() {
+    public synchronized void SetBotID() {
         for (int i = 0; i < PlayerID.size(); i++) {
             for (int j = 0; j < AlreadyTakenIDs.size(); j++) {
                 if (PlayerID.get(i) == AlreadyTakenIDs.get(j)) {
@@ -69,7 +74,7 @@ public class BotManager extends GameThings implements Runnable {
         return Difficulty;
     }
 
-    public void SetBotColor() { //RANG
+    public synchronized void SetBotColor() { //RANG
         for (int i = 0; i < Colors.length; i++) {
             for (int j = 0; j < AlreadyTakenColors.size(); j++) {
                 if (Colors[i] == AlreadyTakenColors.get(j)) {
@@ -114,20 +119,23 @@ public class BotManager extends GameThings implements Runnable {
         return Bot.GetBotID();
     }
 
-    public void SetDefaultBotArea() {
+    public synchronized void SetDefaultBotArea() {
         tempnodes.clear();
         Random rand = new Random();
         while (true) {
-            int RandNum = rand.nextInt(nodes.size() - 100);
-            if (!nodes.get(RandNum).GetIs_passed()) {
+            int RandNum = rand.nextInt(nodes.size());
+            if (!nodes.get(RandNum).GetIs_passed() && !nodes.get(RandNum).GetIs_colored()) {  //?????????????
                 for (int i = nodes.get(RandNum).GetRow(); i <= nodes.get(RandNum).GetRow() + 1; i++) {
                     for (int j = nodes.get(RandNum).GetColumn(); j <= nodes.get(RandNum).GetColumn() + 1; j++) {
                         for (int n = 0; n < nodes.size(); n++) {
-                            if (nodes.get(n).GetRow() == i && nodes.get(n).GetColumn() == j) {
+                            if (nodes.get(n).GetRow() == i && nodes.get(n).GetColumn() == j ) { //?????????????????????
                                 tempnodes.add(nodes.get(n));
                             }
                         }
                     }
+                }if(tempnodes.size() <4){
+                    tempnodes.clear();
+                    continue;
                 }
                 for (int j = 0; j < tempnodes.size(); j++) {
                     if (!tempnodes.get(j).GetIs_passed()) {
@@ -139,7 +147,7 @@ public class BotManager extends GameThings implements Runnable {
                 }
             }
             if (is_empty) {
-                for (int i = 0; i < nodes.size(); i++) {
+              for (int i = 0; i < nodes.size(); i++) {
                     for (int j = 0; j < tempnodes.size(); j++) {
                         if (nodes.get(i) == tempnodes.get(j)) {
                             nodes.get(i).setColor(Bot.GetAreaColor());
@@ -148,9 +156,17 @@ public class BotManager extends GameThings implements Runnable {
                         }
                     }
                 }
+                  for(int j = 0; j < tempnodes.size();j++){
+                      tempnodes.get(j).setColor(Bot.GetAreaColor());
+                      tempnodes.get(j).SetIs_colored(true);
+                      Owner.put(tempnodes.get(j), Bot.GetBotID());
+                  }
+                }
                 SetPlayer();
+                          //  SetPlayerCordinates_R(PlayerNode.GetRow());
+                          // SetPlayerCordinates_C();
                 break;
-            }
+            //}
 
         }
     }
@@ -161,20 +177,21 @@ public class BotManager extends GameThings implements Runnable {
         }
         System.out.println(PlayerID);
     }
-    public void SetPlayerCordinates_R(int row_move){
+    public synchronized void SetPlayerCordinates_R(int row_move){
         this.row_move = row_move;
     }
-    public void SetPlayerCordinates_C (int column_move){
+    public synchronized void SetPlayerCordinates_C (int column_move){
         this.column_move = column_move;
     }
 
-    public void EasyModeMovement() throws InterruptedException {
+    public synchronized void EasyModeMovement() throws InterruptedException {
         Random random = new Random();
         int rand = random.nextInt(4);
         column_move = PlayerNode.GetColumn();
         row_move = PlayerNode.GetRow();
-        int x = 5;
-        int y = 7;
+         x = 5;
+         y = 7;
+        RepairColor();
         while (true) {
             switch (rand) {
                 case (0):  //UP
@@ -235,17 +252,22 @@ public class BotManager extends GameThings implements Runnable {
                     break;
 
             }
+            //if(Restart){
+             //   break;
+           // }
             x++;
             y++;
         }
     }
-    public void NormalModeMovement() throws InterruptedException{
+    public synchronized void NormalModeMovement() throws InterruptedException{
+
         Random random = new Random();
         int rand = random.nextInt(4);
         column_move = PlayerNode.GetColumn();
         row_move = PlayerNode.GetRow();
         int x = 3;
         int y = 5;
+        RepairColor();
         while(true){
             switch (rand) {
                 case (0):  //UP
@@ -282,17 +304,22 @@ public class BotManager extends GameThings implements Runnable {
 
 
             }
+          //  if(Restart){
+           //     break;
+         //  }
             x++;
             y++;
         }
     }
-    public void HardMoveMovement() throws InterruptedException {
+    public synchronized void HardMoveMovement() throws InterruptedException {
+
         Random random = new Random();
         int rand = random.nextInt(4);
         column_move = PlayerNode.GetColumn();
         row_move = PlayerNode.GetRow();
         int x = 3;
         int y = 5;
+        RepairColor();
         while(true){
             switch (rand) {
                 case (0):  //UP
@@ -329,17 +356,22 @@ public class BotManager extends GameThings implements Runnable {
 
 
             }
+           // if(Restart){
+            //    break;
+           // }
             x++;
             y++;
         }
     }
 
-    public void SetPlayer() {
+    public synchronized void SetPlayer() {
         for (int j = 0; j < nodes.size(); j++) {
             if (Owner.get(nodes.get(j)) == Bot.GetBotID()) {
                 nodes.get(j).setColor(Bot.GetBOTColor());
                 nodes.get(j).SetIs_player(true);
                 PlayerNode = nodes.get(j);
+                SetPlayerCordinates_C(PlayerNode.GetColumn());
+                SetPlayerCordinates_R(PlayerNode.GetRow());
                 break;
             }
         }
@@ -385,7 +417,7 @@ public class BotManager extends GameThings implements Runnable {
         return TempNode;
     }
 
-    public void FindUnColoredRow(int row_move,int column_move,boolean UP) throws InterruptedException { //RE CHECK ??
+    public synchronized void FindUnColoredRow(int row_move,int column_move,boolean UP) throws InterruptedException { //RE CHECK ??
         while(PlayerNode.GetIs_colored() && Objects.equals(Owner.get(PlayerNode), Bot.GetBotID())){
             if(UP){
                 row_move --;
@@ -402,7 +434,7 @@ public class BotManager extends GameThings implements Runnable {
       //  System.out.println("R GETTING OUT!");
 
     }
-    public void FindUnColoredColumn(int row_move,int column_move,boolean LEFT) throws InterruptedException { //RE CHECK ??
+    public synchronized void FindUnColoredColumn(int row_move,int column_move,boolean LEFT) throws InterruptedException { //RE CHECK ??
         while(PlayerNode.GetIs_colored() && Objects.equals(Owner.get(PlayerNode), Bot.GetBotID())){
             if(LEFT){
                  column_move--;
@@ -420,40 +452,56 @@ public class BotManager extends GameThings implements Runnable {
 
 
     @Override
-    public void run() {
+    public  void run() {
         if(Difficulty == "EASY") {
-            try {
-                EasyModeMovement();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            while(true) {
+                try {
+                    //RepairColor();
+                    EasyModeMovement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("RESTARTTTTTTTTTTTT");
             }
         }
         else if(Difficulty == "NORMAL"){
-            try {
-                NormalModeMovement();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            while (true) {
+                try {
+                    // RepairColor();
+                    NormalModeMovement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("RESTARTTTTTTTTTTTT");
             }
         }
         else if(Difficulty == "HARD"){
-            try {
-                HardMoveMovement();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            while (true) {
+                try {
+                    HardMoveMovement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("RESTARTTTTTTTTTTTT");
             }
 
         }
     }
-    public void MoveUP(int row, int column, int step,String difficulty) throws InterruptedException {
+    public synchronized void MoveUP(int row, int column, int step,String difficulty) throws InterruptedException {
         int Counter = 1;
         while(Counter <= step){
             TempNode = FindRowNode(row_move,column_move);
-            if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())) {
-                color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
-                ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-                FindUnColoredRow(row_move,column_move,true);
-            }
+           // if(Restart) {
+                if (TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())) {
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    FindUnColoredRow(row_move, column_move, true);
+                }
+           // }
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+          //  if(Restart){
+                //break;
+           // }
             row_move--;
             Counter++;
             steps++;
@@ -486,18 +534,23 @@ public class BotManager extends GameThings implements Runnable {
 
 
     }
-    public void MoveDOWN(int row, int column,int step,String difficulty)throws  InterruptedException{
+    public synchronized void MoveDOWN(int row, int column,int step,String difficulty)throws  InterruptedException{
         int Counter = 1;
         while(Counter <= step){
             TempNode = FindRowNode(row_move,column_move);
-            if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){ // ????????????
-                color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
-                ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-               // FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
-                FindUnColoredRow(row_move,column_move,false);
-                //TempNode = FindRowNode(row_move,column);
-            }
+          //  if(!Restart) {
+                if (TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())) { // ????????????
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    // FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
+                    FindUnColoredRow(row_move, column_move, false);
+                    //TempNode = FindRowNode(row_move,column);
+                }
+          //  }
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+          ///  if(Restart){
+           //     break;
+          //  }
             row_move++;
             Counter++;
             steps++;
@@ -529,18 +582,23 @@ public class BotManager extends GameThings implements Runnable {
        // SetPlayerCordinates_C(PlayerNode.GetColumn());
         SetSteps(steps);
     }
-    public void MoveLEFT(int row, int column,int step,String difficulty) throws InterruptedException{
+    public synchronized void MoveLEFT(int row, int column,int step,String difficulty) throws InterruptedException{
         int Counter = 1;
-        while(Counter <= step){
-            TempNode = FindColumnNode(row_move,column_move);
-            if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){ // ????????????
-                color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
-                ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-              // FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
-                FindUnColoredColumn(row_move,column_move,true);
+        while(Counter <= step) {
+            //if (!Restart) {
+                TempNode = FindColumnNode(row_move, column_move);
+            if (TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())) { // ????????????
+                color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                // FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
+                FindUnColoredColumn(row_move, column_move, true);
                 //TempNode = FindColumnNode(row,column_move);
-            }
+           // }
+        }
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+           // if(Restart){
+           //     break;
+           // }
             column_move--;
             Counter++;
             steps++;
@@ -571,18 +629,23 @@ public class BotManager extends GameThings implements Runnable {
         SetPlayerCordinates_C(column_move); //COLM
         SetSteps(steps);
     }
-    public void MoveRIGHT(int row, int column,int step,String difficulty) throws InterruptedException{
+    public synchronized void MoveRIGHT(int row, int column,int step,String difficulty) throws InterruptedException{
         int Counter = 1;
         while(Counter <= step){
             TempNode = FindColumnNode(row_move,column_move);
-            if(TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())){ //?????????????????
-                color_the_path(Bot.GetAreaColor(),Bot.GetBotID(),Bot.GetTraceColor());
-                ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
-              //  FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
-                FindUnColoredColumn(row_move,column_move,false);
-              //  TempNode = FindColumnNode(row,column_move);
-            }
+           // if(!Restart) {
+                if (TempNode.GetIs_colored() && Objects.equals(Owner.get(TempNode), Bot.GetBotID())) { //?????????????????
+                    color_the_path(Bot.GetAreaColor(), Bot.GetBotID(), Bot.GetTraceColor());
+                    ColorArea(Bot.GetAreaColor(), Bot.GetBotID());
+                    //  FindEnemy(PlayerNode.GetRow(),PlayerNode.GetColumn(),5);
+                    FindUnColoredColumn(row_move, column_move, false);
+                    //  TempNode = FindColumnNode(row,column_move);
+                }
+          //  }
             PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+        //   if(Restart){
+          //      break;
+          //  }
             column_move++;
             Counter++;
             steps++;
@@ -614,24 +677,34 @@ public class BotManager extends GameThings implements Runnable {
         SetSteps(steps);
     }
 
-    public node SwitchPlayer(node player, node temp){
-       temp.SetIs_player(true);
-       player.SetIs_player(false);
-       temp.setColor(Bot.GetBOTColor());
-       if(temp.GetIs_colored() && Owner.get(temp) == Bot.GetBotID()){
-           player.setColor(Bot.GetAreaColor());
-       } else {
-           player.setColor(Bot.GetTraceColor());
-       }
-      // temp.setOwnerID(Bot.GetBotID());
-      // player.setOwnerID(Bot.GetBotID());
-       player.SetIs_passed(true);
-        ChecktoKill(temp,Bot.GetBotID());
-       player = temp;
-       player.setOwnerID(Bot.GetBotID());
-        return player;
+    public synchronized node SwitchPlayer(node player, node temp) throws InterruptedException {
+        AmiDead = AmIDead(Bot.GetBotID());
+        if(AmiDead){
+            Reset(temp, player);
+            ReGenerate(false);
+            return PlayerNode;
+        }else {
+            if (temp.GetIs_colored() && Owner.get(temp) != Bot.GetBotID()) {
+                temp.SetPrevious(); //&&&&&&&&&&&&&
+            }
+            temp.SetIs_player(true);
+            player.SetIs_player(false);
+            temp.setColor(Bot.GetBOTColor());
+            if (temp.GetIs_colored() && Owner.get(temp) == Bot.GetBotID()) {
+                player.setColor(Bot.GetAreaColor());
+            } else {
+                player.setColor(Bot.GetTraceColor());
+            }
+            ChecktoKill(temp,Bot.GetBotID());
+            temp.setOwnerID(Bot.GetBotID());
+            player.SetIs_passed(true);
+            //AmiDead = AmIDead(Bot.GetBotID()); //@@@@@@@@@@
+            player = temp;
+            player.setOwnerID(Bot.GetBotID());
+            return player;
+        }
     }
-    public void LocateMyArea(String ID) throws InterruptedException {  //RE CHECK ??
+    public synchronized void LocateMyArea(String ID) throws InterruptedException {  //RE CHECK ??
         node TempNode;
         int MinRow = 1000000;
         int MinColumn = 1000000;
@@ -655,6 +728,9 @@ public class BotManager extends GameThings implements Runnable {
                     ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
                 }
                 PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+              //  if(Restart){
+               //     break;
+              //  }
                  Thread.sleep(Speed);
               //  SetPlayerCordinates_R(PlayerNode.GetRow());
             }
@@ -667,6 +743,9 @@ public class BotManager extends GameThings implements Runnable {
                     ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
                 }
                 PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+               // if(Restart){
+               //     break;
+              //  }
                 Thread.sleep(Speed);
                // SetPlayerCordinates_R(PlayerNode.GetRow());
             }
@@ -680,6 +759,9 @@ public class BotManager extends GameThings implements Runnable {
                     ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
                 }
                 PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+              //  if(Restart){
+               //     break;
+             //  }
                 Thread.sleep(Speed);
                // SetPlayerCordinates_C(PlayerNode.GetColumn());
             }
@@ -693,6 +775,9 @@ public class BotManager extends GameThings implements Runnable {
                     ColorArea(Bot.GetAreaColor(),Bot.GetBotID());
                 }
                 PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+               // if(Restart){
+               //     break;
+              //  }
                 Thread.sleep(Speed);
               //  SetPlayerCordinates_C(PlayerNode.GetColumn());
             }
@@ -701,7 +786,19 @@ public class BotManager extends GameThings implements Runnable {
         SetPlayerCordinates_R(PlayerNode.GetRow());
         SetPlayerCordinates_C(PlayerNode.GetColumn());
     }
-    public void FindEnemy(int row , int column , int Sensitivity) throws InterruptedException {
+
+    public void RepairColor(){
+        for(int i = PlayerNode.GetRow(); i <= PlayerNode.GetRow() + 1;i++){
+            for(int j = PlayerNode.GetColumn(); j <= PlayerNode.GetColumn() + 1;j++){
+                for(int n = 0 ; n < nodes.size();n++){
+                    if(nodes.get(n).GetRow() == i && nodes.get(n).GetColumn() == j && !nodes.get(n).Getis_player()){
+                        nodes.get(n).setColor(Bot.GetAreaColor());
+                    }
+                }
+            }
+        }
+    }
+    public synchronized void FindEnemy(int row , int column , int Sensitivity) throws InterruptedException {
         node EnemyTrace = null;
         node TempNode;
         String Direction = "";
@@ -762,6 +859,9 @@ public class BotManager extends GameThings implements Runnable {
                     for(int i = row; i >= EnemyTrace.GetRow();i--){
                         TempNode = FindTemp(i,column);
                         PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+                       // if(Restart){
+                        //    break;
+                       // }
                         Thread.sleep(Speed);
                         }
                     break;
@@ -770,6 +870,9 @@ public class BotManager extends GameThings implements Runnable {
                     for(int i = row; i <= EnemyTrace.GetRow();i++){
                         TempNode = FindTemp(i,column);
                        PlayerNode =  SwitchPlayer(PlayerNode,TempNode);
+                       // if(Restart){
+                        //    break;
+                       // }
                         Thread.sleep(Speed);
                     }
                     break;
@@ -778,6 +881,9 @@ public class BotManager extends GameThings implements Runnable {
                     for(int i = column; i >= EnemyTrace.GetColumn();i--){
                         TempNode = FindTemp(row,i);
                         PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+                      //  if(Restart){
+                       //     break;
+                     //   }
                         Thread.sleep(Speed);
                     }
                     break;
@@ -786,6 +892,9 @@ public class BotManager extends GameThings implements Runnable {
                     for(int i = column; i <= EnemyTrace.GetColumn();i++){
                         TempNode = FindTemp(row,i);
                         PlayerNode = SwitchPlayer(PlayerNode,TempNode);
+                      //  if(Restart){
+                       //     break;
+                      //  }
                         Thread.sleep(Speed);
 
                     }
@@ -800,10 +909,59 @@ public class BotManager extends GameThings implements Runnable {
             System.out.println("ENEMY NOT FOUND!!");
         }
     }
-    public void SetSteps(int steps){
+    public synchronized void SetSteps(int steps){
     this.steps =  steps;
     }
 
+    public synchronized void ReGenerate(boolean firsttime) throws InterruptedException {
+        if(!firsttime) {
+            Thread.sleep(3000);
+        }
+       // SetBotColor();
+       // SetBotID();
+       // PlayerNode = null;
+        SetDefaultBotArea();
+        //SetPlayer();
+        SetSteps(0);
+
+      //  SetPlayerCordinates_C(PlayerNode.GetColumn());
+       // SetPlayerCordinates_R(PlayerNode.GetRow());
+       // SetRestart(false);
+
+        row_move = PlayerNode.GetRow();
+        column_move = PlayerNode.GetColumn();
+
+    }
+    public void Reset(node temp,node player){
+        if(temp.GetIs_colored() && Owner.get(temp) != Bot.GetBotID()){
+            player.SetIs_player(false);
+            temp.ResetToPrevious();
+            player.ResetToPrevious();
+        }else if(temp.GetIs_colored() && Owner.get(temp) == Bot.GetBotID()){
+            player.SetIs_player(false);
+            temp.ResetoDefault();
+            player.ResetoDefault();
+        }else if(!temp.GetIs_colored()){
+            player.SetIs_player(false);
+            temp.ResetoDefault();
+            player.ResetoDefault();
+        }
+        for(int j = 0; j < nodes.size();j++){
+            if(nodes.get(j).Getis_player() || nodes.get(j).GetColor() == Bot.GetBOTColor()){
+                nodes.get(j).ResetoDefault();
+            }
+        }
+        if(Difficulty == "EASY"){
+            x = 5;
+            y = 7;
+        }else{
+            x = 3;
+            y = 5;
+        }
+    }
+   /* public void SetRestart( boolean Restart){
+        this.Restart = Restart;
+    }*/
 
 
 }

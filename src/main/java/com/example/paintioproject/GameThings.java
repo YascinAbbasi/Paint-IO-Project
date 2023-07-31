@@ -34,7 +34,7 @@ public class GameThings{
 
 
 
-    public void DefaultNodeGenerator() {
+    public synchronized void DefaultNodeGenerator() {
         for (int i = 0; i <= 24; i++) {
             for (int j = 0; j <= 24; j++) {
                 node temp;
@@ -49,7 +49,7 @@ public class GameThings{
         }
 
 
-    public void RowNodeGenerator(int row_move, int column_move) {
+    public synchronized void RowNodeGenerator(int row_move, int column_move) {
         System.out.println("r gen working");
 
         if (((row_move % 2 == 0) && (column_move % 2 == 0)) || ((row_move % 2 != 0) && (column_move % 2 != 0))) {
@@ -73,7 +73,7 @@ public class GameThings{
 
     }
 
-    public void ColumnNodeGenerator(int row_move, int column_move) {
+    public synchronized void ColumnNodeGenerator(int row_move, int column_move) {
         System.out.println("c gen working");
 
         if (((row_move % 2 == 0) && (column_move % 2 == 0)) || ((row_move % 2 != 0) && (column_move % 2 != 0))) {
@@ -219,7 +219,7 @@ public class GameThings{
                     if(firstime){
                         TempNode2 = TempNode;
                         TempNode = FindTemp(i, column);
-                        TempNode2.ResettoDefaultColor();
+                       // TempNode2.ResettoDefaultColor(); ??@@@@@@@@@@@@@@@@
                         TempNode.setColor(Color.BLACK);
                         TempNode.SetIs_colored(true);
                         Owner.put(TempNode,ID);
@@ -256,7 +256,7 @@ public class GameThings{
                   if(firstime){
                       TempNode2 = TempNode;
                       TempNode = FindTemp(i, column);
-                      TempNode2.ResettoDefaultColor();
+                     // TempNode2.ResettoDefaultColor(); //@@@@@@@@@@@@@@
                       TempNode.setColor(Color.BLACK);
                       TempNode.SetIs_colored(true);
                       Owner.put(TempNode,ID);
@@ -294,7 +294,7 @@ public class GameThings{
                     if(firstime){
                         TempNode2 = TempNode;
                         TempNode = FindTemp(row,i);
-                        TempNode2.ResettoDefaultColor();
+                      //  TempNode2.ResettoDefaultColor(); //@@@@@@@@@@@@@@@@@
                         TempNode.setColor(Color.BLACK);
                         TempNode.SetIs_colored(true);
                         Owner.put(TempNode,ID);
@@ -331,7 +331,7 @@ public class GameThings{
                     if(firstime){
                         TempNode2 = TempNode;
                         TempNode = FindTemp(row,i);
-                        TempNode2.ResettoDefaultColor();
+                      //  TempNode2.ResettoDefaultColor(); @@@@@@@@@@@@@@@@
                         TempNode.setColor(Color.BLACK);
                         TempNode.SetIs_colored(true);
                         Owner.put(TempNode,ID);
@@ -446,6 +446,7 @@ public class GameThings{
                 nodes.get(j).SetIs_colored(true);
                 Owner.put(nodes.get(j),ID);
                 nodes.get(j).SetIs_passed(false);
+                nodes.get(j).SetPrevious();
             }
         }
         System.out.println("COLOR THE PATH CALLED BY " + ID);
@@ -612,15 +613,17 @@ public class GameThings{
         toCheck.clear();
 
         for (int i = 0; i < toColor.size(); i++) {
-            if (!toRemove.contains(toColor.get(i))) {
+            if (!toRemove.contains(toColor.get(i)) && !toColor.get(i).Getis_player() && !toColor.get(i).GetIs_passed()) {
                 toColor.get(i).setColor(color);
                 toColor.get(i).SetIs_colored(true);
+                toColor.get(i).setOwnerID(ID);
                 Owner.put(toColor.get(i),ID);
+                toColor.get(i).SetPrevious(); //???????????
                 // System.out.println("TO COLOR CALLED BY " + ID);
             }
         }
     }
-    public node FindtoColorTemp(int row, int column){
+    public synchronized node FindtoColorTemp(int row, int column){
         tempnode = null;
         for(int j = 0; j < toColor.size();j++){
             if(toColor.get(j).GetRow() == row && toColor.get(j).GetColumn() == column){
@@ -630,7 +633,7 @@ public class GameThings{
         }
         return tempnode;
     }
-    public node FindTemp(int row, int column){
+    public synchronized node FindTemp(int row, int column){
          node TempNode = null;
         for (int j = 0; j < nodes.size();j++) {
             if (nodes.get(j).GetRow() == row && nodes.get(j).GetColumn() == column) {
@@ -640,7 +643,7 @@ public class GameThings{
         }
          return TempNode;
     }
-    public boolean Checkneighbour(int row, int column){
+    public synchronized boolean Checkneighbour(int row, int column){
         is_found = false;
         for(int j = 0 ; j < toCheck.size(); j++){
             if(toCheck.get(j).GetRow() == row && toCheck.get(j).GetColumn() == column){
@@ -654,7 +657,7 @@ public class GameThings{
     }
 
 
-    public void toCheckArea(node Tempnode, String Direction,int row, int column,String ID){ /*-------------------------------------------------*/
+    public synchronized void toCheckArea(node Tempnode, String Direction,int row, int column,String ID){ /*-------------------------------------------------*/
         TEMPNODES.clear();
         TEMPNODES.add(Tempnode);
         Helptempnode = null;
@@ -757,9 +760,9 @@ public class GameThings{
                 break;
         }
     }
-     public node MoveBullet(node BulletNode,node TempNode){
-        TempNode.setColor(Color.LIGHTYELLOW);
-        BulletNode.ResettoDefaultColor();
+     public synchronized node MoveBullet(node BulletNode,node TempNode){
+        TempNode.setColor(Color.BLACK);
+        BulletNode.setColor(Color.WHITE);
         BulletNode = TempNode;
     return BulletNode;
     }
@@ -769,7 +772,8 @@ public class GameThings{
     this.BulletRow = BulletRow;
     this.BulletColumn = BulletColumn;
     }
-    public void Kill(String ID){
+    public synchronized void Kill(String ID){
+        DeleteKeys.clear();
         for(Map.Entry <node,String> entry : Owner.entrySet()){
             if(entry.getValue() == ID){
                 DeleteKeys.add(entry.getKey());
@@ -777,39 +781,42 @@ public class GameThings{
         }
         for(node delete : DeleteKeys){
             Owner.remove(delete);
-            delete.ResettoDefaultColor();
-            delete.ResetOwnerID();
+            delete.ResetoDefault();
+          //  delete.ResetOwnerID();
         }
         for(int j = 0; j < nodes.size();j++){
-            if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && nodes.get(j).GetAlreadyColored()){
+            if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && nodes.get(j).GetIs_colored()){
 
-                nodes.get(j).ResettoPreviousColor();
-                nodes.get(j).ResettoPreviousOwner();
+                nodes.get(j).ResetToPrevious();
+               // nodes.get(j).ResetToPrevious();
+              // nodes.get(j).ResetOwnerID();//
             }
-            else if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetAlreadyColored()){
+            else if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
 
-                nodes.get(j).ResettoDefaultColor();
-                nodes.get(j).ResetOwnerID();
+                nodes.get(j).ResetoDefault();
+                //nodes.get(j).ResetToPrevious();
+               // nodes.get(j).ResetOwnerID();
             }
-             if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID &&nodes.get(j).GetAlreadyColored() ){
-                nodes.get(j).ResettoPreviousColor();
-                nodes.get(j).ResettoPreviousOwner();
+             if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID &&nodes.get(j).GetIs_colored()){
+                // nodes.get(j).ResetToPrevious();
+                 nodes.get(j).ResetoDefault();
+
             }
-            else if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetAlreadyColored()){
-               nodes.get(j).ResettoDefaultColor();
-                 nodes.get(j).ResetOwnerID();
+             else if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
+                // nodes.get(j).ResetoDefault();
+                 nodes.get(j).ResetToPrevious();
              }
         }
 
     }
 
-    public void ChecktoKill(node Player, String ID){
+    public synchronized void ChecktoKill(node Player, String ID){
         if(Player.GetIs_passed() && Player.getOwnerID() != ID){
             Kill(Player.getOwnerID());
             System.out.println("CHECK TO KILL CALLED");
         }
     }
-    public boolean AmIDead(String ID){
+    public synchronized boolean AmIDead(String ID){
        ArrayList <node> ImAlive =  new ArrayList<>();
         for(Map.Entry <node,String> entry : Owner.entrySet()){
             if(entry.getValue() == ID){
@@ -822,4 +829,5 @@ public class GameThings{
             return false;
         }
     }
+
 }

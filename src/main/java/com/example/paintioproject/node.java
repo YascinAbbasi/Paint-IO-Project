@@ -24,6 +24,8 @@ public class node extends Region {
     private boolean HasOwner = false;
     private boolean is_passed  =false;
     private boolean is_player = false;
+    private boolean PreviousisPassed = false;
+    private boolean PreviousisColored = false;
     private boolean is_MainPlayer = false;
     private String OwnerID;
     private String PreviousOwnerID;
@@ -69,7 +71,7 @@ public class node extends Region {
         return AlreadyColored;
     }
 
-    public void setOwnerID(String ownerID) {
+    public void setOwnerID(String ownerID) { //???????????????
         HasOwner = true;
         PreviousOwnerID = OwnerID;
         OwnerID = ownerID;
@@ -102,9 +104,9 @@ public class node extends Region {
         setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
 
     }
-    public void setColor(Color Color) {
-        AlreadyColored = true;
-        PreviousColor = color;
+    public void setColor(Color Color) { //????????????
+      //  AlreadyColored = true;
+       // PreviousColor = color;
         color = Color;
         requestLayout();
     }
@@ -118,6 +120,32 @@ public class node extends Region {
     public void ResettoDefaultColor(){
         color = DefaultColor;
         AlreadyColored = false;
+        requestLayout();
+    }
+    public void SetPrevious(){
+        PreviousColor = color;
+        PreviousisColored = is_colored;
+        PreviousisPassed = is_passed;
+        PreviousOwnerID = OwnerID;
+    }
+    public void ResetToPrevious(){
+        color = PreviousColor;
+        is_colored = PreviousisColored;
+        is_passed = false;
+        is_player = false;
+        OwnerID = PreviousOwnerID;
+        if(OwnerID == null){
+            HasOwner = false;
+        }
+        requestLayout();
+    }
+    public void ResetoDefault(){
+        color = DefaultColor;
+        is_colored = false;
+        AlreadyColored = false;
+        is_passed = false;
+        OwnerID = null;
+        HasOwner = false;
         requestLayout();
     }
 

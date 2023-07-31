@@ -25,11 +25,13 @@ public class Bullets extends GameThings implements Runnable {
                     row--;
                     TempNode = FindTemp(row,column);
                     if(TempNode == null){
+                        System.out.println("BREAKKKKKKKKKK!");
                         break;
                     }
                     BulletNode = MoveBullet(BulletNode,TempNode);
                     Thread.sleep(100);
                     if(BulletNode.GetIs_passed()){
+                        System.out.println("BREAKKKKKKKKKK2!");
                         break;
                     }
                 }
@@ -42,11 +44,13 @@ public class Bullets extends GameThings implements Runnable {
 
                     TempNode = FindTemp(row,column);
                     if(TempNode == null){
+                        System.out.println("BREAKKKKKKKKKK!");
                         break;
                     }
                     BulletNode = MoveBullet(BulletNode,TempNode);
                     Thread.sleep(100);
                     if(BulletNode.GetIs_passed()){
+                        System.out.println("BREAKKKKKKKKKK2!");
                         break;
                     }
                 }
@@ -58,11 +62,13 @@ public class Bullets extends GameThings implements Runnable {
                     column--;
                     TempNode = FindTemp(row,column);
                     if(TempNode == null){
+                        System.out.println("BREAKKKKKKKKKK!");
                         break;
                     }
                     BulletNode = MoveBullet(BulletNode,TempNode);
                     Thread.sleep(100);
                     if(BulletNode.GetIs_passed()){
+                        System.out.println("BREAKKKKKKKKKK2!");
                         break;
                     }
                 }
@@ -74,11 +80,13 @@ public class Bullets extends GameThings implements Runnable {
                     column++;
                     TempNode = FindTemp(row,column);
                     if(TempNode == null){
+                        System.out.println("BREAKKKKKKKKKK!");
                         break;
                     }
                     BulletNode = MoveBullet(BulletNode,TempNode);
                     Thread.sleep(100);
                     if(BulletNode.GetIs_passed()){
+                        System.out.println("BREAKKKKKKKKKK2!");
                         break;
                     }
 
