@@ -167,6 +167,7 @@ public class GameController extends GameThings {
              if(AmiDead){
                  try {
                          SwitchtoGameOverScene();
+                         gameLoop.stop();
                  } catch (IOException e) {
                          throw new RuntimeException(e);
                  }
@@ -216,6 +217,7 @@ public class GameController extends GameThings {
         Image image = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai (1)GameOver.jpg");
         GameOverController gameOverController = loader.getController();
         gameOverController.GameOverImageView.setImage(image);
+        gameOverController.SetScoreLabel(Integer.toString(player.GetPlayerScore()));
         GameOverscene = new Scene(root);
         stage = (Stage)Pane.getScene().getWindow();
         stage.setScene(GameOverscene);

@@ -12,10 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignUpPageController {
+public class SignUpPageController implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Parent root;
     private Scene scene;
     private Stage stage;

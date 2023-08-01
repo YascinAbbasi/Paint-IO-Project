@@ -31,6 +31,7 @@ public class GameThings{
     private int MinColumn = 1000000;
     private int BulletRow = 0;
     private int BulletColumn = 0;
+    private static int Score;
 
 
 
@@ -246,6 +247,7 @@ public class GameThings{
                 }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
+                    ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
             }
@@ -281,6 +283,7 @@ public class GameThings{
               }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
+                    ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
               }
@@ -319,6 +322,7 @@ public class GameThings{
                 }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
+                    ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
             }
@@ -356,6 +360,7 @@ public class GameThings{
                 }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
+                    ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
             }
@@ -829,5 +834,22 @@ public class GameThings{
             return false;
         }
     }
+    public void SetScore(int Score){
+        this.Score = Score;
+    }
+    public int GetScore(){
+        return Score;
+    }
+    public int CheckScore(String ID){
+        Score = 0;
+        for(int j = 0; j < nodes.size();j++){
+            if(Objects.equals(Owner.get(nodes.get(j)), ID)){
+                Score += 5;
+            }
+        }
+        SetScore(Score);
+        return GetScore();
+    }
+
 
 }

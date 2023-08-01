@@ -33,6 +33,7 @@ public class BotManager extends GameThings implements Runnable {
     private volatile int steps = 0;
     private  static int x = 5;
     private  static int y = 7;
+    private volatile int BotScore = 0;
     private int Speed;
 
 
@@ -701,6 +702,8 @@ public class BotManager extends GameThings implements Runnable {
             //AmiDead = AmIDead(Bot.GetBotID()); //@@@@@@@@@@
             player = temp;
             player.setOwnerID(Bot.GetBotID());
+            SetBotScore(CheckScore(Bot.GetBotID()));
+            System.out.println( "BOT SCORE : " + BotScore);
             return player;
         }
     }
@@ -962,6 +965,11 @@ public class BotManager extends GameThings implements Runnable {
    /* public void SetRestart( boolean Restart){
         this.Restart = Restart;
     }*/
+    public void SetBotScore(int BotScore){
+        this.BotScore = BotScore;
+    }
 
-
+    public int GetBotScore() {
+        return BotScore;
+    }
 }

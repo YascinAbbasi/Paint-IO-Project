@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-
 <Pane fx:id="Pane" prefHeight="630.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paintioproject.GameController">
    <children>
       <GridPane fx:id="gp" layoutX="3.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="625.0">

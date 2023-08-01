@@ -12,8 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class GameOverController {
+public class GameOverController implements Serializable {
+    private static final long serialVersionUID = 1L;
     @FXML
     private Label ScoreLabel;
     @FXML
@@ -21,6 +23,8 @@ public class GameOverController {
     private Parent root;
     private Scene  scene;
     private Stage  stage;
+    private int Score;
+    private String PlayerID;
 
     public void ContinueButton(ActionEvent e) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
@@ -31,5 +35,8 @@ public class GameOverController {
         stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+    }
+    public void SetScoreLabel(String score){
+        ScoreLabel.setText(score);
     }
 }

@@ -13,6 +13,8 @@ public class Player extends GameThings {
     private String PlayerID;
     private Color PlayerColor;
     private Color TraceColor;
+    private int PlayerScore = 0;
+
 
     Rectangle rect = new Rectangle(25, 25);// GetPlayerColor());
     private Label label = new Label("  \uD83C\uDFAE  ");
@@ -30,7 +32,9 @@ public class Player extends GameThings {
                     if (nodes.get(j).GetRow() == i && nodes.get(j).GetColumn() == k){
                         gp.add(nodes.get(j),column++,row);
                         if(row == 12 && column == 13){
-                           // ChecktoKill(nodes.get(j),"PLAYER1"); //@@@@@@@@@@@@@@@@
+                            ChecktoKill(nodes.get(j),"PLAYER1"); //@@@@@@@@@@@@@@
+                            PlayerScore = CheckScore("PLAYER1");
+                            System.out.println("Player Score : " + PlayerScore);
                         }
                         if(row == 12 && column == 13 &&(nodes.get(j).GetIs_colored() || !Objects.equals(Owner.get(nodes.get(j)), "PLAYER1"))){
                            nodes.get(j).SetPrevious(); //@@@@@@@@@@@@@@
@@ -82,6 +86,7 @@ public class Player extends GameThings {
 
     }*/
     public void SetDefaultArea(Color color) {
+        PlayerScore = 0;
         for (int m = 11; m <= 13; m++) {
             for (int n = 11;n <=13;n++){
                 for (int j = 0; j < nodes.size(); j++) {
@@ -89,6 +94,7 @@ public class Player extends GameThings {
                         nodes.get(j).setColor(color); //RANG
                         nodes.get(j).SetIs_colored(true);
                         Owner.put(nodes.get(j),"PLAYER1");
+                        PlayerScore += 5;
                         break;
                     }
                 }
@@ -116,4 +122,12 @@ public class Player extends GameThings {
     public Color GetTraceColor() {
         return TraceColor;
     }
+    public void SetPlayerScore(int PlayerScore){
+        this.PlayerScore = PlayerScore;
+    }
+
+    public int GetPlayerScore() {
+        return PlayerScore;
+    }
 }
+
