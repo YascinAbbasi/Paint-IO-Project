@@ -1,16 +1,18 @@
 package com.example.paintioproject;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-
 import java.io.Serializable;
 
-public class PlayerScore implements Serializable {
+public class PlayerData implements Serializable {
     private static final long serialVersionUID = 1L;
     private  String PlayerID;
     private int Score;
    private String username;
    private String password;
+
+   public PlayerData (String username, String password){
+       this.username = username;
+       this.password = password;
+   }
 
 
     public void setPlayerID(String playerID) {

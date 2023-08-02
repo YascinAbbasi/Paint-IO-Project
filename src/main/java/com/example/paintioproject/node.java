@@ -106,7 +106,7 @@ public class node extends Region {
     }
     public void setColor(Color Color) { //????????????
       //  AlreadyColored = true;
-       // PreviousColor = color;
+        // PreviousColor = color;
         color = Color;
         requestLayout();
     }

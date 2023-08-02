@@ -45,6 +45,7 @@ public class GameController extends GameThings {
      public Thread Bot1;
     public Thread Bot2;
     public Thread Bot3;
+    public Thread BulletThread;
      private Bullets BulletB;
      @FXML
      private Button GameOverButton;
@@ -120,15 +121,13 @@ public class GameController extends GameThings {
 
                 }
                 case ENTER -> {
-                    BulletB = new Bullets(HelpKeyEvent,row_move,column_move,"PLAYER1");
-                    //Thread BulletThread = new Thread(BulletB);
-                    //BulletThread.start();
-                    try {
-                        BulletB.ShootBulletB(HelpKeyEvent,row_move,column_move,"PLAYER1");
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    HelpKeyEvent = lastKeyEvent;
+                  BulletB.SetBullet(HelpKeyEvent,row_move + 12,column_move + 12,"PLAYER1");
+                  BulletB.SetShootBullet(true);
+
+                    //  BulletThread.start();
+                   // player.SetNodes(gp, row_move, column_move, player.GetPlayerColor(), player.GetTraceColor());
+                    lastKeyEvent = HelpKeyEvent;
+
                 }
                 default -> {
                     switch (HelpKeyEvent.getCode()){
@@ -222,6 +221,12 @@ public class GameController extends GameThings {
         stage = (Stage)Pane.getScene().getWindow();
         stage.setScene(GameOverscene);
 
+    }
+
+    public void SetBullet(Bullets Bullet){
+       BulletB = Bullet;
+       BulletThread = new Thread(BulletB);
+       BulletThread.start();
     }
 }
 

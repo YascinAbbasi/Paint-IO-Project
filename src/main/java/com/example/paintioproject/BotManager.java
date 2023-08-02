@@ -153,15 +153,16 @@ public class BotManager extends GameThings implements Runnable {
                         if (nodes.get(i) == tempnodes.get(j)) {
                             nodes.get(i).setColor(Bot.GetAreaColor());
                             nodes.get(i).SetIs_colored(true);
+                            nodes.get(i).SetPrevious();
                             Owner.put(nodes.get(i), Bot.GetBotID());
                         }
                     }
                 }
-                  for(int j = 0; j < tempnodes.size();j++){
+                 /* for(int j = 0; j < tempnodes.size();j++){
                       tempnodes.get(j).setColor(Bot.GetAreaColor());
                       tempnodes.get(j).SetIs_colored(true);
                       Owner.put(tempnodes.get(j), Bot.GetBotID());
-                  }
+                  }*/
                 }
                 SetPlayer();
                           //  SetPlayerCordinates_R(PlayerNode.GetRow());
@@ -696,7 +697,7 @@ public class BotManager extends GameThings implements Runnable {
             } else {
                 player.setColor(Bot.GetTraceColor());
             }
-            ChecktoKill(temp,Bot.GetBotID());
+           // ChecktoKill(temp,Bot.GetBotID());
             temp.setOwnerID(Bot.GetBotID());
             player.SetIs_passed(true);
             //AmiDead = AmIDead(Bot.GetBotID()); //@@@@@@@@@@

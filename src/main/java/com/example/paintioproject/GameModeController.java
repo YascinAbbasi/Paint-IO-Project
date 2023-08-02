@@ -56,6 +56,7 @@ public class GameModeController implements Initializable {
     private String[] BotNumber = {"1","2","3"};
     private String difficulty;
     private BotPlayer bt ;
+    private Bullets Bullet = new Bullets();
     private int speed;
     private static int Botnumber = 1;
     public void BackButton(ActionEvent e) throws IOException{
@@ -125,6 +126,7 @@ public class GameModeController implements Initializable {
        // SetBot(botplayer2);
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
+        gamecontroller.SetBullet(Bullet); ////@@@@@@@@@
     //    gamecontroller.SetBotPlayer(botplayer);
 
       //  gamecontroller.SetBotPlayers(BotManagers);

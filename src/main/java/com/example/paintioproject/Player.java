@@ -93,6 +93,7 @@ public class Player extends GameThings {
                     if (nodes.get(j).GetRow() == m && nodes.get(j).GetColumn() == n) {
                         nodes.get(j).setColor(color); //RANG
                         nodes.get(j).SetIs_colored(true);
+                        nodes.get(j).SetPrevious();
                         Owner.put(nodes.get(j),"PLAYER1");
                         PlayerScore += 5;
                         break;

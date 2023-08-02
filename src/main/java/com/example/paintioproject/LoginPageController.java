@@ -15,9 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginPageController  implements Initializable, Serializable {
@@ -38,6 +38,8 @@ private TextField password;
     public TextArea LeaderBoardTextArea;
     @FXML
      public ImageView LoginImageView ;
+    private File file = new File();
+    private ArrayList <PlayerData> TempPlayers = new ArrayList<>();
 
 
     public void LoginButton(ActionEvent e)throws IOException{
@@ -68,4 +70,19 @@ private TextField password;
         Image image = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai.jpg");
         LoginImageView.setImage(image);
     }
+
+    public void ReadPlayer(String Path){
+        try {
+            FileInputStream fis = new FileInputStream(Path);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            TempPlayers = (ArrayList<PlayerData>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
