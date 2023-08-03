@@ -10,12 +10,7 @@ public class Bullets extends GameThings implements Runnable {
     private String ShooterID;
     private volatile boolean ShootBullet = false;
 
-    public Bullets(KeyEvent Direction, int BulletRow , int BulletColumn,String ShooterID){
-        this.Direction = Direction;
-        this.BulletRow = BulletRow;
-        this.BulletColumn = BulletColumn;
-        this.ShooterID = ShooterID;
-    }
+
     public Bullets(){
         ShootBullet = false;
     }
@@ -30,18 +25,18 @@ public class Bullets extends GameThings implements Runnable {
             case UP ->{
                 System.out.println("UP BULLET CALLED!");
                 BulletNode = SetFirstBullet(Direction,BulletRow,BulletColumn);
-                BulletNode.setColor(Color.YELLOW);
                 Help = BulletNode.GetColor();
+                BulletNode.setColor(Color.YELLOW);
                 SetBulletRow(BulletNode.GetRow());
                 SetBulletColumn(BulletNode.GetColumn());
                 while(true){
                     TempNode = FindTemp(BulletRow - 1,BulletColumn);
                     if(TempNode != null){
-                        if(BulletNode.GetIs_colored()){
-                            BulletNode.ResettoPreviousColor();
-                        }
-                       else if(BulletNode.GetIs_passed()){
+                        if(BulletNode.GetIs_passed()){
                           BulletNode.setColor(Help);
+                        }
+                        else if(BulletNode.GetIs_colored()){
+                            BulletNode.ResettoPreviousColor();
                         }
                         else{
                             BulletNode.ResettoDefaultColor();
@@ -73,19 +68,20 @@ public class Bullets extends GameThings implements Runnable {
             case DOWN -> {
                 System.out.println("DOWN BULLET CALLED!");
                 BulletNode = SetFirstBullet(Direction,BulletRow,BulletColumn);
-                BulletNode.setColor(Color.YELLOW);
                 Help = BulletNode.GetColor();
+                BulletNode.setColor(Color.YELLOW);
                 SetBulletRow(BulletNode.GetRow());
                 SetBulletColumn(BulletNode.GetColumn());
                 while(true){
                     TempNode = FindTemp(BulletRow + 1,BulletColumn);
                     if(TempNode != null){
-                        if(BulletNode.GetIs_colored()){
-                            BulletNode.ResettoPreviousColor();
-                        }
-                        else if(BulletNode.GetIs_passed()){
+
+                         if(BulletNode.GetIs_passed()){
                             BulletNode.setColor(Help);
                         }
+                         else if(BulletNode.GetIs_colored()){
+                             BulletNode.ResettoPreviousColor();
+                         }
                         else{
                             BulletNode.ResettoDefaultColor();
                         }
@@ -116,18 +112,19 @@ public class Bullets extends GameThings implements Runnable {
             case LEFT -> {
                 System.out.println("LEFT BULLET CALLED!");
                 BulletNode = SetFirstBullet(Direction,BulletRow,BulletColumn);
-                BulletNode.setColor(Color.YELLOW);
                 Help = BulletNode.GetColor();
+                BulletNode.setColor(Color.YELLOW);
                 SetBulletRow(BulletNode.GetRow());
                 SetBulletColumn(BulletNode.GetColumn());
                 while(true){
                     TempNode = FindTemp(BulletRow,BulletColumn - 1);
                     if(TempNode != null){
-                        if(BulletNode.GetIs_colored()){
-                            BulletNode.ResettoPreviousColor();
-                        }
-                       else if(BulletNode.GetIs_passed()){
+
+                        if(BulletNode.GetIs_passed()){
                             BulletNode.setColor(Help);
+                        }
+                        else if(BulletNode.GetIs_colored()){
+                            BulletNode.ResettoPreviousColor();
                         }
                         else{
                             BulletNode.ResettoDefaultColor();
@@ -158,19 +155,19 @@ public class Bullets extends GameThings implements Runnable {
             case RIGHT -> {
                 System.out.println("FIND BULLET CALLED!");
                 BulletNode = SetFirstBullet(Direction,BulletRow,BulletColumn);
-                BulletNode.setColor(Color.YELLOW);
                 Help = BulletNode.GetColor();
+                BulletNode.setColor(Color.YELLOW);
                 SetBulletRow(BulletNode.GetRow());
                 SetBulletColumn(BulletNode.GetColumn());
                 while(true){
                     TempNode = FindTemp(BulletRow,BulletColumn + 1);
                     if(TempNode != null){
-                        if(BulletNode.GetIs_colored()){
-                            BulletNode.ResettoPreviousColor();
-                        }
-                        else if(BulletNode.GetIs_passed()){
+                         if(BulletNode.GetIs_passed()){
                             BulletNode.setColor(Help);
                         }
+                         else if(BulletNode.GetIs_colored()){
+                             BulletNode.ResettoPreviousColor();
+                         }
                         else{
                             BulletNode.ResettoDefaultColor();
                         }
@@ -204,93 +201,7 @@ public class Bullets extends GameThings implements Runnable {
 
 
 
-    /*public void ShootBulletB(/*KeyEvent Direction,int row,int column,String ShooterID) throws InterruptedException {
-        node TempNode = null;
-        node BulletNode;
-        switch (Direction.getCode()){
-            case UP -> {
-                System.out.println("UP BULLET CALLED");
-                BulletNode = FindTemp(BulletRow - 1,BulletColumn);
-                while(TempNode != null){
-                    BulletRow--;
-                    TempNode = FindTemp(BulletRow,BulletColumn);
-                    if(TempNode == null){
-                        System.out.println("BREAKKKKKKKKKK!");
-                        break;
-                    }
-                    BulletNode = MoveBullet(BulletNode,TempNode);
-                    Thread.sleep(300);
-                    if(BulletNode.GetIs_passed()){
-                        System.out.println("BREAKKKKKKKKKK2!");
-                        break;
-                    }
-                }
-                SetShootBullet(false);
-            }
-            case DOWN -> {
-                System.out.println("DOWN BULLET CALLED");
-                BulletNode = FindTemp(BulletRow + 1,BulletColumn);
-                while(TempNode != null){
-                    BulletRow++;
 
-                    TempNode = FindTemp(BulletRow,BulletColumn);
-                    if(TempNode == null){
-                        System.out.println("BREAKKKKKKKKKK!");
-                        break;
-                    }
-                    BulletNode = MoveBullet(BulletNode,TempNode);
-                    Thread.sleep(300);
-                    if(BulletNode.GetIs_passed()){
-                        System.out.println("BREAKKKKKKKKKK2!");
-                        break;
-                    }
-                }
-                SetShootBullet(false);
-            }
-            case LEFT -> {
-                System.out.println("LEFT BULLET CALLED");
-                BulletNode = FindTemp(BulletRow,BulletColumn - 1);
-                while(TempNode != null){
-                    BulletColumn--;
-                    TempNode = FindTemp(BulletRow,BulletColumn);
-                    if(TempNode == null){
-                        System.out.println("BREAKKKKKKKKKK!");
-                        break;
-                    }
-                    BulletNode = MoveBullet(BulletNode,TempNode);
-                    Thread.sleep(300);
-                    if(BulletNode.GetIs_passed()){
-                        System.out.println("BREAKKKKKKKKKK2!");
-                        break;
-                    }
-                }
-                SetShootBullet(false);
-            }
-            case RIGHT -> {
-                System.out.println("RIGHT BULLET CALLED");
-                BulletNode = FindTemp(BulletRow,BulletColumn + 1);
-                while(TempNode != null){
-                    BulletColumn++;
-                    TempNode = FindTemp(BulletRow,BulletColumn);
-                    if(TempNode == null){
-                        System.out.println("BREAKKKKKKKKKK!");
-                        break;
-                    }
-                    BulletNode = MoveBullet(BulletNode,TempNode);
-                    Thread.sleep(300);
-                    if(BulletNode.GetIs_passed()){
-                        System.out.println("BREAKKKKKKKKKK2!");
-                        break;
-                    }
-
-                }
-                SetShootBullet(false);
-            }
-            default -> {
-
-            }
-        }
-    }*/
     public void SetShootBullet(boolean ShootBullet){
         this.ShootBullet = ShootBullet;
     }

@@ -40,17 +40,48 @@ private TextField password;
      public ImageView LoginImageView ;
     private File file = new File();
     private ArrayList <PlayerData> TempPlayers = new ArrayList<>();
+    private String Username = "",Password = "";
+
 
 
     public void LoginButton(ActionEvent e)throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameModePage.fxml"));
+        ReadPlayer(file.getPlayerDataPath());
+        Username = username.getText();
+        Password = password.getText();
+        if(Username.equals("") ||Password.equals("")){
+            WelcomeLabel.setText("Fields Can't be empty!");
+        }
+        else{
+            for(int i = 0; i < TempPlayers.size();i++){
+                if(TempPlayers.get(i).getUsername().equals(Username) && TempPlayers.get(i).getPassword().equals(Password)){
+
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameModePage.fxml"));
+                    GameModePage = loader.load();
+                    GameModeController gameModeController = loader.getController();
+                    Image image2 = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai (2).jpg");
+                    gameModeController.GameModeImageView.setImage(image2);
+                    gameModeController.Setplayerdata(TempPlayers.get(i));
+                    stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    scene = new Scene(GameModePage);
+                    stage.setScene(scene);
+                    break;
+                }else{
+                    WelcomeLabel.setText("User Not Found!");
+                }
+            }
+        }
+
+
+
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("GameModePage.fxml"));
         GameModePage = loader.load();
         GameModeController gameModeController = loader.getController();
         Image image2 = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai (2).jpg");
         gameModeController.GameModeImageView.setImage(image2);
         stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(GameModePage);
-        stage.setScene(scene);
+        stage.setScene(scene);*/
 
     }
     public void SignUpButton(ActionEvent e1)throws IOException{
@@ -69,6 +100,12 @@ private TextField password;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai.jpg");
         LoginImageView.setImage(image);
+        ReadPlayer(file.getPlayerDataPath());
+        String LeaderBoardData = "";
+        for(int i = 0; i < TempPlayers.size();i++){
+            LeaderBoardData += TempPlayers.get(i).getUsername() + "   " + TempPlayers.get(i).GetTopScore()+"\n";
+        }
+        LeaderBoardTextArea.setText(LeaderBoardData);
     }
 
     public void ReadPlayer(String Path){

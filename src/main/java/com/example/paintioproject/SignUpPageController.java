@@ -34,29 +34,29 @@ public class SignUpPageController implements Serializable {
     private ArrayList <PlayerData> TempPlayers = new ArrayList<>();
     private PlayerData TempPlayer;
 
-    private String Username = null;
-    private String Password = null;
+    private String Username = "",Password = "";
 
 
 
 
     public void SignUp(){
-          ReadPlayer(file.getPlayerDataPath());
+         ReadPlayer(file.getPlayerDataPath());
         boolean in_use = false;
         Username = username.getText();
         Password = password.getText();
-        if(Username == null ||Password == null){
-            WelcomeLabel.setText("Fields Shouldn't be empty!");
-        }else {
+        if(Username.equals("") ||Password.equals("")){
+            WelcomeLabel.setText("Fields Can't be empty!");
+        }
+        else {
             for(int i = 0; i < TempPlayers.size();i++){
-                if(TempPlayers.get(i).getUsername() == Username){
+                if(TempPlayers.get(i).getUsername().equals(Username)){
                     WelcomeLabel.setText("Username is Already in Use!");
                     in_use = true;
                     break;
                 }
             }
             if(!in_use) {
-              //  TempPlayers.clear();
+               // TempPlayers.clear();
                 TempPlayer = new PlayerData(Username, Password);
                 TempPlayers.add(TempPlayer);
                 file.Write(TempPlayers, file.getPlayerDataPath());

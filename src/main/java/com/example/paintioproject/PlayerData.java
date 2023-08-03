@@ -1,13 +1,16 @@
 package com.example.paintioproject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class PlayerData implements Serializable {
     private static final long serialVersionUID = 1L;
     private  String PlayerID;
     private int Score;
+    private int TopScore;
    private String username;
    private String password;
+   public ArrayList <Integer> Scores = new ArrayList<>();
 
    public PlayerData (String username, String password){
        this.username = username;
@@ -45,5 +48,12 @@ public class PlayerData implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+    public void SetTopScore(int TopScore){
+       this.TopScore = TopScore;
+    }
+
+    public int GetTopScore() {
+        return TopScore;
     }
 }

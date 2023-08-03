@@ -57,7 +57,9 @@ public class GameModeController implements Initializable {
     private String difficulty;
     private BotPlayer bt ;
     private Bullets Bullet = new Bullets();
+    private PlayerData playerdata;
     private int speed;
+    private static int Botspeed = 100;
     private static int Botnumber = 1;
     public void BackButton(ActionEvent e) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
@@ -126,6 +128,7 @@ public class GameModeController implements Initializable {
        // SetBot(botplayer2);
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
+        gamecontroller.Setplayerdata(playerdata);// #$#$#$#$#$#$
         gamecontroller.SetBullet(Bullet); ////@@@@@@@@@
     //    gamecontroller.SetBotPlayer(botplayer);
 
@@ -175,14 +178,17 @@ public class GameModeController implements Initializable {
         switch (SpeedChoiceBox.getValue()){
             case("SLOW"):
                 speed = 200;
+                SetBotSpeed(220);
                 break;
 
             case("NORMAL"):
                 speed = 100;
+                SetBotSpeed(110);
                 break;
 
             case("FAST"):
                 speed = 50;
+                SetBotSpeed(55);
                 break;
 
         }
@@ -288,7 +294,7 @@ public class GameModeController implements Initializable {
        // botmanager.ReGenerate(true);
       //  botmanager.SetPlayer();
         botmanager.setDifficulty(difficulty);
-        botmanager.setSpeed(200);
+        botmanager.setSpeed(Botspeed);
          botmanager.Kill(botmanager.GETbotID());
          botmanager.ReGenerate(true);
     }
@@ -353,5 +359,12 @@ public class GameModeController implements Initializable {
 
 
         }
+   }
+   public void SetBotSpeed(int Botspeed){
+        this.Botspeed = Botspeed;
+   }
+   public void Setplayerdata(PlayerData playerdata ){
+        this.playerdata = playerdata;
+        System.out.println(playerdata.getUsername());
    }
 }

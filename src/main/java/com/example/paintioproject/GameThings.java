@@ -6,18 +6,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GameThings{
-    public static ArrayList<node> nodes = new ArrayList<>();
+    public static CopyOnWriteArrayList<node> nodes = new CopyOnWriteArrayList<>();
     public ArrayList<node> tempNodes = new ArrayList<>();
-    public static HashMap<node,String> Owner = new HashMap<>();
-    public static ArrayList <node> toCheck = new ArrayList<>();
-    public static ArrayList <node> toColor = new ArrayList<>();
-    public static HashSet<node> toRemove = new HashSet<>();
-    private ArrayList <node> DeleteKeys = new ArrayList<>();
+    public static ConcurrentHashMap<node,String> Owner = new ConcurrentHashMap<>();
+    private  ArrayList <node> toCheck = new ArrayList<>();
+    private  ArrayList <node> toColor = new ArrayList<>();
+    private final HashSet<node> toRemove = new HashSet<>();
+    private static CopyOnWriteArrayList <node> DeleteKeys = new CopyOnWriteArrayList<>();
      public ArrayList  <node> TEMPNODES = new ArrayList<>();
     public ArrayList<node> toShootCheck = new ArrayList<>();
-    private node tempnode;
+    private  node tempnode;
     private node Helptempnode;
     Rectangle rect = new Rectangle(25, 25);// GetPlayerColor());
     private KeyEvent Direction;
@@ -368,81 +370,6 @@ public class GameThings{
             }
         }
 
-         public void ShootBulletB(KeyEvent Direction,int row,int column) throws InterruptedException {
-        node TempNode = null;
-        node BulletNode = null;
-
-
-        switch (Direction.getCode()){
-             case UP -> {
-                 BulletNode = FindTemp(row - 1,column);
-               while(TempNode != null){
-                   row--;
-                  TempNode = FindTemp(row,column);
-                  if(TempNode == null){
-                      break;
-                  }
-                  BulletNode = MoveBullet(BulletNode,TempNode);
-                  Thread.sleep(70);
-                   if(BulletNode.GetIs_passed()){
-                       break;
-                   }
-
-               }
-             }
-             case DOWN -> {
-                 BulletNode = FindTemp(row + 1,column);
-                 while(TempNode != null){
-                     row++;
-
-                     TempNode = FindTemp(row,column);
-                     if(TempNode == null){
-                         break;
-                     }
-                     BulletNode = MoveBullet(BulletNode,TempNode);
-                     Thread.sleep(70);
-                     if(BulletNode.GetIs_passed()){
-                         break;
-                     }
-                 }
-             }
-             case LEFT -> {
-                 BulletNode = FindTemp(row,column - 1);
-                 while(TempNode != null){
-                     column--;
-                     TempNode = FindTemp(row,column);
-                     if(TempNode == null){
-                         break;
-                     }
-                     BulletNode = MoveBullet(BulletNode,TempNode);
-                     Thread.sleep(70);
-                     if(BulletNode.GetIs_passed()){
-                         break;
-                     }
-                 }
-             }
-             case RIGHT -> {
-                 BulletNode = FindTemp(row,column  + 1);
-                 while(TempNode != null){
-                     column++;
-                     TempNode = FindTemp(row,column);
-                     if(TempNode == null){
-                         break;
-                     }
-                     BulletNode = MoveBullet(BulletNode,TempNode);
-                     Thread.sleep(70);
-                     if(BulletNode.GetIs_passed()){
-                         break;
-                     }
-
-                 }
-             }
-             default -> {
-
-             }
-         }
-        }
-
         public synchronized void color_the_path(Color color,String ID,Color TraceColor){
         for(int j = 0; j < nodes.size(); j++){
             if(nodes.get(j).GetIs_passed() && (nodes.get(j).GetColor() == TraceColor || nodes.get(j).GetColor() == color)){/*&& !nodes.get(j).GetIs_colored()*/
@@ -765,18 +692,7 @@ public class GameThings{
                 break;
         }
     }
-     public synchronized node MoveBullet(node BulletNode,node TempNode){
-        TempNode.setColor(Color.BLACK);
-        BulletNode.setColor(Color.WHITE);
-        BulletNode = TempNode;
-    return BulletNode;
-    }
 
-    public void SetBulletB(KeyEvent Direction,int BulletRow, int BulletColumn){
-    this.Direction = Direction;
-    this.BulletRow = BulletRow;
-    this.BulletColumn = BulletColumn;
-    }
     public synchronized void Kill(String ID){
         DeleteKeys.clear();
         for(Map.Entry <node,String> entry : Owner.entrySet()){
