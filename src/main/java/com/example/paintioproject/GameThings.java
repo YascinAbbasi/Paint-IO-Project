@@ -27,6 +27,7 @@ public class GameThings{
     private boolean is_grey = false;
     private boolean is_exists = false;
     private boolean is_found =false;
+    private boolean AmIAKiller = false;
     private int MaxRow = -1000000;
     private int MinRow = 1000000;
     private int MaxColumn = -1000000;
@@ -733,8 +734,11 @@ public class GameThings{
 
     public synchronized void ChecktoKill(node Player, String ID){
         if(Player.GetIs_passed() && Player.getOwnerID() != ID){
+            AmIaKiller(true);
             Kill(Player.getOwnerID());
             System.out.println("CHECK TO KILL CALLED");
+        }else{
+            AmIaKiller(false);
         }
     }
     public synchronized boolean AmIDead(String ID){
@@ -766,6 +770,11 @@ public class GameThings{
         SetScore(Score);
         return GetScore();
     }
+    public void AmIaKiller(boolean Killer){
+         AmIAKiller = Killer;
+    }
 
-
+    public boolean GetAmIAKiller() {
+        return AmIAKiller;
+    }
 }

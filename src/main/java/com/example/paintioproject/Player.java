@@ -3,18 +3,21 @@ package com.example.paintioproject;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Objects;
 
-public class Player extends GameThings {
+public class Player extends GameThings  {
 
     private String PlayerID;
     private Color PlayerColor;
     private Color TraceColor;
     private int PlayerScore = 0;
     private static boolean AlreadyColored = true;
+    private MediaPlayer SoundEffectPlayer;
+    private File file = new File();
 
 
     Rectangle rect = new Rectangle(25, 25);// GetPlayerColor());
@@ -32,7 +35,12 @@ public class Player extends GameThings {
                     if (nodes.get(j).GetRow() == i && nodes.get(j).GetColumn() == k){
                         gp.add(nodes.get(j),column++,row);
                         if(row == 12 && column == 13){
-                            ChecktoKill(nodes.get(j),"PLAYER1"); //@@@@@@@@@@@@@@
+                            if(GetAmIAKiller()){
+                                MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                                SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                                SoundEffectPlayer.play();
+                            }
+                            ChecktoKill(nodes.get(j),"PLAYER1");//@@@@@@@@@@@@@@
                             PlayerScore = CheckScore("PLAYER1");
                             System.out.println("Player Score : " + PlayerScore);
                         }
@@ -55,6 +63,9 @@ public class Player extends GameThings {
                                // AlreadyColored = true;
                                 color_the_path(PlayerColor,"PLAYER1",TraceColor);
                                 ColorArea(PlayerColor, "PLAYER1");
+                            MediaPlayerManager.loadSoundEffect(file.ColoringEffect);
+                            SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                            SoundEffectPlayer.play();
                                 AlreadyColored = true;
                            // }
                         }
@@ -130,5 +141,6 @@ public class Player extends GameThings {
     public int GetPlayerScore() {
         return PlayerScore;
     }
+
 }
 

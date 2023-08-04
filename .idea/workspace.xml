@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="Adding Files and bulletB">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameOverController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PlayerData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,22 +55,25 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/JAVA/Paint-IO-Project/src/main/resources/images&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JAVA/javafx-media-20.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\JAVA\Paint-IO-Project\src\main\resources\AudioFiles\BackGroundMusic\SoundEffects" />
       <recent name="D:\JAVA\Paint-IO-Project\src\main\resources\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\JAVA\Paint-IO-Project\src\main\resources\AudioFiles\BackGroundMusic" />
       <recent name="D:\JAVA\Paint-IO-Project\src\main\resources\images" />
       <recent name="D:\JAVA\Paint-IO-Project\src\main\resources\com\example\paintioproject" />
       <recent name="D:\JAVA\Paint-IO-Project\src\main\java\Fxml" />
@@ -180,7 +183,11 @@
       <workItem from="1690982063619" duration="3243000" />
       <workItem from="1691030712068" duration="12595000" />
       <workItem from="1691061391800" duration="45000" />
-      <workItem from="1691061447985" duration="11307000" />
+      <workItem from="1691061447985" duration="11670000" />
+      <workItem from="1691118930990" duration="3858000" />
+      <workItem from="1691122803391" duration="2353000" />
+      <workItem from="1691125540190" duration="181000" />
+      <workItem from="1691125727025" duration="4587000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -438,7 +445,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690981642684</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements">
+      <option name="closed" value="true" />
+      <created>1691087837587</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1691087837587</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -488,7 +503,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="a few changes and most importantly adding nodes to gridpane" />
     <MESSAGE value="changing nodes" />
     <MESSAGE value="adding new nodes to gridpane" />
     <MESSAGE value="working on finding nodes" />
@@ -513,6 +527,7 @@
     <MESSAGE value="Adding score and a few changes" />
     <MESSAGE value="Adding bulletB" />
     <MESSAGE value="Adding Files and bulletB" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Files and bulletB" />
+    <MESSAGE value="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements" />
   </component>
 </project>

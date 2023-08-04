@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Random;
 
 
 public class GameController extends GameThings {
@@ -52,7 +55,10 @@ public class GameController extends GameThings {
     private KeyEvent HelpKeyEvent;
     private Long LastShootAttempt = 0L;
     private static final long COOLDOWN = 3000;
+    private MediaPlayer mediaplayer;
+    private MediaPlayer SoundEffectPlayer;
 
+    private File file = new File();
     private boolean AmiDead =false;
 
     public void setPlayer(Player player) {
@@ -103,6 +109,9 @@ public class GameController extends GameThings {
                         try {
                             ShootBulletA(HelpKeyEvent, row_move + 12, column_move + 12, player.GetPlayerColor(), player.GetTraceColor(), "PLAYER1");
                             BulletMAG--;
+                            MediaPlayerManager.loadSoundEffect(file.BelletAEffect);
+                            SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                            SoundEffectPlayer.play();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
@@ -118,6 +127,9 @@ public class GameController extends GameThings {
                             LastShootAttempt = CurrentTime;
                             BulletB.SetBullet(HelpKeyEvent, row_move + 12, column_move + 12, "PLAYER1");
                             BulletB.SetShootBullet(true);
+                            MediaPlayerManager.loadSoundEffect(file.BelletBEffect);
+                            SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                            SoundEffectPlayer.play();
                             //  BulletThread.start();
                             // player.SetNodes(gp, row_move, column_move, player.GetPlayerColor(), player.GetTraceColor());
                         }else{
@@ -225,6 +237,35 @@ public class GameController extends GameThings {
     public void Setplayerdata(PlayerData playerdata ){
         System.out.println(playerdata.getUsername());
         this.playerdata = playerdata;
+    }
+    public void SetMediaPlayer(MediaPlayer mediaplayer){
+        this.mediaplayer = mediaplayer;
+        Random Rand = new Random();
+        int random = Rand.nextInt(3);
+        switch (random){
+            case(0) ->{
+                MediaPlayerManager.StopPlaying();
+                MediaPlayerManager.loadMedia(file.Continue);
+                mediaplayer = MediaPlayerManager.getMediaPlayer();
+                mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
+                mediaplayer.play();
+
+            }
+            case(1) ->{
+                MediaPlayerManager.StopPlaying();
+                MediaPlayerManager.loadMedia(file.UpperCut);
+                mediaplayer = MediaPlayerManager.getMediaPlayer();
+                mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
+                mediaplayer.play();
+            }
+            case(2) -> {
+                MediaPlayerManager.StopPlaying();
+                MediaPlayerManager.loadMedia(file.Shoryuken);
+                mediaplayer = MediaPlayerManager.getMediaPlayer();
+                mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
+                mediaplayer.play();
+            }
+        }
     }
 }
 

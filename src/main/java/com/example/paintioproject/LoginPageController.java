@@ -13,11 +13,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class LoginPageController  implements Initializable, Serializable {
@@ -41,6 +44,8 @@ private TextField password;
     private File file = new File();
     private ArrayList <PlayerData> TempPlayers = new ArrayList<>();
     private String Username = "",Password = "";
+    private static boolean AlreadyPlayed = false;
+     private  MediaPlayer mediaplayer;
 
 
 
@@ -62,6 +67,7 @@ private TextField password;
                     Image image2 = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai (2).jpg");
                     gameModeController.GameModeImageView.setImage(image2);
                     gameModeController.Setplayerdata(TempPlayers.get(i));
+                    gameModeController.SetMediaPlayer(mediaplayer);
                     stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
                     scene = new Scene(GameModePage);
                     stage.setScene(scene);
@@ -106,6 +112,30 @@ private TextField password;
             LeaderBoardData += TempPlayers.get(i).getUsername() + "   " + TempPlayers.get(i).GetTopScore()+"\n";
         }
         LeaderBoardTextArea.setText(LeaderBoardData);
+        Random Rand = new Random();
+        int random = Rand.nextInt(2);
+        if(!AlreadyPlayed) {
+            switch (random) {
+                case (0) -> {
+                    MediaPlayerManager.loadMedia(file.Voyage);
+                     mediaplayer = MediaPlayerManager.getMediaPlayer();
+                    mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
+                    mediaplayer.play();
+                    AlreadyPlayed = true;
+                }
+                case (1) -> {
+                    MediaPlayerManager.loadMedia(file.NightShade);
+                     mediaplayer = MediaPlayerManager.getMediaPlayer();
+                    mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
+                    mediaplayer.play();
+                    AlreadyPlayed = true;
+                }
+            }
+        }
+       // MediaPlayerManager.loadMedia(file.NightShade);
+        //Media media = new Media(new java.io.File(file.Continue).toURI().toString());
+        //  MediaPlayer mediaplayer = MediaPlayerManager.getMediaPlayer();
+      //  mediaplayer.play();
     }
 
     public void ReadPlayer(String Path){

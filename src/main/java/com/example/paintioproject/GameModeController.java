@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -61,6 +62,7 @@ public class GameModeController implements Initializable {
     private int speed;
     private static int Botspeed = 100;
     private static int Botnumber = 1;
+    private  MediaPlayer mediaplayer;
     public void BackButton(ActionEvent e) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         root = loader.load();
@@ -129,9 +131,9 @@ public class GameModeController implements Initializable {
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
         gamecontroller.Setplayerdata(playerdata);// #$#$#$#$#$#$
+        gamecontroller.SetMediaPlayer(mediaplayer);
         gamecontroller.SetBullet(Bullet); ////@@@@@@@@@
     //    gamecontroller.SetBotPlayer(botplayer);
-
       //  gamecontroller.SetBotPlayers(BotManagers);
         //gamecontroller.SetBotPlayer2(botplayer2);
         RandomDirection();
@@ -366,5 +368,8 @@ public class GameModeController implements Initializable {
    public void Setplayerdata(PlayerData playerdata ){
         this.playerdata = playerdata;
         System.out.println(playerdata.getUsername());
+   }
+   public void SetMediaPlayer(MediaPlayer mediaplayer){
+       this.mediaplayer = mediaplayer;
    }
 }

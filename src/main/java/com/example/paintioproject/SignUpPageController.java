@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -35,6 +36,7 @@ public class SignUpPageController implements Serializable {
     private PlayerData TempPlayer;
 
     private String Username = "",Password = "";
+
 
 
 

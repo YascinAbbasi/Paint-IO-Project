@@ -269,7 +269,7 @@ public class BotManager extends GameThings implements Runnable {
         row_move = PlayerNode.GetRow();
         int x = 3;
         int y = 5;
-        RepairColor();
+       // RepairColor();
         while(true){
             switch (rand) {
                 case (0):  //UP
