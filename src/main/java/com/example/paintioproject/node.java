@@ -26,7 +26,7 @@ public class node extends Region {
     private boolean is_player = false;
     private boolean PreviousisPassed = false;
     private boolean PreviousisColored = false;
-    private boolean is_MainPlayer = false;
+    private boolean KillIt = true;
     private String OwnerID;
     private String PreviousOwnerID;
 
@@ -71,7 +71,7 @@ public class node extends Region {
         return AlreadyColored;
     }
 
-    public void setOwnerID(String ownerID) { //???????????????
+    public synchronized void setOwnerID(String ownerID) { //???????????????
         HasOwner = true;
         PreviousOwnerID = OwnerID;
         OwnerID = ownerID;
@@ -110,25 +110,25 @@ public class node extends Region {
         color = Color;
         requestLayout();
     }
-    public void ResettoPreviousColor(){
+    public synchronized void ResettoPreviousColor(){
        color = PreviousColor;
         requestLayout();
     }
     public Color GetColor(){
         return color;
     }
-    public void ResettoDefaultColor(){
+    public synchronized void ResettoDefaultColor(){
         color = DefaultColor;
         AlreadyColored = false;
         requestLayout();
     }
-    public void SetPrevious(){
+    public synchronized void SetPrevious(){
         PreviousColor = color;
         PreviousisColored = is_colored;
         PreviousisPassed = is_passed;
         PreviousOwnerID = OwnerID;
     }
-    public void ResetToPrevious(){
+    public synchronized void ResetToPrevious(){
         color = PreviousColor;
         is_colored = PreviousisColored;
         is_passed = false;
@@ -139,18 +139,21 @@ public class node extends Region {
         }
         requestLayout();
     }
-    public void ResetoDefault(){
+    public synchronized void ResetoDefault(){
         color = DefaultColor;
         is_colored = false;
         AlreadyColored = false;
         is_passed = false;
         OwnerID = null;
         HasOwner = false;
+        KillIt = true;
         requestLayout();
     }
+   public void SetKillIt(boolean KillIt){
+        this.KillIt = KillIt;
+   }
 
-
-
-
-
+    public boolean  GetKillIt() {
+        return KillIt;
+    }
 }

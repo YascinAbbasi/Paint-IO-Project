@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="01806ba3a57028ecce901560a935474a694c878d" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,6 +89,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PaintIoProject" />
+        <item itemvalue="Application.PaintIoProject" />
         <item itemvalue="Application.PaintIoProject" />
       </list>
     </recent_temporary>
@@ -187,7 +183,7 @@
       <workItem from="1691118930990" duration="3858000" />
       <workItem from="1691122803391" duration="2353000" />
       <workItem from="1691125540190" duration="181000" />
-      <workItem from="1691125727025" duration="4587000" />
+      <workItem from="1691125727025" duration="31709000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -453,7 +449,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691087837587</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )">
+      <option name="closed" value="true" />
+      <created>1691132175054</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1691132175054</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,6 +466,17 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="RECENT_FILTERS">
       <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
         <entry key="User">
           <value>
             <list>
@@ -490,7 +505,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -503,7 +518,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changing nodes" />
     <MESSAGE value="adding new nodes to gridpane" />
     <MESSAGE value="working on finding nodes" />
     <MESSAGE value="finishing the find node method" />
@@ -528,6 +542,7 @@
     <MESSAGE value="Adding bulletB" />
     <MESSAGE value="Adding Files and bulletB" />
     <MESSAGE value="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements" />
+    <MESSAGE value="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 package com.example.paintioproject;
 
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 public class Bullets extends GameThings implements Runnable {
@@ -9,6 +10,8 @@ public class Bullets extends GameThings implements Runnable {
     private static int BulletColumn;
     private String ShooterID;
     private volatile boolean ShootBullet = false;
+    private MediaPlayer SoundEffectPlayer;
+    private File file = new File();
 
 
     public Bullets(){
@@ -46,6 +49,9 @@ public class Bullets extends GameThings implements Runnable {
                         BulletNode = TempNode;
                         if(BulletNode.Getis_player()){
                             Kill(BulletNode.getOwnerID());
+                            MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                            SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                            SoundEffectPlayer.play();
                             System.out.println("KILL CALLED");
                             break;
                         }else{
@@ -90,6 +96,9 @@ public class Bullets extends GameThings implements Runnable {
                         BulletNode = TempNode;
                         if(BulletNode.Getis_player()){
                             Kill(BulletNode.getOwnerID());
+                            MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                            SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                            SoundEffectPlayer.play();
                             System.out.println("KILL CALLED");
                             break;
                         }else{
@@ -134,6 +143,9 @@ public class Bullets extends GameThings implements Runnable {
                         BulletNode = TempNode;
                         if(BulletNode.Getis_player()){
                             Kill(BulletNode.getOwnerID());
+                            MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                            SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                            SoundEffectPlayer.play();
                             System.out.println("KILL CALLED");
                             break;
                         }else{
@@ -176,6 +188,9 @@ public class Bullets extends GameThings implements Runnable {
                         BulletNode = TempNode;
                         if(BulletNode.Getis_player()){
                             Kill(BulletNode.getOwnerID());
+                            MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                            SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                            SoundEffectPlayer.play();
                             System.out.println("KILL CALLED");
                             break;
                         }else{

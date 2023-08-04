@@ -2,6 +2,7 @@ package com.example.paintioproject;
 
 
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -35,6 +36,8 @@ public class GameThings{
     private int BulletRow = 0;
     private int BulletColumn = 0;
     private static int Score;
+    private MediaPlayer SoundEffectPlayer;
+    private File file = new File();
 
 
 
@@ -250,7 +253,13 @@ public class GameThings{
                 }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
-                    ChecktoKill(toShootCheck.get(j),ID);
+                    if(toShootCheck.get(j).Getis_player()){
+                        Kill(toShootCheck.get(j).getOwnerID());
+                        MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                        SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                        SoundEffectPlayer.play();
+                    }
+                    //ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
             }
@@ -286,7 +295,13 @@ public class GameThings{
               }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
-                    ChecktoKill(toShootCheck.get(j),ID);
+                    if(toShootCheck.get(j).Getis_player()){
+                        Kill(toShootCheck.get(j).getOwnerID());
+                        MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                        SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                        SoundEffectPlayer.play();
+                    }
+                    //ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
               }
@@ -325,7 +340,13 @@ public class GameThings{
                 }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
-                    ChecktoKill(toShootCheck.get(j),ID);
+                   if(toShootCheck.get(j).Getis_player()){
+                       Kill(toShootCheck.get(j).getOwnerID());
+                       MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                       SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                       SoundEffectPlayer.play();
+                   }
+                    //ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
             }
@@ -363,7 +384,13 @@ public class GameThings{
                 }
                 color_the_path(color,ID,TraceColor);
                 for(int j = 0; j < toShootCheck.size();j++){
-                    ChecktoKill(toShootCheck.get(j),ID);
+                    if(toShootCheck.get(j).Getis_player()){
+                        Kill(toShootCheck.get(j).getOwnerID());
+                        MediaPlayerManager.loadSoundEffect(file.DeathEffect);
+                        SoundEffectPlayer = MediaPlayerManager.getSoundEffectPlayer();
+                        SoundEffectPlayer.play();
+                    }
+                    //ChecktoKill(toShootCheck.get(j),ID);
                     toShootCheck.get(j).setColor(color);
                 }
             }
@@ -694,7 +721,7 @@ public class GameThings{
         }
     }
 
-    public synchronized void Kill(String ID){
+   /* public synchronized void Kill(String ID){
         DeleteKeys.clear();
         for(Map.Entry <node,String> entry : Owner.entrySet()){
             if(entry.getValue() == ID){
@@ -702,8 +729,13 @@ public class GameThings{
             }
         }
         for(node delete : DeleteKeys){
-            Owner.remove(delete);
-            delete.ResetoDefault();
+           // if(!Objects.equals(delete.getOwnerID(), Owner.get(delete))){
+                Owner.remove(delete);
+                delete.ResetoDefault();
+           // }/*else {
+            //    Owner.remove(delete);
+               // delete.ResetoDefault();
+           // }
           //  delete.ResetOwnerID();
         }
         for(int j = 0; j < nodes.size();j++){
@@ -730,10 +762,37 @@ public class GameThings{
              }
         }
 
+    }*/
+    public synchronized void Kill(String ID){
+        for(int j = 0 ; j <nodes.size();j++){
+            if(Objects.equals(Owner.get(nodes.get(j)), ID)){
+                if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() != ID){ ///////
+                    nodes.get(j).SetIs_colored(false);
+                    nodes.get(j).SetPrevious();
+                }else{
+                    nodes.get(j).ResetoDefault();
+                }
+                Owner.remove(nodes.get(j));
+            }
+            if(nodes.get(j).GetIs_passed() && nodes.get(j).GetIs_colored() && nodes.get(j).getOwnerID() == ID){
+                nodes.get(j).ResetToPrevious();
+            }else if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
+                nodes.get(j).ResetoDefault();
+            }
+            if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID &&nodes.get(j).GetIs_colored()){
+                // nodes.get(j).ResetToPrevious();
+                nodes.get(j).ResetoDefault();
+
+            }
+            else if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
+                // nodes.get(j).ResetoDefault();
+                nodes.get(j).ResetToPrevious();
+            }
+        }
     }
 
     public synchronized void ChecktoKill(node Player, String ID){
-        if(Player.GetIs_passed() && Player.getOwnerID() != ID){
+        if(Player.GetIs_passed() && Player.getOwnerID() != ID && Player.GetKillIt()){
             AmIaKiller(true);
             Kill(Player.getOwnerID());
             System.out.println("CHECK TO KILL CALLED");
