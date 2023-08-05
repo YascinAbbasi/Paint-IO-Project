@@ -5,7 +5,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 
-public class MediaPlayerManager {
+public class MediaPlayerManager { // this class handles the media and sound effect player
     private static MediaPlayer mediaPlayer;
     private static MediaPlayer SoundEffectPlayer;
 

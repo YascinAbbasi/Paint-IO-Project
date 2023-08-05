@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Paint-IO-Project:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment=" fixing some final bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameOverController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/MediaPlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/MediaPlayerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PaintIoProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PaintIoProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PlayerData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Files/PlayerData" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Files/PlayerData" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,12 +67,12 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/JAVA/javafx-media-20.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JAVA/JAVAFX/javafx-sdk-20.0.1/bin/vcruntime140_1.dll&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
@@ -73,7 +91,7 @@
       <recent name="D:\JAVA\Paint-IO-Project\src\main\java\Fxml" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.PaintIoProject">
     <configuration name="PaintIoProject" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.paintioproject.PaintIoProject" />
       <module name="Paint-IO-Project" />
@@ -87,9 +105,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Paint-IO-Project.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Paint_IO_Project_jar/Paint-IO-Project.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.PaintIoProject" />
+        <item itemvalue="JAR Application.Paint-IO-Project.jar" />
         <item itemvalue="Application.PaintIoProject" />
         <item itemvalue="Application.PaintIoProject" />
       </list>
@@ -183,7 +206,14 @@
       <workItem from="1691118930990" duration="3858000" />
       <workItem from="1691122803391" duration="2353000" />
       <workItem from="1691125540190" duration="181000" />
-      <workItem from="1691125727025" duration="31709000" />
+      <workItem from="1691125727025" duration="33207000" />
+      <workItem from="1691172589834" duration="266000" />
+      <workItem from="1691173232651" duration="263000" />
+      <workItem from="1691174865736" duration="1322000" />
+      <workItem from="1691205492969" duration="13512000" />
+      <workItem from="1691227372014" duration="16000" />
+      <workItem from="1691227550987" duration="4523000" />
+      <workItem from="1691234041358" duration="7172000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -457,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691132175054</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary=" fixing some final bugs">
+      <option name="closed" value="true" />
+      <created>1691171618128</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1691171618128</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +556,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding new nodes to gridpane" />
     <MESSAGE value="working on finding nodes" />
     <MESSAGE value="finishing the find node method" />
     <MESSAGE value="finally making an infinite map by relocating nodes" />
@@ -543,6 +580,7 @@
     <MESSAGE value="Adding Files and bulletB" />
     <MESSAGE value="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements" />
     <MESSAGE value="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )" />
+    <MESSAGE value=" fixing some final bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value=" fixing some final bugs" />
   </component>
 </project>

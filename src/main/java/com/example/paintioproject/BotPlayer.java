@@ -2,22 +2,13 @@ package com.example.paintioproject;
 
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
 
 public class BotPlayer  {
-
-    private Color color;
+         //This class holds the data of each robot, and we utilize the BotManager class to populate this data.
 
     private Color BotColor;
     private Color AreaColor;
     private Color TraceColor;
-    private boolean ID_in_use = false;
-    private boolean Color_in_use = false;
-    private boolean is_empty = false;
-    private node PlayerNode;
-    private ArrayList <node> tempnodes = new ArrayList<>();
-     private int row_move = 0;
-     private int column_move = 0;
 
     private String BotID;
    private Color[] Colors = {Color.RED,Color.BLUE,Color.GREEN,Color.PURPLE};

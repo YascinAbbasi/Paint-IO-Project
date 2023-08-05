@@ -5,6 +5,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 public class Bullets extends GameThings implements Runnable {
+     //This class holds the data of a single bullet (bullet b), and whenever we shoot, we reset the bullet data with the information of a new bullet.
+    // in here we have a thread that is waiting for a bullet to shoot and after shooting the bullet it will wait for the next bullet to shoot
     private KeyEvent Direction;
     private static int BulletRow;
     private static int BulletColumn;
@@ -21,6 +23,10 @@ public class Bullets extends GameThings implements Runnable {
 
 
     public void ShootBulletB() throws InterruptedException {
+                   //In this method, we shoot bullet b and create an illusion of movement by switching the essence of the bullet node.
+                   //(same as moving the playerNode)
+                    // This is how it works: In each direction, we first set the bullet node's position and then begin moving it until
+        // the bullet hits the enemy or there are no more nodes available for the bullet to occupy (assuming we haven't expanded our infinite map that far yet).
         node BulletNode = null;
          node TempNode = null;
         Color Help;
@@ -221,12 +227,14 @@ public class Bullets extends GameThings implements Runnable {
         this.ShootBullet = ShootBullet;
     }
     public void SetBullet(KeyEvent Direction,int BulletRow,int BulletColumn,String ShooterID ){
+                                                        //The data of the bullet is set in this part of the code.
         this.Direction = Direction;
         this.BulletRow = BulletRow;
         this.BulletColumn = BulletColumn;
         this.ShooterID = ShooterID;
     }
     public node SetFirstBullet(KeyEvent Direction,int row, int column){
+        // We utilize this function to set the initial position of the bullet.
         node TempBullet = null;
         switch (Direction.getCode()){
             case UP ->{
@@ -258,6 +266,7 @@ public class Bullets extends GameThings implements Runnable {
 
     @Override
     public void run() {
+        // This is the implemented run method that the thread uses. After the shooting ends, the thread will wait for permission to shoot the new bullet
         while (true) {
             if (ShootBullet) {
                 System.out.println("THREAD IS SHOOOOOOOTING THE BULLET!!!");

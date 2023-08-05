@@ -24,7 +24,8 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class LoginPageController  implements Initializable, Serializable {
-    private static final long serialVersionUID = 1L;
+    //This class handles user login and the leaderboard
+  private static final long serialVersionUID = 1L;
     private Parent GameModePage;
     private Parent SignUpPage;
     private Scene scene;
@@ -49,7 +50,7 @@ private TextField password;
 
 
 
-    public void LoginButton(ActionEvent e)throws IOException{
+    public void LoginButton(ActionEvent e)throws IOException{ //This method checks if there is a user with the  entered username and password
         ReadPlayer(file.getPlayerDataPath());
         Username = username.getText();
         Password = password.getText();
@@ -77,20 +78,8 @@ private TextField password;
                 }
             }
         }
-
-
-
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("GameModePage.fxml"));
-        GameModePage = loader.load();
-        GameModeController gameModeController = loader.getController();
-        Image image2 = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai (2).jpg");
-        gameModeController.GameModeImageView.setImage(image2);
-        stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(GameModePage);
-        stage.setScene(scene);*/
-
     }
-    public void SignUpButton(ActionEvent e1)throws IOException{
+    public void SignUpButton(ActionEvent e1)throws IOException{ //switch to signup page scene
         FXMLLoader loader2 = new FXMLLoader(getClass().getResource("SignUpPage.fxml"));
         SignUpPage = loader2.load();
         SignUpPageController signUpPage =loader2.getController();
@@ -114,7 +103,7 @@ private TextField password;
         LeaderBoardTextArea.setText(LeaderBoardData);
         Random Rand = new Random();
         int random = Rand.nextInt(2);
-        if(!AlreadyPlayed) {
+        if(!AlreadyPlayed) {            //"This part handles the menu music by playing these two songs randomly
             switch (random) {
                 case (0) -> {
                     MediaPlayerManager.loadMedia(file.Voyage);
@@ -132,13 +121,9 @@ private TextField password;
                 }
             }
         }
-       // MediaPlayerManager.loadMedia(file.NightShade);
-        //Media media = new Media(new java.io.File(file.Continue).toURI().toString());
-        //  MediaPlayer mediaplayer = MediaPlayerManager.getMediaPlayer();
-      //  mediaplayer.play();
     }
 
-    public void ReadPlayer(String Path){
+    public void ReadPlayer(String Path){ //reading the users from file
         try {
             FileInputStream fis = new FileInputStream(Path);
             ObjectInputStream ois = new ObjectInputStream(fis);

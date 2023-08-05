@@ -1,14 +1,12 @@
 package com.example.paintioproject;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -25,6 +23,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class GameModeController implements Initializable {
+        //In this class, we set the game requirements such as the player's color, speed, difficulty, and the number of robots
     private Parent root;
     private Parent GamePage;
     private Scene scene;
@@ -43,12 +42,6 @@ public class GameModeController implements Initializable {
     private ChoiceBox <String> BotNumberChoiceBox;
     @FXML
     private Label ErrorLabel;
-   /* BotPlayer Bot1 = new BotPlayer();
-    BotPlayer Bot2 = new BotPlayer();
-    BotPlayer Bot3 = new BotPlayer();
-    BotManager BotManager1 = new BotManager(Bot1);
-    BotManager BotManager2 = new BotManager(Bot2);
-    BotManager BotManager3 = new BotManager(Bot3);*/
     private ArrayList <BotManager> BotManagers = new ArrayList<>();
     private String[] Colors ={"RED","BLUE","GREEN","PURPLE"};
     private String[] Speed = {"SLOW","NORMAL","FAST"};
@@ -56,14 +49,13 @@ public class GameModeController implements Initializable {
     private String[] Difficulty = {"EASY","NORMAL","HARD"};
     private String[] BotNumber = {"1","2","3"};
     private String difficulty;
-    private BotPlayer bt ;
     private Bullets Bullet = new Bullets();
     private PlayerData playerdata;
     private int speed;
     private static int Botspeed = 100;
     private static int Botnumber = 1;
     private  MediaPlayer mediaplayer;
-    public void BackButton(ActionEvent e) throws IOException{
+    public void BackButton(ActionEvent e) throws IOException{ //switch to loginpage method
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         root = loader.load();
         stage =  (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -71,18 +63,17 @@ public class GameModeController implements Initializable {
         stage.setScene(scene);
     }
     public void StartButton(ActionEvent e1) throws IOException, InterruptedException {
+        //This method fills the required information of the game and also handles the switchScene to the game Scene.
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("testGamePage.fxml"));
         GamePage = loader.load();
         stage =  (Stage) ((Node) e1.getSource()).getScene().getWindow();
         scene = new Scene(GamePage);
         GameController gamecontroller = loader.getController();
         Player player = new Player();
-        BotPlayer Botplayer = new BotPlayer();
-        BotPlayer Botplayer2 = new  BotPlayer();
-        BotManager botplayer2 = new BotManager(Botplayer2);
-        BotManager botplayer = new BotManager(Botplayer);
         gamecontroller.firstnodehandel(Getplayercolor());
         SetPlayer(player);
+                                                       //setting the bots
         switch(Botnumber){
             case(1) -> {
                 BotPlayer Bot1 = new BotPlayer();
@@ -117,34 +108,15 @@ public class GameModeController implements Initializable {
 
             }
         }
-       // player.SetPlayerColor(Getplayercolor());
-       /* BotManager.AlreadyTakenColors.add(Getplayercolor());
-        botplayer.SetBotColor();
-        botplayer.AddPlayerID(3);
-        botplayer.SetBotID();*/
-       // player.SetDefaultArea(Getplayercolor());
-       /* botplayer.SetDefaultBotArea();
-        botplayer.SetPlayer();
-        botplayer.setSpeed(400);*/
-      //  SetBot(botplayer);
-       // SetBot(botplayer2);
+                                    //set the player and game requirements
         gamecontroller.Setspeed(Getspeed());
         gamecontroller.setPlayer(player);
-        gamecontroller.Setplayerdata(playerdata);// #$#$#$#$#$#$
+        gamecontroller.Setplayerdata(playerdata);
         gamecontroller.SetMediaPlayer(mediaplayer);
-        gamecontroller.SetBullet(Bullet); ////@@@@@@@@@
-    //    gamecontroller.SetBotPlayer(botplayer);
-      //  gamecontroller.SetBotPlayers(BotManagers);
-        //gamecontroller.SetBotPlayer2(botplayer2);
+        gamecontroller.SetBullet(Bullet);
         RandomDirection();
         gamecontroller.SetLastKeyEvent(lastKeyEvent);
         gamecontroller.gameLoop.start();
-        /*gamecontroller.SetPlayerColor(Getplayercolor());
-        gamecontroller.SetTakenColors(Getplayercolor());
-        gamecontroller.SetDefaultArea();
-        gamecontroller.AddPlayerID(3);
-        bt = new BotPlayer();
-        gamecontroller.AddBot(bt);*/
         scene.setOnKeyPressed(event -> {
 
             try {
@@ -156,7 +128,7 @@ public class GameModeController implements Initializable {
         });
         stage.setScene(scene);
     }
-    public void setplayercolor(ActionEvent event){
+    public void setplayercolor(ActionEvent event){ //setting the player's color
         switch(ColorChoiceBox.getValue()){
             case("RED"):
                 playercolor = Color.RED;
@@ -176,7 +148,7 @@ public class GameModeController implements Initializable {
         }
     }
 
-    public void SetGameSpeed(ActionEvent event2){
+    public void SetGameSpeed(ActionEvent event2){      // setting the game speed
         switch (SpeedChoiceBox.getValue()){
             case("SLOW"):
                 speed = 200;
@@ -215,7 +187,7 @@ public class GameModeController implements Initializable {
         BotNumberChoiceBox.getItems().addAll(BotNumber);
         BotNumberChoiceBox.setOnAction(this::ChooseBotNumber);
     }
-    public void  RandomDirection(){
+    public void  RandomDirection(){     //this method gives a random direction to player at the beginning
         Random Rand = new Random();
         int rand = Rand.nextInt(4);
         switch(rand){
@@ -282,25 +254,22 @@ public class GameModeController implements Initializable {
         }
     }
 
-    public void SetPlayer( Player player){
+    public void SetPlayer( Player player){   //setting player
         player.SetPlayerColor(Getplayercolor());
         player.SetDefaultArea(Getplayercolor());
     }
-    public void SetBot(BotManager botmanager) throws InterruptedException {
+    public void SetBot(BotManager botmanager) throws InterruptedException { //setting bots
         BotManager.AlreadyTakenColors.add(Getplayercolor());
         botmanager.SetBotColor();
         botmanager.AddPlayerID(3);
         botmanager.SetBotID();
         botmanager.SetDefaultBotArea();
-       // botmanager.Kill(botmanager.GETbotID());
-       // botmanager.ReGenerate(true);
-      //  botmanager.SetPlayer();
         botmanager.setDifficulty(difficulty);
         botmanager.setSpeed(Botspeed);
          botmanager.Kill(botmanager.GETbotID());
          botmanager.ReGenerate(true);
     }
-    public void SetDifficulty(ActionEvent event3){
+    public void SetDifficulty(ActionEvent event3){   //setting difficulty
         switch(DifficultyLevelChoiceBox.getValue()){
             case("EASY"):
 
@@ -320,56 +289,29 @@ public class GameModeController implements Initializable {
                 break;
         }
     }
-   public void ChooseBotNumber(ActionEvent event4){
+   public void ChooseBotNumber(ActionEvent event4){  //setting the number of robots
         BotManagers.clear();
         switch (BotNumberChoiceBox.getValue()){
             case("1") -> {
                Botnumber = 1;
-                /* BotPlayer Bot1 = new BotPlayer();
-                BotManager BotManager1 = new BotManager(Bot1);
-                SetBot(BotManager1);
-                BotManagers.add(BotManager1);*/
             }
 
             case ("2") -> {
                 Botnumber = 2;
-              /*  BotPlayer Bot1 = new BotPlayer();
-                BotPlayer Bot2 = new BotPlayer();
-                BotManager BotManager1 = new BotManager(Bot1);
-                BotManager BotManager2 = new BotManager(Bot2);
-                SetBot(BotManager1);
-                SetBot(BotManager2);
-                BotManagers.add(BotManager1);
-                BotManagers.add(BotManager2);*/
-
             }
             case("3") ->{
                 Botnumber = 3;
-               /* BotPlayer Bot1 = new BotPlayer();
-                BotPlayer Bot2 = new BotPlayer();
-                BotPlayer Bot3 = new BotPlayer();
-                BotManager BotManager1 = new BotManager(Bot1);
-                BotManager BotManager2 = new BotManager(Bot2);
-                BotManager BotManager3 = new BotManager(Bot3);
-                SetBot(BotManager1);
-                SetBot(BotManager2);
-                SetBot(BotManager3);
-                BotManagers.add(BotManager1);
-                BotManagers.add(BotManager2);
-                BotManagers.add(BotManager3);*/
             }
-
-
         }
    }
    public void SetBotSpeed(int Botspeed){
         this.Botspeed = Botspeed;
    }
-   public void Setplayerdata(PlayerData playerdata ){
+   public void Setplayerdata(PlayerData playerdata ){   //This part sends the logged-in user object to the game to store their score
         this.playerdata = playerdata;
         System.out.println(playerdata.getUsername());
    }
    public void SetMediaPlayer(MediaPlayer mediaplayer){
        this.mediaplayer = mediaplayer;
-   }
+   } //sending the media player to the game class
 }

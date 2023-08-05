@@ -3,6 +3,7 @@ package com.example.paintioproject;
 import java.io.*;
 
 public class File implements Serializable {
+    //in this class we hold the location of audio and  user files  and also the write function is defined here.
     private static final long serialVersionUID = 1L;
 
     private String PlayerDataPath = "src/main/resources/Files/PlayerData";

@@ -10,6 +10,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class node extends Region {
+    //This class holds the data of the game elements, which are called Nodes.
+    // Everything in the game and the game algorithm is built using these Nodes
+    // All the variables and methods below are used to create, change, and reset the essence of the nodes
    private int x = 25;
    private   int y = 25;
     private int row;

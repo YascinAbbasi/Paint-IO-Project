@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PlayerData implements Serializable {
+    //this class holds the data of the user
     private static final long serialVersionUID = 1L;
-    private  String PlayerID;
     private int Score;
     private int TopScore;
    private String username;
@@ -18,9 +18,7 @@ public class PlayerData implements Serializable {
    }
 
 
-    public void setPlayerID(String playerID) {
-        PlayerID = playerID;
-    }
+
 
     public void setScore(int score) {
         Score = score;
@@ -28,10 +26,6 @@ public class PlayerData implements Serializable {
 
     public int getScore() {
         return Score;
-    }
-
-    public String getPlayerID() {
-        return PlayerID;
     }
 
     public void setpassword(String password) {
