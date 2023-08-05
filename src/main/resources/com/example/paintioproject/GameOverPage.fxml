@@ -24,6 +24,6 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <Button layoutX="241.0" layoutY="461.0" mnemonicParsing="false" onAction="#ContinueButton" prefHeight="35.0" prefWidth="143.0" text="Continue" />
+      <Button layoutX="241.0" layoutY="461.0" mnemonicParsing="false" onAction="#ExitButton" prefHeight="35.0" prefWidth="143.0" text="Exit" />
    </children>
 </AnchorPane>

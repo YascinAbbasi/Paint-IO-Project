@@ -9,25 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment=" fixing some final bugs">
+    <list default="true" id="569f7c93-f0a1-4cc7-b99c-7130e0eb9fc7" name="Changes" comment="//Adding discription and cleaning the code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/BotPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Bullets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/File.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameModeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameOverController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/GameThings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/LoginPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/MediaPlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/MediaPlayerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/NodeManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PaintIoProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PaintIoProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/PlayerData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/SignUpPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/paintioproject/node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Files/PlayerData" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Files/PlayerData" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GameOverPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/paintioproject/GameOverPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +202,7 @@
       <workItem from="1691205492969" duration="13512000" />
       <workItem from="1691227372014" duration="16000" />
       <workItem from="1691227550987" duration="4523000" />
-      <workItem from="1691234041358" duration="7172000" />
+      <workItem from="1691234041358" duration="11157000" />
     </task>
     <task id="LOCAL-00001" summary="checking the git connection">
       <option name="closed" value="true" />
@@ -495,7 +484,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691171618128</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="//Adding discription and cleaning the code">
+      <option name="closed" value="true" />
+      <created>1691242368972</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1691242368972</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,7 +553,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working on finding nodes" />
     <MESSAGE value="finishing the find node method" />
     <MESSAGE value="finally making an infinite map by relocating nodes" />
     <MESSAGE value="saving the path" />
@@ -581,6 +577,7 @@
     <MESSAGE value="adding score and user to fx Scenes &amp; finishing bullet B &amp; few improvements" />
     <MESSAGE value="Adding backGround Music And SoundEffects (all the pictures and audio files are  non-copyrighted files )" />
     <MESSAGE value=" fixing some final bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value=" fixing some final bugs" />
+    <MESSAGE value="//Adding discription and cleaning the code" />
+    <option name="LAST_COMMIT_MESSAGE" value="//Adding discription and cleaning the code" />
   </component>
 </project>

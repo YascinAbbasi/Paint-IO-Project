@@ -30,6 +30,7 @@ public class node extends Region {
     private boolean PreviousisPassed = false;
     private boolean PreviousisColored = false;
     private boolean KillIt = true;
+    private boolean is_DefaultArea = false;
     private String OwnerID;
     private String PreviousOwnerID;
 
@@ -136,6 +137,7 @@ public class node extends Region {
         is_colored = PreviousisColored;
         is_passed = false;
         is_player = false;
+        is_DefaultArea = false;
         OwnerID = PreviousOwnerID;
         if(OwnerID == null){
             HasOwner = false;
@@ -149,6 +151,7 @@ public class node extends Region {
         is_passed = false;
         OwnerID = null;
         HasOwner = false;
+        is_DefaultArea = false;
         KillIt = true;
         requestLayout();
     }
@@ -158,5 +161,12 @@ public class node extends Region {
 
     public boolean  GetKillIt() {
         return KillIt;
+    }
+    public void SetIs_DefaultArea(boolean is_DefaultArea){
+        this.is_DefaultArea = is_DefaultArea;
+    }
+
+    public boolean GetIs_DefaultArea() {
+        return is_DefaultArea;
     }
 }

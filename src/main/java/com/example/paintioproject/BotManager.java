@@ -163,6 +163,7 @@ public class BotManager extends GameThings implements Runnable { //this class ha
                   for(int j = 0; j < tempnodes.size();j++) {
                       tempnodes.get(j).setColor(Bot.GetAreaColor());
                       tempnodes.get(j).SetIs_colored(true);
+                      tempnodes.get(j).SetIs_DefaultArea(true);
                       tempnodes.get(j).SetPrevious();
                       Owner.put(tempnodes.get(j), Bot.GetBotID());
                   }
@@ -360,9 +361,10 @@ public class BotManager extends GameThings implements Runnable { //this class ha
 
 
         for (int j = 0; j < nodes.size(); j++) {
-            if (Objects.equals(Owner.get(nodes.get(j)), Bot.GetBotID())) {
+            if (Objects.equals(Owner.get(nodes.get(j)), Bot.GetBotID()) && nodes.get(j).GetIs_DefaultArea()) {
                 nodes.get(j).setColor(Bot.GetBOTColor());
                 nodes.get(j).SetIs_player(true);
+                nodes.get(j).SetIs_DefaultArea(false);
                 PlayerNode = nodes.get(j);
                 SetPlayerCordinates_C(PlayerNode.GetColumn());
                 SetPlayerCordinates_R(PlayerNode.GetRow());

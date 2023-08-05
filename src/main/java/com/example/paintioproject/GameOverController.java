@@ -23,7 +23,7 @@ public class GameOverController implements Serializable {
     private PlayerData playerdata;
 
 
-    public void ContinueButton(){        //saving the player score and comparing it with the user's top score
+    public void ExitButton(){        //saving the player score and comparing it with the user's top score
         ReadPlayer(file.getPlayerDataPath());
         FindPlayer(playerdata);
         TempPlayers.get(PlayerNum).Scores.add(Score);

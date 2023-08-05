@@ -52,6 +52,7 @@ public class GameController extends GameThings {
      private int row_move = 0;
     private int column_move = 0;
     private int speed;
+    private static int BotNumber= 0;
     private int  BulletMAG = 2;
     private PlayerData playerdata;
     private KeyEvent lastKeyEvent;
@@ -73,17 +74,20 @@ public class GameController extends GameThings {
         botplayer = Botplayer;
         thread = new Thread(botplayer);
         thread.start();
+        BotNumber++;
     }
     public void SetBotPlayer2(BotManager Botplayer2){
         botplayer2 = Botplayer2;
         thread2 = new Thread(botplayer2);
         thread2.start();
+        BotNumber++;
+
     }
     public void SetBotPlayer3(BotManager Botplayer3){
         botplayer3 = Botplayer3;
         thread3 = new Thread(botplayer3);
         thread3.start();
-
+        BotNumber++;
     }
     AnimationTimer gameLoop = new AnimationTimer() { //BEMON OC
         @Override
@@ -222,6 +226,31 @@ public class GameController extends GameThings {
         root = loader.load();
         Image image = new Image("file:src/main/resources/images/abstract-multi-colored-wave-pattern-shiny-flowing-modern-generated-by-ai (1)GameOver.jpg");
         GameOverController gameOverController = loader.getController();
+        BulletThread.interrupt();
+        BulletThread = null;
+        switch (BotNumber){
+            case(1) ->{
+                thread.interrupt();
+                thread = null;
+
+
+            }
+            case(2) ->{
+                thread.interrupt();
+                thread = null;
+                thread2.interrupt();
+                thread2= null;
+
+            }
+            case(3) ->{
+                thread.interrupt();
+                thread = null;
+                thread2.interrupt();
+                thread2 = null;
+                thread3.interrupt();
+                thread3 = null;
+            }
+        }
         gameOverController.GameOverImageView.setImage(image);
         gameOverController.Setplayerdata(playerdata);
         gameOverController.SetScoreLabel(player.GetPlayerScore());
