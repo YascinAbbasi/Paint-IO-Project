@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Player extends GameThings  {
     //this class holds the player data and some method that is only used by the main player
 
-    private String PlayerID;
+
     private Color PlayerColor;
     private Color TraceColor;
     private int PlayerScore = 0;

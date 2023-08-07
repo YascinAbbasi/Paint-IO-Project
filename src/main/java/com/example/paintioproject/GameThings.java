@@ -19,13 +19,13 @@ public class GameThings{
     private  ArrayList <node> toCheck = new ArrayList<>();
     private  ArrayList <node> toColor = new ArrayList<>();
     private  HashSet<node> toRemove = new HashSet<>();
-    private static CopyOnWriteArrayList <node> DeleteKeys = new CopyOnWriteArrayList<>();
+
      public ArrayList  <node> TEMPNODES = new ArrayList<>();
     public ArrayList<node> toShootCheck = new ArrayList<>();
     private  node tempnode;
     private node Helptempnode;
-    Rectangle rect = new Rectangle(25, 25);// GetPlayerColor());
-    private KeyEvent Direction;
+    Rectangle rect = new Rectangle(25, 25);
+
 
     private boolean is_grey = false;
     private boolean is_exists = false;
@@ -35,8 +35,7 @@ public class GameThings{
     private int MinRow = 1000000;
     private int MaxColumn = -1000000;
     private int MinColumn = 1000000;
-    private int BulletRow = 0;
-    private int BulletColumn = 0;
+
     private static int Score;
     private MediaPlayer SoundEffectPlayer;
     private File file = new File();
@@ -489,10 +488,8 @@ public class GameThings{
 
                                 }
                             }
-                            //toRemove.add(tempnode);
                         } else {
                             toCheckArea(tempnode, "UP", i, j, ID);
-                            //toCheck.add(tempnode);
                         }
                     } else {
                         toCheck.add(tempnode);
@@ -505,13 +502,13 @@ public class GameThings{
         for (int i = MaxRow; i >= MinRow; i--) { //DOWN check
             for (int j = MaxColumn; j >= MinColumn; j--) {
                 tempnode = FindtoColorTemp(i, j);
-                if (tempnode != null) {/////////////
+                if (tempnode != null) {
                     if (!tempnode.GetIs_colored() || (tempnode.GetIs_colored() && !Objects.equals(Owner.get(tempnode), ID))) {
                         is_found = Checkneighbour(i + 1, j);
                         if (!is_found) {
                             for (int n = j; n >= MinColumn; n--) {
                                 tempnode = FindtoColorTemp(i, n);
-                                if (tempnode != null) { ///////////////////
+                                if (tempnode != null) {
                                     if (tempnode.GetIs_colored() && Objects.equals(Owner.get(tempnode), ID)) {
                                         break;
                                     } else {
@@ -519,10 +516,10 @@ public class GameThings{
                                     }
                                 }
                             }
-                            //toRemove.add(tempnode);
+
                         } else {
                             toCheckArea(tempnode, "DOWN", i, j, ID);
-                            //toCheck.add(tempnode);
+
                         }
                     } else {
                         toCheck.add(tempnode);
@@ -549,10 +546,10 @@ public class GameThings{
                                     }
                                 }
                             }
-                            // toRemove.add(tempnode);
+
                         } else {
                             toCheckArea(tempnode, "LEFT", i, j, ID);
-                            // toCheck.add(tempnode);
+
                         }
 
 
@@ -580,10 +577,10 @@ public class GameThings{
                                     }
                                 }
                             }
-                            //toRemove.add(tempnode);
+
                         } else {
                             toCheckArea(tempnode, "RIGHT", i, j, ID);
-                            //toCheck.add(tempnode);
+
                         }
                     } else {
                         toCheck.add(tempnode);
@@ -729,48 +726,6 @@ public class GameThings{
         }
     }
 
-   /* public synchronized void Kill(String ID){
-        DeleteKeys.clear();
-        for(Map.Entry <node,String> entry : Owner.entrySet()){
-            if(entry.getValue() == ID){
-                DeleteKeys.add(entry.getKey());
-            }
-        }
-        for(node delete : DeleteKeys){
-           // if(!Objects.equals(delete.getOwnerID(), Owner.get(delete))){
-                Owner.remove(delete);
-                delete.ResetoDefault();
-           // }/*else {
-            //    Owner.remove(delete);
-               // delete.ResetoDefault();
-           // }
-          //  delete.ResetOwnerID();
-        }
-        for(int j = 0; j < nodes.size();j++){
-            if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && nodes.get(j).GetIs_colored()){
-
-                nodes.get(j).ResetToPrevious();
-               // nodes.get(j).ResetToPrevious();
-              // nodes.get(j).ResetOwnerID();//
-            }
-            else if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
-
-                nodes.get(j).ResetoDefault();
-                //nodes.get(j).ResetToPrevious();
-               // nodes.get(j).ResetOwnerID();
-            }
-             if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID &&nodes.get(j).GetIs_colored()){
-                // nodes.get(j).ResetToPrevious();
-                 nodes.get(j).ResetoDefault();
-
-            }
-             else if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
-                // nodes.get(j).ResetoDefault();
-                 nodes.get(j).ResetToPrevious();
-             }
-        }
-
-    }*/
     public synchronized void Kill(String ID){
         //In this function, we remove everything that belongs to the ID, such as the area, PlayerNode, path, and so on.
         //Each of these if statements checks how the belongings of the ID should be removed,
@@ -790,15 +745,6 @@ public class GameThings{
             }else if(nodes.get(j).GetIs_passed() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
                 nodes.get(j).ResetoDefault();
             }
-           /* if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID &&nodes.get(j).GetIs_colored()){
-                 nodes.get(j).ResetToPrevious();
-
-
-            }
-            else if(nodes.get(j).Getis_player() && nodes.get(j).getOwnerID() == ID && !nodes.get(j).GetIs_colored()){
-                 nodes.get(j).ResetoDefault();
-              //  nodes.get(j).ResetToPrevious();
-            }*/
         }
     }
 

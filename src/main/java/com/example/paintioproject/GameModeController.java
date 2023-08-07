@@ -151,18 +151,18 @@ public class GameModeController implements Initializable {
     public void SetGameSpeed(ActionEvent event2){      // setting the game speed
         switch (SpeedChoiceBox.getValue()){
             case("SLOW"):
-                speed = 200;
-                SetBotSpeed(220);
+                speed = 150;
+                SetBotSpeed(150);
                 break;
 
             case("NORMAL"):
                 speed = 100;
-                SetBotSpeed(110);
+                SetBotSpeed(100);
                 break;
 
             case("FAST"):
                 speed = 50;
-                SetBotSpeed(55);
+                SetBotSpeed(50);
                 break;
 
         }

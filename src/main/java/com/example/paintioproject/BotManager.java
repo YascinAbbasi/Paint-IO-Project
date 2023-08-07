@@ -21,7 +21,7 @@ public class BotManager extends GameThings implements Runnable { //this class ha
     private  node PlayerNode;
     private  node TempNode;
     private  ArrayList<node> tempnodes = new ArrayList<>();
-    private ArrayList  <node> UnableToKill = new ArrayList<>();
+
     public static ArrayList<String> PlayerID = new ArrayList<>();
     public static ArrayList<Color> AlreadyTakenColors = new ArrayList<>();
     public static ArrayList<String> AlreadyTakenIDs = new ArrayList<>();
@@ -150,16 +150,6 @@ public class BotManager extends GameThings implements Runnable { //this class ha
                 }
             }
             if (is_empty) {
-             /*for (int i = 0; i < nodes.size(); i++) {
-                    for (int j = 0; j < tempnodes.size(); j++) {
-                        if (nodes.get(i) == tempnodes.get(j)) {
-                            nodes.get(i).setColor(Bot.GetAreaColor());
-                            nodes.get(i).SetIs_colored(true);
-                            nodes.get(i).SetPrevious();
-                            Owner.put(nodes.get(i), Bot.GetBotID());
-                        }
-                    }
-                }*/
                   for(int j = 0; j < tempnodes.size();j++) {
                       tempnodes.get(j).setColor(Bot.GetAreaColor());
                       tempnodes.get(j).SetIs_colored(true);
@@ -352,12 +342,6 @@ public class BotManager extends GameThings implements Runnable { //this class ha
     }
 
     public synchronized void SetPlayer() {     //in here we set the playerNode and its position
-      /* tempnodes.get(0).setColor(Bot.GetBOTColor());
-       tempnodes.get(0).SetIs_player(true);
-       PlayerNode = tempnodes.get(0);
-        SetPlayerCordinates_C(PlayerNode.GetColumn());
-        SetPlayerCordinates_R(PlayerNode.GetRow());
-        tempnodes.clear();*/
 
 
         for (int j = 0; j < nodes.size(); j++) {
@@ -788,9 +772,6 @@ public class BotManager extends GameThings implements Runnable { //this class ha
             ReGenerate(false);
             return PlayerNode;
         }else {                                                                //This part performs the essence switching for the robots.
-            if (temp.GetIs_colored() && Owner.get(temp) != Bot.GetBotID()) {
-              //  temp.SetPrevious(); //&&&&&&&&&&&&&
-            }
             temp.SetIs_player(true);
             player.SetIs_player(false);
             temp.setColor(Bot.GetBOTColor());
@@ -811,7 +792,6 @@ public class BotManager extends GameThings implements Runnable { //this class ha
             temp.setOwnerID(Bot.GetBotID());
             player.setOwnerID(Bot.GetBotID());
             player = temp;
-            //  player.setOwnerID(Bot.GetBotID());
             SetBotScore(CheckScore(Bot.GetBotID()));
             System.out.println( "BOT SCORE : " + BotScore);
             return player;
@@ -1069,7 +1049,6 @@ public class BotManager extends GameThings implements Runnable { //this class ha
         for(int j = 0; j < nodes.size(); j++){
             if(!nodes.get(j).GetKillIt()){
                 nodes.get(j).SetKillIt(true);
-                //nodes.get(j).SetIs_passed(false);  //////////////////////////////////////
             }
         }
     }
